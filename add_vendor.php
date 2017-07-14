@@ -44,7 +44,7 @@ if(isset($_POST['submit']))
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>Add Customer | Port-ME</title>
+	<title>Add Supplier/Vendor | Port-ME</title>
 	<?php include("metalinks.php");?>
 
 </head>
@@ -72,7 +72,7 @@ if(isset($_POST['submit']))
 						<div class="rs-dashhead-content">
 							<div class="rs-dashhead-titles">
 								<h3 class="rs-dashhead-title m-t">
-									New Customer
+									New Supplier/Vendor
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
@@ -81,6 +81,7 @@ if(isset($_POST['submit']))
 								</h3>
 								
 							</div>
+							
 						</div><!-- /.rs-dashhead-content -->
 						<!-- Begin Breadcrumb -->
 
@@ -93,6 +94,7 @@ if(isset($_POST['submit']))
 						<div class="col-md-12 col-sm-12">
 							<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Registration Successfull </p>
 						</div>
+
 					
 
 						<div class="col-md-7 col-sm-12">
