@@ -154,12 +154,12 @@ if(isset($_POST['update']))
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input name="wphone" type="tel" class="form-control" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['work_phone']; ?> >
+												<input name="wphone" type="integer" class="form-control" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['work_phone']; ?> >
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input name="mobile" type="tel" class="form-control" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['firstname']; ?> >
+												<input name="mobile" type="integer" class="form-control" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['mobile']; ?> >
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
@@ -212,7 +212,7 @@ if(isset($_POST['update']))
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input name="bzip" type="tel" class="form-control bilzip" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['billing_zip']; ?> >
+															<input name="bzip" type="integer" class="form-control bilzip" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['billing_zip']; ?> >
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 

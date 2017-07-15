@@ -148,7 +148,7 @@ if(isset($_POST['submit']))
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input name="website" type="email" class="form-control" id="rs-form-example-tel" placeholder="Website" required>
+												<input name="website" type="text" class="form-control" id="rs-form-example-tel" placeholder="Website" required>
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 

@@ -110,7 +110,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<input type="email" class="form-control" id="rs-form-example-email" value= <?php echo $fetch_customer_details['company_name'];?>  disabled>
+														<input type="text" class="form-control" id="rs-form-example-email" value= <?php echo $fetch_customer_details['company_name'];?>  disabled>
 															<p class="help-block with-errors"></p>
 													</div><!-- /.form-group -->
 												</div>
@@ -133,7 +133,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<input type="tel" class="form-control" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['work_phone'];?>  disabled>
+														<input type="integer" class="form-control" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['work_phone'];?>  disabled>
 															<p class="help-block with-errors"></p>
 													</div><!-- /.form-group -->
 												</div>
@@ -144,7 +144,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<input type="tel" class="form-control" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['mobile'];?> disabled>
+														<input type="ineteger" class="form-control" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['mobile'];?> disabled>
 															<p class="help-block with-errors"></p>
 													</div><!-- /.form-group -->
 												</div>
@@ -155,7 +155,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<input type="tel" class="form-control" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['website'];?>  disabled>
+														<input type="text" class="form-control" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['website'];?>  disabled>
 															<p class="help-block with-errors"></p>
 													</div><!-- /.form-group -->
 												</div>
