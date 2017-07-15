@@ -1,3 +1,30 @@
+<?php
+include ("config.php");
+$user_id =$_SESSION['user_id'];
+
+if(isset($_POST['update']))
+{
+	$username = $_POST['cu_name'];
+	$pan	  = $_POST['pan'];
+	$adhaar	  = $_POST['adhaar'];
+	$business = $_POST['business'];
+	$street	  = $_POST['street'];
+	$city	  = $_POST['city'];
+	$state	  = $_POST['state'];
+	$zip	  = $_POST['zip'];
+
+$update_details = mysqli_query ($mysqli, "update users set username='".$username."', pan='".$pan."', adhaar='".$adhaar."',business='".$business."',street='".$street."',city='".$city."',state='".$state."',zip='".$zip."' where user_id='".$user_id."'");
+if ($update_details)
+	{
+		echo "<script>alert('updated successfully')</script>";
+	}
+		else
+	{
+		echo "<script>alert('error')</script>";
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html lang=en>
 
@@ -29,7 +56,7 @@
 		<article class="rs-content-wrapper">
 			<div class="rs-content">
 				<div class="rs-inner">
-
+					<form method="POST">
 					<!-- Begin Dashhead -->
 					<div class="rs-dashhead m-b-lg" style="background:#f5f5f5">
 						<div class="rs-dashhead-content">
@@ -54,56 +81,77 @@
 
 					<!-- Begin default content width -->
 					<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
-
 					
+					<?php
+						$cu_info = mysqli_query($mysqli, "select * from users where user_id = '".$user_id."'");
+						$fetch_details = mysqli_fetch_array($cu_info);
 
-						<div class="col-md-7 col-sm-12">
-						<!-- Begin Panel -->
+					?>
+
+					<div class="col-md-12" style="margin-top:0px;">
+							<!-- Begin Panel -->
+								<div class="panel panel-plain panel-rounded">
+									<div class="panel-body">									
+										<div class="tab-content p-t-md">
+											<div role="tabpanel" class="tab-pane fade in active" id="rs-tab-01">
+												<div class="col-md-12" style="margin:0px;padding:0px;">
+													<div class="col-md-6 col-sm-12" style="padding:5px;">
+														<h3 style="margin-bottom:15px;font-size:17px;">Customer Information</h3>
+														
+														<div class="form-group">
+															<input name="cu_name" type="text" class="form-control " value= <?php echo $fetch_details['business_name']; ?>   ></input>
+															<p class="help-block with-errors"></p>
+														</div><!-- /.form-group -->
+
+														<div class="form-group">
+															<input name="email" type="email" class="form-control " id="rs-form-example-email" value=<?php echo $fetch_details['email']; ?> >
+															<p class="help-block with-errors"></p>
+														</div><!-- /.form-group -->
+
+														<div class="form-group">
+															<input name="phone" type="integer" class="form-control " id="rs-form-example-tel" value=<?php echo $fetch_details['phone']; ?> >
+															<p class="help-block with-errors"></p>
+														</div><!-- /.form-group -->														
+													</div>
+
+													<div class="col-md-6 col-sm-12" style="margin-left:0px;padding:38px;">
+														<h3 style="margin-bottom:15px;font-size:17px;"></h3>
+														
+														<div class="form-group">
+															<input name="pan" class="form-control " placeholder="PAN Number" required></input>
+															<p class="help-block with-errors"></p>
+														</div><!-- /.form-group -->
+
+														<div class="form-group">
+															<input name="adhaar" type="text" class="form-control " id="rs-form-example-email" placeholder="Adhaar Number" required>
+															<p class="help-block with-errors"></p>
+														</div><!-- /.form-group -->
+
+														<div class="form-group">
+															<input name="business" type="text" class="form-control " id="rs-form-example-tel" placeholder="Business ID" required>
+															<p class="help-block with-errors"></p>
+														</div><!-- /.form-group -->										
+
+														
+													</div>
+												</div>
+										
+											
+
+								
+					<!--------------------------------------------------------------------------------------------------------->
+					
 							<div class="panel panel-plain panel-rounded">
 
 								<div class="panel-body">
-									<form >
-											<div class="row">
-												<div class="col-sm-4">Email:</div>
-													<div class="form-group col-sm-6" >
-															<input type="email" class="form-control" id="rs-form-example-email" placeholder="Email" required>
-															<p class="help-block with-errors"></p>
-													</div><!-- /.form-group -->
-												</div>
-											
-									
-											<div class="row">
-												<div class="col-sm-4">Password: </div>
-													<div class="form-group col-sm-6">
-															<input type="password" class="form-control" id="rs-form-example-email" placeholder="Password" required>
-															<p class="help-block with-errors"></p>
-													</div><!-- /.form-group -->
-												</div>
-											
-											
-											<div class="row">
-												<div class="col-sm-4">Phone : </div>
-													<div class="form-group col-sm-6">
-															<input type="integer" class="form-control" id="rs-form-example-tel" placeholder="Phone" required>
-															<p class="help-block with-errors"></p>
-													</div><!-- /.form-group -->
-												</div>
-											
-											
-											<div class="row">
-												<div class="col-sm-4">Business Name: </div>
-														<div class="form-group col-sm-6">
-															<input type="text" class="form-control" id="rs-form-example-tel" placeholder="Business Name" required>
-															<p class="help-block with-errors"></p>
-														</div><!-- /.form-group -->
-													</div>
+												
 											
 							<div class="row">
 									<div class="col-sm-4">Select type of business: </div>
 
-							<div class="form-group has-feedback feedback-left col-sm-6">
+							<div class="form-group col-sm-6">
 							<select name="type" class="form-control">
-							<option value="" selected disabled> Type of your business </option>
+							<option value="" selected > Type of your business </option>
 							<option value="Accounting Services"> Accounting Services </option>
 							<option value="Administrative Services "> Administrative Services </option>
 							<option value="Advertising, Creative Design, Media and Marketing Services"> Advertising, Creative Design, Media and Marketing Services </option>
@@ -142,14 +190,65 @@
 							<option value="Whole-sellers"> Whole-sellers </option>
 							<option value="Wholesale Trade and Distributors"> Wholesale Trade and Distributors </option>
 						</select>
-						<span class="gcon gcon-box f-s-xs form-control-feedback" aria-hidden="true"></span>
+						<span class=" f-s-xs form-control-feedback" aria-hidden="true"></span>
 					</div><!-- /.form-group -->
 					</div>
 								</div><!-- /.panel-body -->
 							</div><!-- /.panel -->
 						</div>
 
-					
+					<div class="col-md-12" style="margin-top:-50px;">
+							<!-- Begin Panel -->
+								<div class="panel panel-plain panel-rounded">
+									<div class="panel-body">									
+										<div class="tab-content p-t-md">
+											<div role="tabpanel" class="tab-pane fade in active" id="rs-tab-01">
+												<div class="col-md-12" style="margin:0px;padding:0px;">
+													<div class="col-md-6 col-sm-12" style="padding:5px;">
+														<h3 style="margin-bottom:15px;font-size:17px;">Customer Address</h3>
+														
+														<div class="form-group">
+															<textarea name="street" class="form-control " placeholder="Street" required></textarea>
+															<p class="help-block with-errors"></p>
+														</div><!-- /.form-group -->
+
+														<div class="form-group">
+															<input name="city" type="text" class="form-control " id="rs-form-example-email" placeholder="City" required>
+															<p class="help-block with-errors"></p>
+														</div><!-- /.form-group -->
+
+														<div class="form-group">
+															<input name="state" type="text" class="form-control " id="rs-form-example-tel" placeholder="State" required>
+															<p class="help-block with-errors"></p>
+														</div><!-- /.form-group -->
+
+														<div class="form-group">
+															<input name="zip" type="integer" class="form-control " id="rs-form-example-tel" placeholder="Zip" required>
+															<p class="help-block with-errors"></p>
+														</div><!-- /.form-group -->												
+														
+													</div>
+
+												</div>
+											</div><!-- /.tab-pane -->
+
+									
+										</div><!-- /.tab-content -->
+									</div><!-- .panel-body -->
+									
+
+									<div class="panel-footer">
+											<div class="form-group m-a-0">
+												<button name="reset" type="reset" class="btn btn-default btn-wide">Reset</button>
+												<button name="update" type="submit" class="btn btn-success btn-wide">Update</button>
+											</div>
+										</div><!-- /.panel-footer -->
+									</form>
+								</div><!-- /.panel -->
+
+								<!-- End Panel -->
+
+						</div>
 						
 						
 					</div><!-- /.container-fluid -->

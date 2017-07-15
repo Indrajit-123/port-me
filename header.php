@@ -1,8 +1,8 @@
 <?php
 	include("config.php");
 	include("user_related/functions.php");
-	$uz = $_SESSION['user_id'];
-	$user_data = user_details($uz);
+	$user_id = $_SESSION['user_id'];
+
 ?>
 	<nav class="navbar navbar-default rs-navbar navbar-static-top">
 			<div class="container-fluid">
@@ -59,7 +59,7 @@
 					<!-- All left content goes here -->
 					<div class="navbar-left">
 
-						<ul class="nav navbar-nav">
+						<!--<ul class="nav navbar-nav">
 							<li class="navbar-icon dropdown">
 								<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<i class="fa fa-globe"></i>
@@ -92,10 +92,10 @@
 										</ul>
 									</li>
 
-									<!--<li class="text-center bottom-button"><a href="javascript:void(0);">All Accounts</a></li>-->
+									<!--<li class="text-center bottom-button"><a href="javascript:void(0);">All Accounts</a></li>
 								</ul>
 							</li>
-						</ul>
+						</ul>-->
 
 						<!-- Begin nav search form -->
 						<form class="navbar-form navbar-left" style="margin-top:16px;margin-left:-13px;">
@@ -206,7 +206,7 @@
 									<li class="menu-icon"><a href="my_account.php"><span class="mcon mcon-face rs-dropdown-icon"></span>My Account</a></li>
 									<li class="menu-icon"><a href="javascript:void(0);"><span class="gcon gcon-cog rs-dropdown-icon"></span>General Settings</a></li>
 									<li class="menu-icon"><a href="javascript:void(0);"><span class="fa fa-industry rs-dropdown-icon"></span>Manage Warehouse</a></li>
-									<li class="menu-icon"><a href="add_staff.php"><span class="fa fa-user rs-dropdown-icon"></span>Manage Staff's</a></li>
+									<li class="menu-icon"><a href="staff.php"><span class="fa fa-user rs-dropdown-icon"></span>Manage Staff's</a></li>
 									<li class="menu-icon"><a href="logout.php"><span class="gcon gcon-log-out rs-dropdown-icon"></span>Log Out</a></li>
 								</ul>
 								<!-- End dropdown -->

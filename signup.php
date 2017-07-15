@@ -2,7 +2,7 @@
 	include("config.php");
 	include("user_related/functions.php");
 	if(isset($_POST['submit'])){
-		$username = $_POST['username'];
+		$email = $_POST['email'];
 		$password = $_POST['password'];
 		$phone = $_POST['phone'];
 		$country = "India";
@@ -17,7 +17,17 @@
 		$check_email = check_duplicate_email($username);
 		echo $check_email;
 		if($check_email < 1){
-			$save_reg = mysqli_query($mysqli,"INSERT into users VALUES('','$username','$password','$phone','$country','$status','$date','$subscription_package','$subscription_expdate','$subscription_price')");
+			$save_reg = mysqli_query($mysqli,"INSERT into users VALUES ('',  '', '".$email."', '".$business."','".$type."' '".$password."', '".$phone."', '','','','','','','','','','','','','')");
+			if($save_reg)
+			{	
+				$_SESSION['user_id'] = $fetch_details['user_id'];
+				echo "<script>window.location.href='dashboard.php'</script>";
+			}
+			else
+			{
+				echo "<script>alert('error')</script>";	
+			}
+
 			$user_id = mysqli_insert_id($mysqli);
 			$save_biz_data = mysqli_query($mysqli,"INSERT into business_details VALUES('','$business','$type','$date')");
 			$business_id = mysqli_insert_id($mysqli);
@@ -95,7 +105,7 @@
 				<p class="text-center" style="margin-bottom:30px;"><a href="http://www.port-me.com"><img src="images/logo.png" alt="Logo" style="height:80px;"></a></p>
 				<form class="m-b-lg" id="rs-validation-login-page" method="POST" enctype="multipart/form-data">
 					<div class="form-group has-feedback feedback-left">
-						<input type="text" name="username" placeholder="Enter your email" class="form-control">
+						<input type="email" name="email" placeholder="Enter your email" class="form-control">
 						<span class="gcon gcon-user f-s-xs form-control-feedback" aria-hidden="true"></span>
 					</div><!-- /.form-group -->
 
@@ -360,7 +370,7 @@
 						<span class="gcon gcon-home f-s-xs form-control-feedback" aria-hidden="true"></span>
 					</div><!-- /.form-group -->
 
-					<div class="form-group has-feedback feedback-left">
+					<div class="form-group  feedback-left">
 						<select name="type" class="form-control">
 							<option value="" selected disabled> Type of your business </option>
 							<option value="Accounting Services"> Accounting Services </option>
