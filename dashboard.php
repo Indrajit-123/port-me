@@ -226,7 +226,7 @@
 										<li><i class="rs-refresh-panel icon-toolbar gcon gcon-cycle"></i></li>
 										<li><i class="icon-toolbar gcon gcon-cog"></i></li>
 										</ul>
-									</div><!-- /.panel-toolbar -->
+									</div><!-- /.panel-toolbar s -->
 								</div><!-- /.panel-heading -->
 								<div class="panel-body p-t-0">
 									<h3 class="m-t-0 f-w-300">1.00 USD</h3>
