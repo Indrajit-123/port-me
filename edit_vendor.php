@@ -1,6 +1,6 @@
 <?php
 include ("config.php");
-$user_id = $_SESSION['c'];
+$user_id = $_SESSION['user_id'];
 
 $customer_id = $_GET['cu_id'];
 $view_customer_info = mysqli_query($mysqli, "select * from customers where customer_id='".$customer_id."'");

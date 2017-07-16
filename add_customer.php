@@ -1,6 +1,6 @@
 <?php
 include ("config.php");
-$user_id = $_SESSION['c'];
+$user_id = $_SESSION['user_id'];
 
 if(isset($_POST['submit']))
 {
@@ -138,12 +138,12 @@ if(isset($_POST['submit']))
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input name="wphone" type="tel" class="form-control" id="rs-form-example-tel" placeholder="Work Phone" required>
+												<input name="wphone" type="number" class="form-control" id="rs-form-example-tel" placeholder="Work Phone" required>
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input name="mobile" type="tel" class="form-control" id="rs-form-example-tel" placeholder="Mobile" required>
+												<input name="mobile" type="number" class="form-control" id="rs-form-example-tel" placeholder="Mobile" required>
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 

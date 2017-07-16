@@ -1,16 +1,20 @@
 <?php
-	//print_r($user_data);
+$page_name = BASENAME($_SERVER['PHP_SELF']);
+$user_id = $_SESSION['user_id'];
+$cu_info = mysqli_query($mysqli, "select * from users where user_id = '".$user_id."'");
+$fetch_details = mysqli_fetch_array($cu_info);
 ?>
 <aside class="rs-sidebar">
 
 			<!-- Sidebar menu -->
 			<ul class="rs-sidebar-nav default-sidebar-nav">
 				<li class="rs-user-sidebar">
-					<a href="javascript:void(0);">
-						<img src="images/01.png" alt="Avatar" class="avatar img-circle">
-						Mister Bin, Jr
+					<a href="my_account.php">
+						<img src="uploads/<?php echo $fetch_details['logo_image'];?>" alt="Avatar" class="avatar img-circle">
+						<?php echo $fetch_details['username']; ?>
 						<span class="subname text-uppercase m-t" style="text-transform:normal;">
 							<?php 
+								echo $fetch_details['business_name'];
 								$coun = strlen($user_data['business_name']);
 								echo substr(ucfirst($user_data['business_name']),0,19);
 								if($coun > 19){
@@ -39,14 +43,14 @@
 					</a>
 				</li>
 
-				<li>
+				<li class="nav-item start <?php if($page_name == 'supplier_vendor.php' ||  $page_name == 'customer.php') { ?>active open<?php } ?>">
 					<a href="javascript:void(0);">
 						<span class="badge badge-danger">6</span>
 						<span class="fa fa-address-book rs-icon-menu"></span>Contacts
 					</a>
 					<ul>
-						<li><a href="supplier_vendor.php">Suppliers / Vendors</a></li>
-						<li><a href="customer.php">Customers</a></li>
+						<li ><a href="supplier_vendor.php">Suppliers / Vendors</a></li>
+						<li ><a href="customer.php">Customers</a></li>
 					</ul>
 				</li>
 

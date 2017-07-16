@@ -15,7 +15,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>View Vendor | Port-ME</title>
+	<title>View Customer Details | Port-ME</title>
 	<?php include("metalinks.php");?>
 
 </head>
@@ -43,7 +43,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 						<div class="rs-dashhead-content">
 							<div class="rs-dashhead-titles">
 								<h3 class="rs-dashhead-title m-t">
-									View Supplier/Vendor
+									View Supplier/Vendor Details
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
@@ -80,26 +80,17 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 												</div>
 												<div class="col-sm-2">
 													<div class="form-group">
-														<select name="sal" class="rs-selectize-single" selected disabled>
-															<option value=""><?php echo $fetch_customer_details['salutation']?></option>
-															<option value="1"<?php echo(($fetch_customer_details['salutation']=='1')?'selected':'');?>>Mr.</option>
-															<option value="2"<?php echo(($fetch_customer_details['salutation']=='2')?'selected':'');?>>Mrs.</option>
-															<option value="3"<?php echo(($fetch_customer_details['salutation']=='3')?'selected':'');?>>Ms.</option>
-															<option value="4"<?php echo(($fetch_customer_details['salutation']=='4')?'selected':'');?>>Miss.</option>
-															<option value="5"<?php echo(($fetch_customer_details['salutation']=='5')?'selected':'');?>>Dr.</option>
-														</select>
+														<label><?php echo $fetch_customer_details['salutation']?></label>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->
 												<div class="col-sm-3">
 													<div class="form-group">
-														<input type="text" class="form-control" id="rs-form-example-fname" value= <?php echo $fetch_customer_details['firstname'];?> disabled>
-														<p class="help-block with-errors"></p>
+														<label><?php echo $fetch_customer_details['firstname'];?></label>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->
 												<div class="col-sm-3">
 													<div class="form-group">
-														<input type="text" class="form-control" id="rs-form-example-lname" value= <?php echo $fetch_customer_details['lastname'];?>  disabled>
-														<p class="help-block with-errors"></p>
+														<label><?php echo $fetch_customer_details['lastname'];?></label>										
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->
 											</div><!-- /.row -->
@@ -110,8 +101,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<input type="email" class="form-control" id="rs-form-example-email" value= <?php echo $fetch_customer_details['company_name'];?>  disabled>
-															<p class="help-block with-errors"></p>
+														<label><?php echo $fetch_customer_details['company_name'];?> </label>
 													</div><!-- /.form-group -->
 												</div>
 										</div>
@@ -122,8 +112,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<input type="email" class="form-control" id="rs-form-example-email" value= <?php echo $fetch_customer_details['email'];?> disabled>
-															<p class="help-block with-errors"></p>
+													<label><?php echo $fetch_customer_details['email'];?> </label>												
 													</div><!-- /.form-group -->
 												</div>
 											</div>
@@ -133,8 +122,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<input type="tel" class="form-control" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['work_phone'];?>  disabled>
-															<p class="help-block with-errors"></p>
+													<label><?php echo $fetch_customer_details['work_phone'];?> </label>												
 													</div><!-- /.form-group -->
 												</div>
 											</div>
@@ -144,8 +132,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<input type="tel" class="form-control" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['mobile'];?> disabled>
-															<p class="help-block with-errors"></p>
+													<label><?php echo $fetch_customer_details['mobile'];?> </label>													
 													</div><!-- /.form-group -->
 												</div>
 											</div>
@@ -155,8 +142,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<input type="tel" class="form-control" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['website'];?>  disabled>
-															<p class="help-block with-errors"></p>
+													<label><?php echo $fetch_customer_details['website'];?> </label>	
 													</div><!-- /.form-group -->
 												</div>
 											</div>
@@ -186,59 +172,80 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											<div role="tabpanel" class="tab-pane fade in active" id="rs-tab-01">
 												<div class="col-md-12" style="margin:0px;padding:0px;">
 													<div class="col-md-6 col-sm-12" style="padding:5px;">
-														<h3 style="margin-bottom:15px;font-size:17px;">Billing Address</h3>
-														
+														<h3 style="margin-bottom:15px;font-size:17px;">Billing Address</h3>										
 														<div class="form-group">
-															<textarea class="form-control billstreet"  disabled><?php echo $fetch_customer_details['billing_street'];?></textarea>
-															<p class="help-block with-errors"></p>
+															<div class="col-sm-2">
+																Street :
+															</div>	
+														<label><?php echo $fetch_customer_details['billing_street'];?> </label>									
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="text" class="form-control billcity" id="rs-form-example-email" value= <?php echo $fetch_customer_details['billing_city'];?> disabled >
-															<p class="help-block with-errors"></p>
+															<div class="col-sm-2">
+																City :
+															</div>	
+															<label><?php echo $fetch_customer_details['billing_city'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="text" class="form-control billstate" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['billing_state'];?> disabled>
-															<p class="help-block with-errors"></p>
+															<div class="col-sm-2">
+																State :
+															</div>	
+														<label><?php echo $fetch_customer_details['billing_state'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="integer" class="form-control bilzip" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['billing_zip'];?> disabled>
-															<p class="help-block with-errors"></p>
+															<div class="col-sm-2">
+																Zip :
+															</div>	
+															<label><?php echo $fetch_customer_details['billing_zip'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="text" class="form-control" disabled value="INDIA">			
+															<div class="col-sm-2">
+																Country :
+															</div>	
+															<label>	INDIA </label>
 														</div><!-- /.form-group -->
 
 													</div>
 
 													<div class="col-md-6 col-sm-12" style="margin-left:0px;padding:5px;">
-														<h3 style="margin-bottom:15px;font-size:17px;">Shipping Address <span style="font-size:15px;float:right;color:#4a89dc;font-weight:normal;cursor:pointer;padding:5px;" onclick="copybillingaddr();"><i class="fa fa-hand-o-down"></i> Copy billing address</span></h3>
+														<h3 style="margin-bottom:15px;font-size:17px;">Shipping Address </h3>
 														
 														<div class="form-group">
-															<textarea class="form-control billstreet2" disabled><?php echo $fetch_customer_details['shipping_street'];?></textarea>
-															<p class="help-block with-errors"></p>
+															<div class="col-sm-2">
+																Street :
+															</div>	
+														<label><?php echo $fetch_customer_details['shipping_street'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="text" class="form-control billcity2" id="rs-form-example-email" value= <?php echo $fetch_customer_details['shipping_city'];?> disabled>
-															<p class="help-block with-errors"></p>
+															<div class="col-sm-2">
+																City :
+															</div>	
+														<label><?php echo $fetch_customer_details['shipping_city'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="text" class="form-control billstate2" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['shipping_state'];?> disabled>
-															<p class="help-block with-errors"></p>
+															<div class="col-sm-2">
+																State :
+															</div>	
+														<label><?php echo $fetch_customer_details['shipping_state'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="tel" class="form-control bilzip2" id="rs-form-example-tel" value= <?php echo $fetch_customer_details['shipping_zip'];?> disabled>
-															<p class="help-block with-errors"></p>
+															<div class="col-sm-2">
+																Zip :
+															</div>	
+														<label><?php echo $fetch_customer_details['shipping_zip'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="text" class="form-control" disabled value="INDIA">			
+															<div class="col-sm-2">
+																Country :
+															</div>	
+														<label >INDIA </label>		
 														</div><!-- /.form-group -->
 
 													</div>
@@ -248,7 +255,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											<div role="tabpanel" class="tab-pane fade" id="rs-tab-02">
 												<h3 style="margin-bottom:15px;font-size:17px;">Notes</h3>	
 												<div class="form-group">
-													<textarea class="form-control" style="min-height:250px;" disabled> <?php echo $fetch_customer_details['notes'];?></textarea>
+													<label> <?php echo $fetch_customer_details['notes'];?></label>
 													<p class="help-block with-errors"></p>
 												</div><!-- /.form-group -->
 											</div><!-- /.tab-pane -->
@@ -288,8 +295,8 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 	<script src="js/bootstrap-datepicker.min.js"></script>
 	<script src="js/datepicker-example.js"></script><!-- Example -->
 
-	<script src="js/jquery.maskedinput.min.js"></script>
-	<script src="js/maskedinput-example.js"></script><!-- Example -->
+	<script src="js/jquery.maskedlabel.min.js"></script>
+	<script src="js/maskedlabel-example.js"></script><!-- Example -->
 
 	<script src="js/bootstrap-maxlength.min.js"></script>
 	<script src="js/maxlength-example.js"></script><!-- Example -->

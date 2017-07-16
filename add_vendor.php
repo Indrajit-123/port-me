@@ -1,6 +1,6 @@
 <?php
 include ("config.php");
-$user_id = $_SESSION['c'];
+$user_id = $_SESSION['user_id'];
 
 if(isset($_POST['submit']))
 {

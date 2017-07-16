@@ -21,7 +21,7 @@
 			if($save_reg)
 			{	
 				$_SESSION['user_id'] = $fetch_details['user_id'];
-				echo "<script>window.location.href='dashboard.php'</script>";
+				echo "<script>window.location.href='my_account.php'</script>";
 			}
 			else
 			{

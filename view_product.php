@@ -95,7 +95,7 @@
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<input type="email" class="form-control" id="rs-form-example-email" placeholder="Product Name" disabled>
+														<input type="text" class="form-control" id="rs-form-example-email" placeholder="Product Name" disabled>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>

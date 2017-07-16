@@ -1,6 +1,6 @@
 <?php
 include ("config.php");
-$user_id = $_SESSION['c'];
+$user_id = $_SESSION['user_id'];
 
 $customer_id = $_GET['cu_id'];
 $view_customer_info = mysqli_query($mysqli, "select * from customers where customer_id='".$customer_id."'");
@@ -121,11 +121,11 @@ if(isset($_POST['update']))
 													<div class="form-group">
 														<select name="sal" class="rs-selectize-single" >
 															<option selected disabled value=""><?php echo $fetch_customer_details['salutation']?></option>
-															<option value="1"<?php echo(($fetch_customer_details['salutation']=='1')?'selected':'');?>>Mr.</option>
-															<option value="2"<?php echo(($fetch_customer_details['salutation']=='2')?'selected':'');?>>Mrs.</option>
-															<option value="3"<?php echo(($fetch_customer_details['salutation']=='3')?'selected':'');?>>Ms.</option>
-															<option value="4"<?php echo(($fetch_customer_details['salutation']=='4')?'selected':'');?>>Miss.</option>
-															<option value="5"<?php echo(($fetch_customer_details['salutation']=='5')?'selected':'');?>>Dr.</option>
+															<option value="Mr."<?php echo(($fetch_customer_details['salutation']=='1')?'selected':'');?>>Mr.</option>
+															<option value="Mrs."<?php echo(($fetch_customer_details['salutation']=='2')?'selected':'');?>>Mrs.</option>
+															<option value="Ms."<?php echo(($fetch_customer_details['salutation']=='3')?'selected':'');?>>Ms.</option>
+															<option value="Miss."<?php echo(($fetch_customer_details['salutation']=='4')?'selected':'');?>>Miss.</option>
+															<option value="Dr."<?php echo(($fetch_customer_details['salutation']=='5')?'selected':'');?>>Dr.</option>
 														</select>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->

@@ -5,6 +5,7 @@ $user_id =$_SESSION['user_id'];
 if(isset($_POST['update']))
 {
 	$username = $_POST['cu_name'];
+	$type	  = $_POST['type'];
 	$pan	  = $_POST['pan'];
 	$adhaar	  = $_POST['adhaar'];
 	$business = $_POST['business'];
@@ -13,7 +14,13 @@ if(isset($_POST['update']))
 	$state	  = $_POST['state'];
 	$zip	  = $_POST['zip'];
 
-$update_details = mysqli_query ($mysqli, "update users set username='".$username."', pan='".$pan."', adhaar='".$adhaar."',business='".$business."',street='".$street."',city='".$city."',state='".$state."',zip='".$zip."' where user_id='".$user_id."'");
+	$tmp_image = $_FILES['logo_upload']['tmp_name'];
+	$image = $_FILES['logo_upload']['name'];
+	$user_pic = rand(99,9999).$image;
+	move_uploaded_file($tmp_image,"uploads/".$user_pic);
+
+
+$update_details = mysqli_query ($mysqli, "update users set username='".$username."', pan='".$pan."', logo_image = '".$user_pic."' ,adhaar='".$adhaar."',business='".$business."',street='".$street."',city='".$city."',state='".$state."',zip='".$zip."' where user_id='".$user_id."'");
 if ($update_details)
 	{
 		echo "<script>alert('updated successfully')</script>";
@@ -56,7 +63,7 @@ if ($update_details)
 		<article class="rs-content-wrapper">
 			<div class="rs-content">
 				<div class="rs-inner">
-					<form method="POST">
+					<form method="POST" enctype="multipart/form-data">
 					<!-- Begin Dashhead -->
 					<div class="rs-dashhead m-b-lg" style="background:#f5f5f5">
 						<div class="rs-dashhead-content">
@@ -66,7 +73,7 @@ if ($update_details)
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
-										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='customer.php'"> <i class="fa fa-remove"></i> </span>
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='dashboard.php'"> <i class="fa fa-remove"></i> </span>
 									</div>
 								</h3>
 								
@@ -141,17 +148,16 @@ if ($update_details)
 								
 					<!--------------------------------------------------------------------------------------------------------->
 					
-							<div class="panel panel-plain panel-rounded">
+				<div class="panel panel-plain panel-rounded">
+					<div class="panel-body" style="margin-bottom:20px;margin-right:20px;">
+						<div class="row">
+							<div class="col-md-12" >
+								<div class="col-md-6 col-sm-12">
+									<div class="col-sm-5">Select type of business: </div>
 
-								<div class="panel-body">
-												
-											
-							<div class="row">
-									<div class="col-sm-4">Select type of business: </div>
-
-							<div class="form-group col-sm-6">
+							<div class="form-group ">
 							<select name="type" class="form-control">
-							<option value="" selected > Type of your business </option>
+							<option value="<?php echo $fetch_details['type_business'];?>" selected disabled ><?php echo $fetch_details['type_business']; ?>  </option>
 							<option value="Accounting Services"> Accounting Services </option>
 							<option value="Administrative Services "> Administrative Services </option>
 							<option value="Advertising, Creative Design, Media and Marketing Services"> Advertising, Creative Design, Media and Marketing Services </option>
@@ -193,9 +199,16 @@ if ($update_details)
 						<span class=" f-s-xs form-control-feedback" aria-hidden="true"></span>
 					</div><!-- /.form-group -->
 					</div>
-								</div><!-- /.panel-body -->
-							</div><!-- /.panel -->
-						</div>
+
+					<div class="col-md-6 col-sm-12" >
+							<div class="col-sm-4">Choose Logo </div>
+							<input type="file" name="logo_upload" class="form-control " id="rs-form-example-email">
+					</div>
+					
+
+				</div><!-- /.panel-body -->
+			</div><!-- /.panel -->
+		</div>
 
 					<div class="col-md-12" style="margin-top:-50px;">
 							<!-- Begin Panel -->
