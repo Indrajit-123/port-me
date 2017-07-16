@@ -23,8 +23,8 @@ if(isset($_POST['submit']))
 	$notes = $_POST['notes'];
 	$date = date('m/d/Y h:i:s', time());
 
-	$insert_customer_details = mysqli_query($mysqli, "insert customers values ('','".$salutation."','".$firstname."','".$lastname."','".$company_name."','".$email."','".$work_phone."','".$mobile."','".$website."','".$billing_street."','".$billing_city."','".$billing_state."','".$billing_zip."','INDIA','".$shipping_street."','".$shipping_city."','".$shipping_state."','".$shipping_zip."','INDIA','','".$date."','','".$user_id."')");
-	if($insert_customer_details)
+	$insert_customer_details = mysqli_query($mysqli, "insert vendors values ('','".$salutation."','".$firstname."','".$lastname."','".$company_name."','".$email."','".$work_phone."','".$mobile."','".$website."','".$billing_street."','".$billing_city."','".$billing_state."','".$billing_zip."','INDIA','".$shipping_street."','".$shipping_city."','".$shipping_state."','".$shipping_zip."','INDIA','','".$date."','".$user_id."','".$user_id."')");
+	if($insert_vendor_details)
 	{
 		echo "<script>alert('inserted successfully')</script>";
 	}

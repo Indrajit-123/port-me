@@ -1,3 +1,20 @@
+<?php
+include ("config.php");
+$user_id = $_SESSION['user_id'];
+$staff_info = mysqli_query ($mysqli,"select * from staff_details where user_id='".$user_id."'");
+
+if(isset($_GET['delete_id']))
+{
+	$delete_id = $_GET['delete_id'];
+	$delete_staff = mysqli_query($mysqli,"delete from staff_details where staff_id = '".$delete_id."'");
+	if($delete_staff)
+		{
+			echo "<script>window.location.href='staff.php'</script>";
+		}
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html lang=en>
@@ -88,36 +105,36 @@
 								<table class="table table-b-t table-b-b datatable-default rs-table table-default" style="border-right:1px solid #f5f5f5;border-left:1px solid #f5f5f5;">
 									<thead>
 							            <tr>
-							                <th>Name</th>
-							                <th>Email</th>
-							                <th>Phone</th>
-							                <th>Commision %</th>
-											<th></th>
+							                <th >Name</th>
+							                <th >Email</th>
+							                <th >Phone</th>
+							                <th >Commision %</th>
+											<th >Action</th>
 							            </tr>
 							        </thead>
 							        <tbody>
 							            <tr>
-							                <td>Tiger Nixon</td>
-							                <td>tiger@gmail.com</td>
-							                <td>7342571800</td>
-							                <td>2 (%)</td>
+										<?php
+										while ($fetch_staff_info = mysqli_fetch_array($staff_info))										
+										{
+										?>
+							                <td><?php echo $fetch_staff_info['name']?></td>											
+											<td><?php echo $fetch_staff_info['email']?></td>
+							                <td><?php echo $fetch_staff_info['phone']?></td>
+							                <td><?php echo $fetch_staff_info['commision']?></td>
+										
 											<td>
-												<a href=""><i class="fa fa-edit"></i></a>
-												<a href=""><i class="fa fa-trash"></i></a>
+												<a href="view_staff.php?staff_id=<?php echo $fetch_staff_info['staff_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
+
+												<a href="edit_staff.php?staff_id=<?php echo $fetch_staff_info['staff_id'];?>" class="fa fa-pencil" style="height:10px;margin:5px;"></a>
+
+												<a href="?delete_id=<?php echo $fetch_staff_info['staff_id'];?>" class="fa fa-trash" style="height:10px;margin:5px;"></a>
 											</td>
 							            </tr>
-							            <tr>
-							                <td>Krishanu Mondal</td>
-							                <td>krishanu.mondl@gmail.com</td>
-							                <td>1234567890</td>
-							                <td>5 (%</td>
-											<td>
-												<a href="view_customer.php?cu_id=<?php echo $fetch_customer_info['customer_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
-												<a href="" style="height:10px;margin:5px;"><i class="fa fa-edit"></i></a>
-												<a href="" style="height:10px;margin:5px;"><i class="fa fa-trash"></i></a>
-											</td>
-							            </tr>
-							            
+							           <?php
+										}
+										?>						          
+							           
 							        </tbody>
 								</table>
 						</div><!-- /.panel -->

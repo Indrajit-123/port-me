@@ -1,21 +1,4 @@
-<?php
-include ("config.php");
-$user_id = $_SESSION['user_id'];
 
-$vendor_info = mysqli_query ($mysqli,"select * from vendors where business_id='".$user_id."'");
-
-if(isset($_GET['delete_id']))
-{
-	$delete_id = $_GET['delete_id'];
-	$delete_vendor = mysqli_query($mysqli,"delete from vendors where vendor_id = '".$delete_id."'");
-	if($delete_vendor)
-		{
-			echo "<script>window.location.href='supplier_vendor.php'</script>";
-		}
-}
-
-
-?>
 <!DOCTYPE html>
 <html lang=en>
 
@@ -25,7 +8,7 @@ if(isset($_GET['delete_id']))
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>My Suppliers | Port-ME </title>
+	<title>My Sales Order | Port-ME </title>
 	<?php include("metalinks.php");?>
 	<style>
 		.dt-buttons a{
@@ -76,12 +59,17 @@ if(isset($_GET['delete_id']))
 						<div class="rs-dashhead-content">
 							<div class="rs-dashhead-titles">
 								<h3 class="rs-dashhead-title m-t">
-									Suppliers/Vendors									
+									Sales Order List
+									<!--<div style="float:right;">
+										<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>
+
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;"> <i class="fa fa-remove"></i> </span>
+									</div>-->
 								</h3>
 								
 							</div>
 							<div class="rs-dashhead-toolbar">
-								<button type="button" class="btn btn-success btn-wide rs-btn-icon block-on-mobile" onclick="window.location.href='add_vendor.php'">
+								<button type="button" class="btn btn-success btn-wide rs-btn-icon block-on-mobile" onclick="window.location.href='add_sales_order.php'">
 									<span class="gcon gcon-upload-to-cloud icon-btn"></span>
 									Add New
 								</button>
@@ -100,41 +88,30 @@ if(isset($_GET['delete_id']))
 								<table class="table table-b-t table-b-b datatable-default rs-table table-default" style="border-right:1px solid #f5f5f5;border-left:1px solid #f5f5f5;">
 									<thead>
 							            <tr>
-							                <th style="text-align:center;">Customer Name</th>
-							                <th style="text-align:center;">Company Name</th>
-							                <th style="text-align:center;">Email</th>
-							                <th style="text-align:center;">Mobile No.</th>
-							                <th style="text-align:center;">Shipping City</th>
-							                <th style="text-align:center;">ZIP code</th>
-											
-											<th style="text-align:center;">Action</th>
+							                <th>Name</th>
+							                <th>Position</th>
+							                <th>Office</th>
+							                <th>Age</th>
+							                <th>Start date</th>
+							                <th>Salary</th>
+											<th></th>
 							            </tr>
 							        </thead>
 							        <tbody>
 							            <tr>
-										<?php
-										while ($fetch_vendor_info = mysqli_fetch_array($vendor_info))										
-										{
-										?>
-							                <td><?php echo $fetch_vendor_info['firstname']?></td>											
-											<td><?php echo $fetch_vendor_info['company_name']?></td>
-							                <td><?php echo $fetch_vendor_info['email']?></td>
-							                <td><?php echo $fetch_vendor_info['mobile']?></td>
-							                <td><?php echo $fetch_vendor_info['shipping_city']?></td>
-							                <td><?php echo $fetch_vendor_info['shipping_zip']?></td>
-										
+							                <td>Tiger Nixon</td>
+							                <td>System Architect</td>
+							                <td>Edinburgh</td>
+							                <td>61</td>
+							                <td>2011/04/25</td>
+							                <td>$320,800</td>
 											<td>
-												<a href="view_vendor.php?cu_id=<?php echo $fetch_vendor_info['vendor_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
-
-												<a href="edit_vendor.php?cu_id=<?php echo $fetch_vendor_info['vendor_id'];?>" class="fa fa-pencil" style="height:35px;margin:5px;"></a>
-
-												<a href="?delete_id=<?php echo $fetch_vendor_info['vendor_id'];?>" class="fa fa-trash" style="height:10px;margin:5px;"></a>
+												<a href="view_sales_order.php?cu_id=<?php echo $fetch_customer_info['customer_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
+												<a href="edit_sales_order.php?cu_id=<?php echo $fetch_customer_info['customer_id'];?>" class="fa fa-pencil" style="height:10px;margin:5px;"></a>
+												<a href="?delete_id=<?php echo $fetch_customer_info['customer_id'];?>" class="fa fa-trash" style="height:10px;margin:5px;"></a>
 											</td>
 							            </tr>
-							           <?php
-										}
-										?>						          
-							           
+							          
 							        </tbody>
 								</table>
 						</div><!-- /.panel -->

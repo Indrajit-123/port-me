@@ -1,12 +1,12 @@
 <?php
 include ("config.php");
 $user_id = $_SESSION['user_id'];
-$customer_info = mysqli_query ($mysqli,"select * from customers where business_id='".$user_id."'");
+$vendor_info = mysqli_query ($mysqli,"select * from vendors where business_id='".$user_id."'");
 
 if(isset($_GET['delete_id']))
 {
 	$delete_id = $_GET['delete_id'];
-	$delete_customer = mysqli_query($mysqli,"delete from customers where customer_id = '".$delete_id."'");
+	$delete_customer = mysqli_query($mysqli,"delete from vendors where vendor_id = '".$delete_id."'");
 	if($delete_customer)
 		{
 			echo "<script>window.location.href='customer.php'</script>";
@@ -115,22 +115,22 @@ if(isset($_GET['delete_id']))
 							        <tbody>
 							            <tr>
 										<?php
-										while ($fetch_customer_info = mysqli_fetch_array($customer_info))										
+										while ($fetch_vendor_info = mysqli_fetch_array($vendor_info))										
 										{
 										?>
-							                <td><?php echo $fetch_customer_info['firstname']?></td>											
-											<td><?php echo $fetch_customer_info['company_name']?></td>
-							                <td><?php echo $fetch_customer_info['email']?></td>
-							                <td><?php echo $fetch_customer_info['mobile']?></td>
-							                <td><?php echo $fetch_customer_info['shipping_city']?></td>
-							                <td><?php echo $fetch_customer_info['shipping_zip']?></td>
+							                <td><?php echo $fetch_vendor_info['firstname']?></td>											
+											<td><?php echo $fetch_vendor_info['company_name']?></td>
+							                <td><?php echo $fetch_vendor_info['email']?></td>
+							                <td><?php echo $fetch_vendor_info['mobile']?></td>
+							                <td><?php echo $fetch_vendor_info['shipping_city']?></td>
+							                <td><?php echo $fetch_vendor_info['shipping_zip']?></td>
 										
 											<td>
-												<a href="view_customer.php?cu_id=<?php echo $fetch_customer_info['customer_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
+												<a href="view_vendor.php?vendor_id=<?php echo $fetch_vendor_info['vendor_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
 
-												<a href="edit_customer.php?cu_id=<?php echo $fetch_customer_info['customer_id'];?>" class="fa fa-pencil" style="height:10px;margin:5px;"></a>
+												<a href="edit_vendor.php?vendor_id=<?php echo $fetch_vendor_info['vendor_id'];?>" class="fa fa-pencil" style="height:10px;margin:5px;"></a>
 
-												<a href="?delete_id=<?php echo $fetch_customer_info['customer_id'];?>" class="fa fa-trash" style="height:10px;margin:5px;"></a>
+												<a href="?delete_id=<?php echo $fetch_vendor_info['vendor_id'];?>" class="fa fa-trash" style="height:10px;margin:5px;"></a>
 											</td>
 							            </tr>
 							           <?php

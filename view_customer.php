@@ -78,21 +78,11 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 												<div class="col-sm-2">
 												Full Name:
 												</div>
-												<div class="col-sm-2">
-													<div class="form-group">
-														<label><?php echo $fetch_customer_details['salutation']?></label>
+												<div class="col-sm-7">
+													<div class="form-group" style="margin-bottom:-1px;">
+														<label><?php echo $fetch_customer_details['salutation']?></label>  <label><?php echo $fetch_customer_details['firstname'];?></label>  <label><?php echo $fetch_customer_details['lastname'];?></label>
 													</div><!-- /.form-group -->
-												</div><!-- /.col-sm-4 -->
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label><?php echo $fetch_customer_details['firstname'];?></label>
-													</div><!-- /.form-group -->
-												</div><!-- /.col-sm-4 -->
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label><?php echo $fetch_customer_details['lastname'];?></label>										
-													</div><!-- /.form-group -->
-												</div><!-- /.col-sm-4 -->
+												</div><!-- /.col-sm-4 -->												
 											</div><!-- /.row -->
 
 										<div class="row">
@@ -141,7 +131,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 													Website:
 											</div>
 												<div class="form-group">
-													<div class="col-sm-8">
+													<div class="col-sm-8" style="margin-bottom:20px;">
 													<label><?php echo $fetch_customer_details['website'];?> </label>	
 													</div><!-- /.form-group -->
 												</div>

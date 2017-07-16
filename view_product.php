@@ -75,12 +75,12 @@
 												<div class="col-sm-6">
 													<div class="radio radio-custom">
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-04" value="">
+														<input type="radio" name="cs-radio" id="cs-radio-04" selected disabled >
 														<span class="checker"></span>
 														Product
 													</label>
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-05" value="">
+														<input type="radio" name="cs-radio" id="cs-radio-05" selected disabled >
 														<span class="checker"></span>
 														Service
 													</label>
@@ -95,7 +95,7 @@
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<input type="text" class="form-control" id="rs-form-example-email" placeholder="Product Name" disabled>
+														<label  id="rs-form-example-email" > NAME of PRODUCT</label>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
@@ -107,7 +107,7 @@
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<textarea class="form-control" placeholder="Description" style="height:150px;" disabled></textarea>
+														<label>DESCRIPTION OF PRODUCT</label>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>

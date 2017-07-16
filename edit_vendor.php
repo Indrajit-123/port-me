@@ -2,9 +2,9 @@
 include ("config.php");
 $user_id = $_SESSION['user_id'];
 
-$customer_id = $_GET['cu_id'];
-$view_customer_info = mysqli_query($mysqli, "select * from customers where customer_id='".$customer_id."'");
-$fetch_customer_details = mysqli_fetch_array ($view_customer_info);
+$vendor_id = $_GET['vendor_id'];
+$view_vendor_info = mysqli_query($mysqli, "select * from vendors where vendor_id='".$vendor_id."'");
+$fetch_vendor_details = mysqli_fetch_array ($view_vendor_info);
 
 if(isset($_POST['update']))
 {
@@ -27,8 +27,8 @@ if(isset($_POST['update']))
 	$notes			= $_POST['notes'];
 	$date			= date();
 
-	$update_customer_details = mysqli_query($mysqli, "update customers set salutation= '".$salutation."', firstname='".$firstname."', lastname='".$lastname."', company_name='".$company_name."', email='".$email."', work_phone='".$work_phone."', mobile='".$mobile."', website='".$website."', billing_street='".$billing_street."', billing_city='".$billing_city."', billing_state='".$billing_state."', billing_zip='".$billing_zip."', billing_country='INDIA', shipping_street='".$shipping_street."', shipping_city='".$shipping_city."', shipping_state='".$shipping_state."', shipping_zip='".$shipping_zip."', shipping_country='INDIA', date='".$date."', notes='".$notes."',business_id='".$user_id."'  where customer_id='".$customer_id."' ");
-	if($update_customer_details)
+	$update_vendor_details = mysqli_query($mysqli, "update vendors set salutation= '".$salutation."', firstname='".$firstname."', lastname='".$lastname."', company_name='".$company_name."', email='".$email."', work_phone='".$work_phone."', mobile='".$mobile."', website='".$website."', billing_street='".$billing_street."', billing_city='".$billing_city."', billing_state='".$billing_state."', billing_zip='".$billing_zip."', billing_country='INDIA', shipping_street='".$shipping_street."', shipping_city='".$shipping_city."', shipping_state='".$shipping_state."', shipping_zip='".$shipping_zip."', shipping_country='INDIA', date='".$date."', notes='".$notes."',business_id='".$user_id."'  where vendor_id='".$vendor_id."' ");
+	if($update_vendor_details)
 	{
 		echo "<script>alert('updated successfully')</script>";
 	}
@@ -97,11 +97,11 @@ if(isset($_POST['update']))
 					<!-- Begin default content width -->
 					<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
 					<?php
-						$user_id = $_SESSION['c'];
+						$user_id = $_SESSION['user_id'];
 
-						$customer_id = $_GET['cu_id'];
-						$view_customer_info = mysqli_query($mysqli, "select * from customers where customer_id='".$customer_id."'");
-						$fetch_customer_details = mysqli_fetch_array ($view_customer_info);
+						$vendor_id = $_GET['vendor_id'];
+						$view_vendor_info = mysqli_query($mysqli, "select * from vendors where vendor_id='".$vendor_id."'");
+						$fetch_vendor_details = mysqli_fetch_array ($view_vendor_info);
 					?>
 					
 
@@ -115,51 +115,51 @@ if(isset($_POST['update']))
 												<div class="col-sm-4">
 													<div class="form-group">
 														<select name="sal" class="rs-selectize-single" >
-															<option selected disabled value=""><?php echo $fetch_customer_details['salutation']?></option>
-															<option value="1"<?php echo(($fetch_customer_details['salutation']=='1')?'selected':'');?>>Mr.</option>
-															<option value="2"<?php echo(($fetch_customer_details['salutation']=='2')?'selected':'');?>>Mrs.</option>
-															<option value="3"<?php echo(($fetch_customer_details['salutation']=='3')?'selected':'');?>>Ms.</option>
-															<option value="4"<?php echo(($fetch_customer_details['salutation']=='4')?'selected':'');?>>Miss.</option>
-															<option value="5"<?php echo(($fetch_customer_details['salutation']=='5')?'selected':'');?>>Dr.</option>
+															<option selected disabled value=""><?php echo $fetch_vendor_details['salutation']?></option>
+															<option value="1"<?php echo(($fetch_vendor_details['salutation']=='1')?'selected':'');?>>Mr.</option>
+															<option value="2"<?php echo(($fetch_vendor_details['salutation']=='2')?'selected':'');?>>Mrs.</option>
+															<option value="3"<?php echo(($fetch_vendor_details['salutation']=='3')?'selected':'');?>>Ms.</option>
+															<option value="4"<?php echo(($fetch_vendor_details['salutation']=='4')?'selected':'');?>>Miss.</option>
+															<option value="5"<?php echo(($fetch_vendor_details['salutation']=='5')?'selected':'');?>>Dr.</option>
 														</select>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->
 												<div class="col-sm-4">
 													<div class="form-group">
-														<input name="fname" type="text" class="form-control" id="rs-form-example-fname" value=<?php echo $fetch_customer_details['firstname']; ?> >
+														<input name="fname" type="text" class="form-control" id="rs-form-example-fname" value=<?php echo $fetch_vendor_details['firstname']; ?> >
 														<p class="help-block with-errors"></p>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->
 												<div class="col-sm-4">
 													<div class="form-group">
-														<input name="lname" type="text" class="form-control" id="rs-form-example-lname" value=<?php echo $fetch_customer_details['lastname']; ?> >
+														<input name="lname" type="text" class="form-control" id="rs-form-example-lname" value=<?php echo $fetch_vendor_details['lastname']; ?> >
 														<p class="help-block with-errors"></p>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->
 											</div><!-- /.row -->
 
 											<div class="form-group">
-												<input name="cname" type="text" class="form-control" id="rs-form-example-email" value=<?php echo $fetch_customer_details['company_name']; ?> >
+												<input name="cname" type="text" class="form-control" id="rs-form-example-email" value=<?php echo $fetch_vendor_details['company_name']; ?> >
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input name="email" type="email" class="form-control" id="rs-form-example-email" value=<?php echo $fetch_customer_details['email'];?> >
+												<input name="email" type="email" class="form-control" id="rs-form-example-email" value=<?php echo $fetch_vendor_details['email'];?> >
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input name="wphone" type="integer" class="form-control" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['work_phone']; ?> >
+												<input name="wphone" type="integer" class="form-control" id="rs-form-example-tel" value=<?php echo $fetch_vendor_details['work_phone']; ?> >
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input name="mobile" type="integer" class="form-control" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['mobile']; ?> >
+												<input name="mobile" type="integer" class="form-control" id="rs-form-example-tel" value=<?php echo $fetch_vendor_details['mobile']; ?> >
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input name="website" type="text" class="form-control" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['website']; ?> >
+												<input name="website" type="text" class="form-control" id="rs-form-example-tel" value=<?php echo $fetch_vendor_details['website']; ?> >
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
@@ -192,22 +192,22 @@ if(isset($_POST['update']))
 														<h3 style="margin-bottom:15px;font-size:17px;">Billing Address</h3>
 														
 														<div class="form-group">
-															<textarea name="bstreet" class="form-control billstreet" ><?php echo $fetch_customer_details['billing_street']; ?></textarea>
+															<textarea name="bstreet" class="form-control billstreet" ><?php echo $fetch_vendor_details['billing_street']; ?></textarea>
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input name="bcity" type="text" class="form-control billcity" id="rs-form-example-email" value=<?php echo $fetch_customer_details['billing_city']; ?> >
+															<input name="bcity" type="text" class="form-control billcity" id="rs-form-example-email" value=<?php echo $fetch_vendor_details['billing_city']; ?> >
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input name="bstate" type="text" class="form-control billstate" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['billing_state']; ?> >
+															<input name="bstate" type="text" class="form-control billstate" id="rs-form-example-tel" value=<?php echo $fetch_vendor_details['billing_state']; ?> >
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input name="bzip" type="integer" class="form-control bilzip" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['billing_zip']; ?> >
+															<input name="bzip" type="integer" class="form-control bilzip" id="rs-form-example-tel" value=<?php echo $fetch_vendor_details['billing_zip']; ?> >
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
@@ -221,22 +221,22 @@ if(isset($_POST['update']))
 														<h3 style="margin-bottom:15px;font-size:17px;">Shipping Address <span style="font-size:15px;float:right;color:#4a89dc;font-weight:normal;cursor:pointer;padding:5px;" onclick="copybillingaddr();"><i class="fa fa-hand-o-down"></i> Copy billing address</span></h3>
 														
 														<div class="form-group">
-															<textarea name="sstreet" class="form-control billstreet2"><?php echo $fetch_customer_details['shipping_street']; ?></textarea>
+															<textarea name="sstreet" class="form-control billstreet2"><?php echo $fetch_vendor_details['shipping_street']; ?></textarea>
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input name="scity" type="text" class="form-control billcity2" id="rs-form-example-email" value=<?php echo $fetch_customer_details['shipping_city']; ?> >
+															<input name="scity" type="text" class="form-control billcity2" id="rs-form-example-email" value=<?php echo $fetch_vendor_details['shipping_city']; ?> >
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input name="sstate" type="text" class="form-control billstate2" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['shipping_state']; ?> >
+															<input name="sstate" type="text" class="form-control billstate2" id="rs-form-example-tel" value=<?php echo $fetch_vendor_details['shipping_state']; ?> >
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input name="szip" type="integer" class="form-control bilzip2" id="rs-form-example-tel" value=<?php echo $fetch_customer_details['shipping_zip']; ?> >
+															<input name="szip" type="integer" class="form-control bilzip2" id="rs-form-example-tel" value=<?php echo $fetch_vendor_details['shipping_zip']; ?> >
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 														
@@ -251,14 +251,13 @@ if(isset($_POST['update']))
 											<div role="tabpanel" class="tab-pane fade" id="rs-tab-02">
 												<h3 style="margin-bottom:15px;font-size:17px;">Notes</h3>	
 												<div class="form-group">
-													<textarea name="notes" class="form-control" style="min-height:250px;" ><?php echo $fetch_customer_details['notes']; ?></textarea>
+													<textarea name="notes" class="form-control" style="min-height:250px;" ><?php echo $fetch_vendor_details['notes']; ?></textarea>
 													<p class="help-block with-errors"></p>
 												</div><!-- /.form-group -->
 											</div><!-- /.tab-pane -->
 
 										</div><!-- /.tab-content -->
-									</div><!-- .panel-body -->
-									
+									</div><!-- .panel-body -->								
 
 									<div class="panel-footer">
 											<div class="form-group m-a-0">
@@ -268,10 +267,8 @@ if(isset($_POST['update']))
 										</div><!-- /.panel-footer -->
 									</form>
 								</div><!-- /.panel -->
-
 								<!-- End Panel -->
-
-						</div>
+							</div>
 					</div><!-- /.container-fluid -->
 
 				</div><!-- /.rs-inner -->

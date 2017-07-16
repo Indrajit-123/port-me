@@ -1,9 +1,9 @@
 <?php
 include ("config.php");
 
-$customer_id = $_GET['cu_id'];
-$view_customer_info = mysqli_query($mysqli, "select * from customers where customer_id='".$customer_id."'");
-$fetch_customer_details = mysqli_fetch_array ($view_customer_info);
+$vendor_id = $_GET['vendor_id'];
+$view_vendor_info = mysqli_query($mysqli, "select * from vendors where business_id='".$vendor_id."'");
+$fetch_vendor_details = mysqli_fetch_array ($view_vendor_info);
 ?>
 
 <!DOCTYPE html>
@@ -78,19 +78,9 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 												<div class="col-sm-2">
 												Full Name:
 												</div>
-												<div class="col-sm-2">
-													<div class="form-group">
-														<label><?php echo $fetch_customer_details['salutation']?></label>
-													</div><!-- /.form-group -->
-												</div><!-- /.col-sm-4 -->
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label><?php echo $fetch_customer_details['firstname'];?></label>
-													</div><!-- /.form-group -->
-												</div><!-- /.col-sm-4 -->
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label><?php echo $fetch_customer_details['lastname'];?></label>										
+												<div class="col-sm-8">
+													<div class="form-group" style="margin-bottom:-1px;">
+														<label><?php echo $fetch_vendor_details['salutation']?></label>  <label><?php echo $fetch_vendor_details['firstname'];?></label>  <label><?php echo $fetch_vendor_details['lastname'];?></label>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->
 											</div><!-- /.row -->
@@ -101,10 +91,10 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<label><?php echo $fetch_customer_details['company_name'];?> </label>
+														<label><?php echo $fetch_vendor_details['company_name'];?> </label>
 													</div><!-- /.form-group -->
 												</div>
-										</div>
+											</div>
 										
 										<div class="row">
 											<div class="col-sm-2">
@@ -112,7 +102,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-													<label><?php echo $fetch_customer_details['email'];?> </label>												
+													<label><?php echo $fetch_vendor_details['email'];?> </label>												
 													</div><!-- /.form-group -->
 												</div>
 											</div>
@@ -122,7 +112,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-													<label><?php echo $fetch_customer_details['work_phone'];?> </label>												
+													<label><?php echo $fetch_vendor_details['work_phone'];?> </label>												
 													</div><!-- /.form-group -->
 												</div>
 											</div>
@@ -132,7 +122,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-													<label><?php echo $fetch_customer_details['mobile'];?> </label>													
+													<label><?php echo $fetch_vendor_details['mobile'];?> </label>													
 													</div><!-- /.form-group -->
 												</div>
 											</div>
@@ -141,8 +131,8 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 													Website:
 											</div>
 												<div class="form-group">
-													<div class="col-sm-8">
-													<label><?php echo $fetch_customer_details['website'];?> </label>	
+													<div class="col-sm-8" style="margin-bottom:20px;">
+													<label><?php echo $fetch_vendor_details['website'];?> </label>	
 													</div><!-- /.form-group -->
 												</div>
 											</div>
@@ -177,28 +167,28 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 															<div class="col-sm-2">
 																Street :
 															</div>	
-														<label><?php echo $fetch_customer_details['billing_street'];?> </label>									
+														<label><?php echo $fetch_vendor_details['billing_street'];?> </label>									
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
 															<div class="col-sm-2">
 																City :
 															</div>	
-															<label><?php echo $fetch_customer_details['billing_city'];?> </label>
+															<label><?php echo $fetch_vendor_details['billing_city'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
 															<div class="col-sm-2">
 																State :
 															</div>	
-														<label><?php echo $fetch_customer_details['billing_state'];?> </label>
+														<label><?php echo $fetch_vendor_details['billing_state'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
 															<div class="col-sm-2">
 																Zip :
 															</div>	
-															<label><?php echo $fetch_customer_details['billing_zip'];?> </label>
+															<label><?php echo $fetch_vendor_details['billing_zip'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
@@ -217,28 +207,28 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 															<div class="col-sm-2">
 																Street :
 															</div>	
-														<label><?php echo $fetch_customer_details['shipping_street'];?> </label>
+														<label><?php echo $fetch_vendor_details['shipping_street'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
 															<div class="col-sm-2">
 																City :
 															</div>	
-														<label><?php echo $fetch_customer_details['shipping_city'];?> </label>
+														<label><?php echo $fetch_vendor_details['shipping_city'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
 															<div class="col-sm-2">
 																State :
 															</div>	
-														<label><?php echo $fetch_customer_details['shipping_state'];?> </label>
+														<label><?php echo $fetch_vendor_details['shipping_state'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
 															<div class="col-sm-2">
 																Zip :
 															</div>	
-														<label><?php echo $fetch_customer_details['shipping_zip'];?> </label>
+														<label><?php echo $fetch_vendor_details['shipping_zip'];?> </label>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
@@ -255,7 +245,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 											<div role="tabpanel" class="tab-pane fade" id="rs-tab-02">
 												<h3 style="margin-bottom:15px;font-size:17px;">Notes</h3>	
 												<div class="form-group">
-													<label> <?php echo $fetch_customer_details['notes'];?></label>
+													<label> <?php echo $fetch_vendor_details['notes'];?></label>
 													<p class="help-block with-errors"></p>
 												</div><!-- /.form-group -->
 											</div><!-- /.tab-pane -->
@@ -267,7 +257,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 									<div class="panel-footer">
 											<div class="form-group m-a-0">
 												<button type="reset" class="btn btn-default btn-wide">Reset</button>
-												<a href = "customer.php"><button class="btn btn-success btn-wide">Back</button></a>
+												<a href = "vendor.php"><button class="btn btn-success btn-wide">Back</button></a>
 											</div>
 										</div><!-- /.panel-footer -->
 									</form>

@@ -14,14 +14,13 @@
 		$subscription_expdate = "";
 		$subscription_price = "";
 		
-		$check_email = check_duplicate_email($username);
+		$check_email = check_duplicate_email($email);
 		echo $check_email;
 		if($check_email < 1){
-			$save_reg = mysqli_query($mysqli,"INSERT into users VALUES ('',  '', '".$email."', '".$business."','".$type."' '".$password."', '".$phone."', '','','','','','','','','','','','','')");
+			$save_reg = mysqli_query($mysqli,"INSERT into users VALUES ('','','','".$email."', '".$business."','".$type."', '".$password."', '".$phone."', '','','','','','','','','','','','','')");
 			if($save_reg)
 			{	
-				$_SESSION['user_id'] = $fetch_details['user_id'];
-				echo "<script>window.location.href='my_account.php'</script>";
+				echo "<script>window.location.href='index.php'</script>";
 			}
 			else
 			{

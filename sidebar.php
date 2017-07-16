@@ -5,7 +5,7 @@ $cu_info = mysqli_query($mysqli, "select * from users where user_id = '".$user_i
 $fetch_details = mysqli_fetch_array($cu_info);
 ?>
 <aside class="rs-sidebar">
-
+	
 			<!-- Sidebar menu -->
 			<ul class="rs-sidebar-nav default-sidebar-nav">
 				<li class="rs-user-sidebar">
@@ -28,7 +28,7 @@ $fetch_details = mysqli_fetch_array($cu_info);
 						</span>
 					</a>
 					<ul>
-						<li><a href="javascript:void(0);">My Profile</a></li>
+						<li><a href="my_account.php">My Profile</a></li>
 						<li><a href="javascript:void(0);">Account Settings</a></li>
 						<li><a href="javascript:void(0);">Author Level<span class="label label-success p-x text-uppercase">Elite</span></a></li>
 						<li><a href="logout.php">Log Out</a></li>
@@ -37,11 +37,13 @@ $fetch_details = mysqli_fetch_array($cu_info);
 
 				<li class="menu-block-divider"></li>
 
-				<li class="active selected">
+				<li class="nav-item start <?php if($page_name == 'dashboard.php'){ ?>active open<?php } ?>">
 					<a href="dashboard.php">
 						<span class="gcon gcon-gauge rs-icon-menu"></span>Dashboard
 					</a>
 				</li>
+			
+
 
 				<li class="nav-item start <?php if($page_name == 'supplier_vendor.php' ||  $page_name == 'customer.php') { ?>active open<?php } ?>">
 					<a href="javascript:void(0);">
@@ -54,7 +56,7 @@ $fetch_details = mysqli_fetch_array($cu_info);
 					</ul>
 				</li>
 
-				<li>
+				<li class="nav-item start <?php if($page_name == 'product_group.php' ||  $page_name == 'product.php') { ?>active open<?php } ?>">
 					<a href="javascript:void(0);">
 						<span class="fa fa-shopping-cart rs-icon-menu"></span>Products / Services
 					</a>
@@ -64,36 +66,36 @@ $fetch_details = mysqli_fetch_array($cu_info);
 					</ul>
 				</li>
 
-				<li>
-					<a href="view_sales_order.php">
+				<li class="nav-item start <?php if($page_name == 'view_sales_order.php'){ ?>active open<?php } ?>">
+					<a href="sales_order.php">
 						<span class="fa fa-usd rs-icon-menu"></span>Sales
 					</a>
 					
 				</li>
 
-				<li>
+				<li class="nav-item start <?php if($page_name == 'invoice.php') { ?>active open<?php } ?>">
 					<a href="invoice.php">
 						<span class="fa fa-file-pdf-o rs-icon-menu"></span>Invoices
 					</a>
 				</li>
 
-				<li>
+				<li class="nav-item start <?php if($page_name == 'add_bill.php' ||  $page_name == 'view_bill.php') { ?>active open<?php } ?>">
 					<a href="javascript:void(0);">
 						<span class="fa fa-table rs-icon-menu"></span>Expense Bills
 					</a>
 					<ul>
-						<li><a href="add_report.php">Add Bill</a></li>
-						<li><a href="reports.php">View Bills</a></li>
+						<li><a href="add_bill.php">Add Bill</a></li>
+						<li><a href="view_bill.php">View Bills</a></li>
 					</ul>
 				</li>
 				
-				<li>
+				<li class="nav-item start <?php if($page_name == 'reports.php') { ?>active open<?php } ?>">
 					<a href="reports.php">
 						<span class="fa fa-file-o rs-icon-menu"></span>Reports
 					</a>
 				</li>
 				
-				<li >
+				<li class="nav-item start <?php if($page_name == 'tax.php') { ?>active open<?php } ?>">
 					<a href="tax.php">
 						<span class="fa fa-balance-scale rs-icon-menu"></span>Tax
 					</a>
