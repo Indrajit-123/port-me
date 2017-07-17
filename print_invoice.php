@@ -59,13 +59,13 @@
 							
 								<div style="margin-left:800px;">
 									<button type="button" class=" fa fa-file-pdf-o btn btn-success " onclick="pdf_document();">  PDF</button>	
-									<input type="button" value="Print 1st Div" onclick="javascript:printDiv('printablediv')" />
+									 <input type="button" value="Print Div Contents" id="btnPrint" />
 								</div>								
 						</div>
 					</div>
 	 
-		<div id="printablediv" style="width: 100%; height: 200px">
-			<form id="form1" runat="server">
+	<form id="form1">
+    <div id="dvContainer">
 
 			<div class="container-fluid" style="margin-top:40px;">
 			<div class="col-md-12 col-sm-12">
@@ -275,8 +275,9 @@
 											
 
 												
-							</form>
-						</div><!-- /.panel -->	
+							
+						</div><!-- /.panel -->
+						</form>
 					</div>
 				</div><!-- /.container-fluid -->
 				</div>
@@ -328,30 +329,19 @@
 
 		});
 	</script>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
-	<script language="javascript" type="text/javascript">
-        function printDiv(divID) {
-            //Get the HTML of div
-            var divElements = document.getElementById(divID).innerHTML;
-            //Get the HTML of whole page
-            var oldPage = document.body.innerHTML;
-
-            //Reset the page's HTML with div's HTML only
-            document.body.innerHTML = 
-              "<html><head><title></title></head><body>" + 
-              divElements + "</body>";
-
-            //Print Page
-            window.print();
-
-            //Restore orignal HTML
-            document.body.innerHTML = oldPage;
-
-          
-        }
+	 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $("#btnPrint").live("click", function () {
+            var divContents = $("#dvContainer").html();
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>DIV Contents</title>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });
     </script>
-
 
 </body>
 </html>

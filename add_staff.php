@@ -64,7 +64,7 @@
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
-										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='vendor.php'"> <i class="fa fa-remove"></i> </span>
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='staff.php'"> <i class="fa fa-remove"></i> </span>
 									</div>
 								</h3>
 								
@@ -204,7 +204,7 @@
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="tel" class="form-control bilzip2" id="rs-form-example-tel" placeholder="Zip" name="shipping_zip">
+															<input type="number" class="form-control bilzip2" id="rs-form-example-tel" placeholder="Zip" name="shipping_zip">
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 

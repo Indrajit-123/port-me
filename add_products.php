@@ -1,26 +1,29 @@
 <?php
 include ("config.php");
+$user_id = $_SESSION['user_id'];
 
 if(isset($_POST['submit']))
 {
 	$product_type= $_POST['cs-radio'];
-	$name	   = $_POST['cat_name'];
+	$category_id   = $_POST['product_category_id'];
+	$product_name=$_POST['product_name'];
 	$desc	   = $_POST['desc'];
 	$tax_name  = $_POST['tax_name'];
 	$tax_rate  = $_POST['tax_rate'];
+	$quantity  = $_POST['quantity'];
+	$price	   = $_POST['price'];
 	$attribute = $_POST['attri'];
 	$add_attribute = implode(",",$attribute);
 	$options   = $_POST['optn'];
 	$add_options   = implode(",",$options);
-	$item_type = $_POST['cs-radio1'];
 
 	
 	
 
-	$insert_category = mysqli_query($mysqli,"insert into product_category values ('','".$product_type."','".$name."','".$desc."','".$tax_name."','".$tax_rate."','".$add_attribute."','".$add_options."','".$item_type."') ");
-	if($insert_category)
+	$insert_product = mysqli_query($mysqli,"insert into product values ('','".$product_type."','".$category_id."','".$product_name."','".$desc."','".$quantity."','".$tax_name."','".$tax_rate."','".$price."','".$add_attribute."','".$add_options."','".$user_id."') ");
+	if($insert_product)
 	{
-		echo "<script>window.location.href='product_group.php'</script>";
+		echo "<script>window.location.href='add_products.php'</script>";
 	}
 
 
@@ -101,7 +104,7 @@ if(isset($_POST['submit']))
 							<div class="panel panel-plain panel-rounded">
 
 								<div class="panel-body">
-									<form >
+									<form method="POST" enctype="multipart/form-data">
 											<div class="row" style="margin-bottom:10px;">
 												<div class="col-sm-3" style="margin-top:10px;">
 													<span >
@@ -112,12 +115,12 @@ if(isset($_POST['submit']))
 												<div class="col-sm-6">
 													<div class="radio radio-custom">
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-04" value="">
+														<input type="radio" name="cs-radio" id="cs-radio-04" value="Product">
 														<span class="checker"></span>
 														Product
 													</label>
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-05" value="">
+														<input type="radio" name="cs-radio" id="cs-radio-05" value="Service">
 														<span class="checker"></span>
 														Service
 													</label>
@@ -128,28 +131,33 @@ if(isset($_POST['submit']))
 							
 								<div class="row" style="margin-bottom:5px;">
 									<div class="col-sm-3" style="margin-top:10px;">         
-											Product Category              
+											Choose Category              
 											  </div>
-											 <div class="col-sm-8">
+											 <div class="col-sm-9">
 											   <div class="form-group">                
-											 <select class="rs-selectize-single">
-											   <option value=""selected disabled>Product Category</option>
-											   <option value="4">Thomas Edison</option>
-											   <option value="1">Nikola</option>
-											   <option value="3">Nikola Tesla</option>
-											   <option value="5">Arnold Schwarzenegger</option>
+											 <select name="product_category_id" class="rs-selectize-single">
+												
+											 <?php
+											 $category_name = mysqli_query($mysqli, "select * from product_category");
+											 while ($fetch_category = mysqli_fetch_array($category_name))
+											 {
+											 ?>											   
+											   <option value="<?php echo $fetch_category['category_id']?>"><?php echo $fetch_category['category_name']?></option>
+											  <?php
+											 }  
+											 ?>
+											  
 											 </select>
 											   </div><!-- /.form-group -->
 											  </div>
-									</div><br>
-
+										</div>
 											<div class="row">
 												<div class="col-sm-3">
 													Product Name
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<input type="email" class="form-control" id="rs-form-example-email" placeholder="Product Name" required>
+														<input name="product_name" type="text" class="form-control" id="rs-form-example-email" placeholder="Product Name" required>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
@@ -161,19 +169,60 @@ if(isset($_POST['submit']))
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<textarea class="form-control" placeholder="Description" style="height:150px;" required></textarea>
+														<textarea  name="desc" class="form-control" placeholder="Description" style="height:150px;" ></textarea>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-sm-4">
+											 
+										   Tax Name (optional)
+											 
+										  </div>
+										  <div class="col-sm-8">
+										   <div class="form-group">
+											<input type="tel" class="form-control"  placeholder="Tax Name" name="tax_name">
+											<p class="help-block with-errors"></p>
+										   </div>
+										  </div>
+											</div>
+
+										<div class="row">
+											<div class="col-sm-4">       
+										   Tax Rate (optional) <b>%</b>             
+										  </div>
+										  <div class="col-sm-8">
+										   <div class="form-group has-feedback">
+											
+											<div class="input-group">
+											 <span class="input-group-addon">%</span>
+											 <input name="tax_rate" type="text" class="form-control" placeholder="Tax Rate">
+											</div>
+										   </div>
+										  </div>
 											</div>
 											
 											<div class="row">
 												<div class="col-sm-3">
 													Quantity
 												</div>
-												<div class="col-sm-4">
+												<div class="col-sm-9">
 													<div class="form-group">
-														<input type="number" class="form-control" id="rs-form-example-email" placeholder="Select Quantity" required>
+														<input name="quantity" type="number" class="form-control" id="rs-form-example-email" placeholder="Select Quantity" required>
+														<p class="help-block with-errors"></p>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-sm-3">
+													Price <i class="fa fa-inr"></i>
+												</div>
+												<div class="col-sm-9">
+													<div class="form-group">
+														<input name="price" type="number" class="form-control" id="rs-form-example-email" placeholder="Enter Price" required>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
@@ -251,7 +300,7 @@ if(isset($_POST['submit']))
 						</div>
 						
 						<!-- right side -->
-						<div class="col-md-5 col-sm-12">
+						<div class="col-md-5 col-sm-12" style="margin-top:50px;">
 							<div class="dropzone">
 								
 							</div>
@@ -262,7 +311,7 @@ if(isset($_POST['submit']))
 					<div class="panel-footer" style="background:#fff;">
 							<div class="form-group m-a-0">
 								<button type="reset" class="btn btn-default btn-wide">Reset</button>
-								<button type="submit" class="btn btn-success btn-wide">Submit</button>
+								<button name="submit" type="submit" class="btn btn-success btn-wide">Submit</button>
 							</div>
 						</div><!-- /.panel-footer -->
 					</form>

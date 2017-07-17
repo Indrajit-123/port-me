@@ -1,7 +1,7 @@
 <?php
 include ("config.php");
 $user_id = $_SESSION['user_id'];
-$staff_info = mysqli_query ($mysqli,"select * from staff_details where user_id='".$user_id."'");
+$staff_info = mysqli_query ($mysqli,"select * from staff_details where business_id='".$user_id."'");
 
 if(isset($_GET['delete_id']))
 {

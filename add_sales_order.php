@@ -1,4 +1,14 @@
+<?php
+include ("config.php");
+$user_id=$_SESSION['user_id'];
 
+$customer_info = mysqli_query($mysqli, "select * from customers ");
+$fetch_cu_details = mysqli_fetch_array($customer_info);
+
+$cu_info = $_REQUEST['cu_id'];
+$customer_details = mysqli_query ($mysqli, "select * from customers where customer_id='".$cu_info."'");
+$fetch_cu_info = mysqli_fetch_array($customer_details);
+?>
 
 
 
@@ -69,11 +79,14 @@
 											<div class="col-sm-9">
 											<div class="form-group">
 												<select class="rs-selectize-single">
-													<option value=""selected disabled>Customer Name</option>
-													<option value="4">Thomas Edison</option>
-													<option value="1">Nikola</option>
-													<option value="3">Nikola Tesla</option>
-													<option value="5">Arnold Schwarzenegger</option>
+												<?php
+												while ($fetch_cu_name = mysqli_fetch_array($customer_info))
+												{
+												?>
+													<option id="?cu_id=<?php echo $fetch_cu_name['customer_id'];?>" value="<?php echo $fetch_cu_name['firstname'];?><?php echo $fetch_cu_name['lastname'];?>"><?php echo $fetch_cu_name['firstname'];?> <?php echo $fetch_cu_name['lastname'];?></option>
+												<?php												
+												}
+												?>
 												</select>
 											</div><!-- /.form-group -->
 											</div>
@@ -116,27 +129,31 @@
 											</div>
 										
 								</div>
+
+								
 								<div class="col-md-5 col-sm-12" style="text-align:right;">
 									
 												<div class="col-sm-12">
-													<label style="font-size:20px;">
-														Indrajit Ghosh
+											
+													<label style="font-size:20px;" >
+														<?php echo $fetch_cu_info['firstname'];?> <?php echo $fetch_cu_info['lastname'];?>
 													</label>
 												</div>
 												<div class="col-sm-12">
 													<label style="font-size:15px;">
-														Dukbanglow
+														<?php echo $fetch_cu_info['billing_street'];?> <?php echo $fetch_cu_info['billing_city'];?>
 													</label>
 												</div>
 												<div class="col-sm-12">
 													<label style="font-size:15px;">
-														Murshidabad
+														<?php echo $fetch_cu_info['billing_state'];?>
 													</label>
 												</div>
 												<div class="col-sm-12">
 													<label style="font-size:15px;">
-														742132
+														<?php echo $fetch_cu_info['billing_zip'];?>
 													</label>
+												
 												</div>
 												
 									

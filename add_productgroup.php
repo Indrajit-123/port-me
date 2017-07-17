@@ -1,5 +1,6 @@
 <?php
 include ("config.php");
+$user_id = $_GET['user_id'];
 
 if(isset($_POST['submit']))
 {
@@ -8,21 +9,27 @@ if(isset($_POST['submit']))
 	$desc	   = $_POST['desc'];
 	$tax_name  = $_POST['tax_name'];
 	$tax_rate  = $_POST['tax_rate'];
+
 	$attribute = $_POST['attri'];
 	$add_attribute = implode(",",$attribute);
+
 	$options   = $_POST['optn'];
 	$add_options   = implode(",",$options);
+
 	$item_type = $_POST['cs-radio1'];
 
 	
 	
 
-	$insert_category = mysqli_query($mysqli,"insert into product_category values ('','".$product_type."','".$name."','".$desc."','".$tax_name."','".$tax_rate."','".$add_attribute."','".$add_options."','".$item_type."') ");
+	$insert_category = mysqli_query($mysqli,"insert into product_category values ('','".$product_type."','".$name."','".$desc."','".$tax_name."','".$tax_rate."','".$add_attribute."','".$add_options."','".$item_type."','".$user_id."') ");
 	if($insert_category)
 	{
 		echo "<script>window.location.href='product_group.php'</script>";
 	}
-
+	else
+	{
+		echo "<script>alert('error')</script>";
+	}
 
 }
 
@@ -114,17 +121,15 @@ if(isset($_POST['submit']))
 												<div class="col-sm-6">
 													<div class="radio radio-custom">
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-04" value="">
+														 <input type="radio" name="cs-radio"  id="cs-radio-04" value="Product" >Product
 														<span class="checker"></span>
-														Product
+													
 													</label>
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-05" value="">
-														<span class="checker"></span>
-														Service
+														 <input type="radio" name="cs-radio"  id="cs-radio-04" value="Service">Service
+														<span class="checker"></span>														
 													</label>
 												</div>
-
 												</div><!-- /.col-sm-4 -->
 											</div><!-- /.row -->
 
@@ -255,12 +260,12 @@ if(isset($_POST['submit']))
 												<div class="col-sm-6">
 													<div class="radio radio-custom">
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio1" id="cs-radio-04" value="">
+														<input type="radio" name="cs-radio1" id="cs-radio-04" value="Inventory">
 														<span class="checker"></span>
 														Inventory
 													</label>
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio1" id="cs-radio-05" value="">
+														<input type="radio" name="cs-radio1" id="cs-radio-05" value="Non-inventory">
 														<span class="checker"></span>
 														Non-inventory
 													</label>
