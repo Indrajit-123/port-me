@@ -1,3 +1,9 @@
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang=en>
 
@@ -34,11 +40,11 @@
 						<div class="rs-dashhead-content">
 							<div class="rs-dashhead-titles">
 								<h3 class="rs-dashhead-title m-t">
-									Create Invoice :
+									Cteate Invoice:
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
-										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='invoice.php'"> <i class="fa fa-remove"></i> </span>
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='view_sales_order.php'"> <i class="fa fa-remove"></i> </span>
 									</div>
 								</h3>
 								
@@ -108,11 +114,10 @@
 												
 											</div>
 											</div>
-										</form>
+										
 								</div>
-
 								<div class="col-md-5 col-sm-12" style="text-align:right;">
-									<form name="vendor_form" method="POST" enctype="multipart/form-data" id="rs-validation-login-page">
+									
 												<div class="col-sm-12">
 													<label style="font-size:20px;">
 														Indrajit Ghosh
@@ -133,8 +138,7 @@
 														742132
 													</label>
 												</div>
-												</form>
-
+												
 									
 
 							</div><!-- /.panel -->
@@ -680,23 +684,6 @@
 		  });
 
 		});
-	</script>
-
-	<script>
-		function copybillingaddr(){
-			var billstreet = $(".billstreet").val();
-			var billcity = $(".billcity").val();
-			var billstate = $(".billstate").val();
-			var bilzip = $(".bilzip").val();
-			var billcountry = $(".billcountry option:selected").val();
-			
-			$(".billstreet2").val(billstreet);
-			$(".billcity2").val(billcity);
-			$(".billstate2").val(billstate);
-			$(".bilzip2").val(bilzip);
-			$(".billcountry2 select").val(billcountry)
-			$('.billcountry2 option[value='+billcountry+']').prop('selected',true);
-		}
 	</script>
 	
 </body>
