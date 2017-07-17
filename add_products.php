@@ -1,3 +1,35 @@
+<?php
+include ("config.php");
+
+if(isset($_POST['submit']))
+{
+	$product_type= $_POST['cs-radio'];
+	$name	   = $_POST['cat_name'];
+	$desc	   = $_POST['desc'];
+	$tax_name  = $_POST['tax_name'];
+	$tax_rate  = $_POST['tax_rate'];
+	$attribute = $_POST['attri'];
+	$add_attribute = implode(",",$attribute);
+	$options   = $_POST['optn'];
+	$add_options   = implode(",",$options);
+	$item_type = $_POST['cs-radio1'];
+
+	
+	
+
+	$insert_category = mysqli_query($mysqli,"insert into product_category values ('','".$product_type."','".$name."','".$desc."','".$tax_name."','".$tax_rate."','".$add_attribute."','".$add_options."','".$item_type."') ");
+	if($insert_category)
+	{
+		echo "<script>window.location.href='product_group.php'</script>";
+	}
+
+
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang=en>
 

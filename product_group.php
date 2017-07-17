@@ -2,7 +2,8 @@
 include ("config.php");
 $user_id = $_SESSION['user_id'];
 
-$customer_info = mysqli_query ($mysqli,"select * from customers where business_id='".$user_id."'");
+$fetch_category = mysqli_query($mysqli, "select * from product_category ");
+
 ?>
 <!DOCTYPE html>
 <html lang=en>
@@ -93,29 +94,34 @@ $customer_info = mysqli_query ($mysqli,"select * from customers where business_i
 								<table class="table table-b-t table-b-b datatable-default rs-table table-default" style="border-right:1px solid #f5f5f5;border-left:1px solid #f5f5f5;">
 									<thead>
 							            <tr>
-							                <th style="text-align:center;">Product Category</th>
 							                <th style="text-align:center;">Type</th>
-							                <th style="text-align:center;">Product Name</th>
+							                <th style="text-align:center;">Category Name</th>
 							                <th style="text-align:center;">Item Type</th>					               											
+											<th style="text-align:center;">Tax Value</th>
 											<th style="text-align:center;">Action</th>
 							            </tr>
 							        </thead>
 							        <tbody>
 							             <tr>
 										<?php
-										while ($fetch_customer_info = mysqli_fetch_array($customer_info))										
+										while ($fetch_category_items = mysqli_fetch_array($fetch_category))	
+										
 										{
 										?>
-							                <td style="text-align:center;"><?php echo $fetch_customer_info['firstname']?></td>											
-											<td style="text-align:center;"><?php echo $fetch_customer_info['company_name']?></td>
-							                <td style="text-align:center;"><?php echo $fetch_customer_info['email']?></td>
-							                <td style="text-align:center;"><?php echo $fetch_customer_info['mobile']?></td>
+							               
+											<td style="text-align:center;"><?php echo $fetch_category_items['product_type']?></td>
+							                <td style="text-align:center;"><?php echo $fetch_category_items['category_name']?></td>
+							                <td style="text-align:center;"><?php echo $fetch_category_items['item_type']?></td>
+											<td style="text-align:center;">
+											<?php echo $fetch_category_items['tax_name']?>
+											<?php echo $fetch_category_items['tax_rate']?>
+											</td>
 											
 							               										
-											<td>
-												<a href="view_product.php?cu_id=<?php echo $fetch_customer_info['customer_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
+											<td style="text-align:center;">
+												<a href="view_product.php?cu_id=<?php echo $fetch_category_items['customer_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
 
-												<a href="edit_product.php?cu_id=<?php echo $fetch_customer_info['customer_id'];?>" class="fa fa-pencil" style="height:35px;margin:5px;"></a>
+												<a href="edit_product.php?cu_id=<?php echo $fetch_category_items['customer_id'];?>" class="fa fa-pencil" style="height:35px;margin:5px;"></a>
 
 												<a href="" class="fa fa-trash" style="height:35px;margin:5px;"></a>
 											</td>

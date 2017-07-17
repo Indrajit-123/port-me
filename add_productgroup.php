@@ -1,3 +1,36 @@
+<?php
+include ("config.php");
+
+if(isset($_POST['submit']))
+{
+	$product_type= $_POST['cs-radio'];
+	$name	   = $_POST['cat_name'];
+	$desc	   = $_POST['desc'];
+	$tax_name  = $_POST['tax_name'];
+	$tax_rate  = $_POST['tax_rate'];
+	$attribute = $_POST['attri'];
+	$add_attribute = implode(",",$attribute);
+	$options   = $_POST['optn'];
+	$add_options   = implode(",",$options);
+	$item_type = $_POST['cs-radio1'];
+
+	
+	
+
+	$insert_category = mysqli_query($mysqli,"insert into product_category values ('','".$product_type."','".$name."','".$desc."','".$tax_name."','".$tax_rate."','".$add_attribute."','".$add_options."','".$item_type."') ");
+	if($insert_category)
+	{
+		echo "<script>window.location.href='product_group.php'</script>";
+	}
+
+
+}
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang=en>
 
@@ -69,10 +102,7 @@
 							<div class="panel panel-plain panel-rounded">
 
 								<div class="panel-body">
-									<form >
-
-											
-									
+									<form method="POST" enctype="multipart/form-data" name="myfosda">								
 
 											<div class="row" style="margin-bottom:10px;">
 												<div class="col-sm-3" style="margin-top:10px;">
@@ -104,7 +134,7 @@
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<input type="email" class="form-control" id="rs-form-example-email" placeholder="Group/Category Name" required>
+														<input name="cat_name" type="text" class="form-control" id="rs-form-example-email" placeholder="Group/Category Name" required>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
@@ -116,7 +146,7 @@
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<textarea class="form-control" placeholder="Description" style="height:150px;" required></textarea>
+														<textarea name="desc" class="form-control" placeholder="Description" style="height:150px;" required></textarea>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
@@ -130,7 +160,7 @@
 										  </div>
 										  <div class="col-sm-9">
 										   <div class="form-group">
-											<input type="tel" class="form-control"  placeholder="Tax Name" name="orderno">
+											<input type="tel" class="form-control"  placeholder="Tax Name" name="tax_name">
 											<p class="help-block with-errors"></p>
 										   </div>
 										  </div>
@@ -145,7 +175,7 @@
 											
 											<div class="input-group">
 											 <span class="input-group-addon">%</span>
-											 <input type="text" class="form-control" placeholder="Tax Rate">
+											 <input name="tax_rate" type="text" class="form-control" placeholder="Tax Rate">
 											</div>
 										   </div>
 										  </div>
@@ -225,12 +255,12 @@
 												<div class="col-sm-6">
 													<div class="radio radio-custom">
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-04" value="">
+														<input type="radio" name="cs-radio1" id="cs-radio-04" value="">
 														<span class="checker"></span>
 														Inventory
 													</label>
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-05" value="">
+														<input type="radio" name="cs-radio1" id="cs-radio-05" value="">
 														<span class="checker"></span>
 														Non-inventory
 													</label>
@@ -258,7 +288,7 @@
 					<div class="panel-footer" style="background:#fff;">
 							<div class="form-group m-a-0">
 								<button type="reset" class="btn btn-default btn-wide">Reset</button>
-								<button type="submit" class="btn btn-success btn-wide">Submit</button>
+								<button name="submit" type="submit" class="btn btn-success btn-wide">Submit</button>
 							</div>
 						</div><!-- /.panel-footer -->
 					</form>
