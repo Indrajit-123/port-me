@@ -93,6 +93,7 @@
 			}else if(isset($data) && $data == "error"){
 			?>
 				<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;"> Something went wrong! please try again later. </p>
+
 			<?php
 			}else if(isset($data) && $data == "email"){
 			?>

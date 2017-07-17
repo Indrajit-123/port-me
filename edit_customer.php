@@ -30,11 +30,11 @@ if(isset($_POST['update']))
 	$update_customer_details = mysqli_query($mysqli, "update customers set salutation= '".$salutation."', firstname='".$firstname."', lastname='".$lastname."', company_name='".$company_name."', email='".$email."', work_phone='".$work_phone."', mobile='".$mobile."', website='".$website."', billing_street='".$billing_street."', billing_city='".$billing_city."', billing_state='".$billing_state."', billing_zip='".$billing_zip."', billing_country='INDIA', shipping_street='".$shipping_street."', shipping_city='".$shipping_city."', shipping_state='".$shipping_state."', shipping_zip='".$shipping_zip."', shipping_country='INDIA', date='".$date."', notes='".$notes."',business_id='".$user_id."'  where customer_id='".$customer_id."' ");
 	if($update_customer_details)
 	{
-		echo "<script>alert('updated successfully')</script>";
+		$data = "success";
 	}
 	else
 	{
-		echo "<script>alert('error')</script>";
+		$data = "error" ;
 	}
 }
 ?>
@@ -97,8 +97,20 @@ if(isset($_POST['update']))
 					<!-- Begin default content width -->
 					<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
 						<div class="col-md-12 col-sm-12">
-							<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Registration Successfull </p>
+						<?php
+								if(isset($data) && $data == "success")
+						{
+						?>
+						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Updated Successfully </p>
+						<?php
+						}else if(isset($data) && $data == "error"){
+						?>
+						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error in updation </p>
+						<?php
+						}
+						?>
 						</div>
+					
 
 
 					<?php

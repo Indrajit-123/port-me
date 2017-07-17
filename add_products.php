@@ -23,7 +23,11 @@ if(isset($_POST['submit']))
 	$insert_product = mysqli_query($mysqli,"insert into product values ('','".$product_type."','".$category_id."','".$product_name."','".$desc."','".$quantity."','".$tax_name."','".$tax_rate."','".$price."','".$add_attribute."','".$add_options."','".$user_id."') ");
 	if($insert_product)
 	{
-		echo "<script>window.location.href='add_products.php'</script>";
+		$data = "success";
+	}
+	else
+	{
+		$data = "error";
 	}
 
 
@@ -93,10 +97,22 @@ if(isset($_POST['submit']))
 					<!-- End Dashhead -->
 
 					<!-- Begin default content width -->
-					<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
+						<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
 						<div class="col-md-12 col-sm-12">
-							<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Registration Successfull </p>
+						<?php
+								if(isset($data) && $data == "success")
+						{
+						?>
+						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Added Successfully </p>
+						<?php
+						}else if(isset($data) && $data == "error"){
+						?>
+						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error in Insertion </p>
+						<?php
+						}
+						?>
 						</div>
+					
 
 						
 						<div class="col-md-7 col-sm-12">

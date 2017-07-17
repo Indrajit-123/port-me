@@ -26,11 +26,12 @@ if(isset($_POST['submit']))
 	$insert_vendor_details = mysqli_query($mysqli, "insert vendors values ('','".$salutation."','".$firstname."','".$lastname."','".$company_name."','".$email."','".$work_phone."','".$mobile."','".$website."','".$billing_street."','".$billing_city."','".$billing_state."','".$billing_zip."','INDIA','".$shipping_street."','".$shipping_city."','".$shipping_state."','".$shipping_zip."','INDIA','','".$date."','".$user_id."','".$user_id."')");
 	if($insert_vendor_details)
 	{
+		$data = "success";
 		echo "<script>alert('inserted successfully')</script>";
 	}
 	else
 	{
-		echo "<script>alert('error')</script>";
+		$data = "error";
 	}
 }
 ?>
@@ -90,10 +91,22 @@ if(isset($_POST['submit']))
 					<!-- End Dashhead -->
 
 					<!-- Begin default content width -->
-					<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
+						<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
 						<div class="col-md-12 col-sm-12">
-							<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Registration Successfull </p>
+						<?php
+								if(isset($data) && $data == "success")
+						{
+						?>
+						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Added Successfully </p>
+						<?php
+						}else if(isset($data) && $data == "error"){
+						?>
+						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error in Insertion </p>
+						<?php
+						}
+						?>
 						</div>
+					
 
 					
 
