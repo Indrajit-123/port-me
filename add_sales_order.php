@@ -38,7 +38,7 @@
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
-										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='sales_order.php'"> <i class="fa fa-remove"></i> </span>
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='view_sales_order.php'"> <i class="fa fa-remove"></i> </span>
 									</div>
 								</h3>
 								
@@ -195,17 +195,16 @@
 
 																			<td class="col-sm-2">
 																				<div class="form-group">
-																						<label>CGST:-9%  </label>
-																						<br>
-																						<label>SGST:-9%  </label>
-
-																					
+																					<label>CGST:-9%  </label>
+																					  <br>
+																					  <label>SGST:-9%  </label>
 																				</div>
 																			</td>
 
 																			<td class="col-sm-2">
 																				<div class="form-group" style="font-size:15px;">
-																					<b style="color:#ef5350;">00.00</b><br>
+																					<b style="color:#ef5350;">00.00</b>
+																					<br>
 																					<b style="color:#ef5350;">00.00</b>
 																					<p class="help-block with-errors"></p>
 																				</div>
@@ -642,79 +641,7 @@
 			</div>
 		 </div>						  
 	</div>
- </div> <!--/ end pop up-->
-
-					  <div class="modal fade" id="myModal1" role="dialog">
-						<div class="modal-dialog">
-						
-						  <!-- Modal content-->
-						  <div class="modal-content">
-							<div class="modal-header">
-							  <button type="button" class="close" data-dismiss="modal">&times;</button>
-							  <h4 class="modal-title">Add Tax</h4>
-							</div>
-							<div class="modal-body">
-
-							<div class="col-sm-12">
-							 <div class="col-sm-4">             
-								Product Category              
-									 </div>
-									<div class="col-sm-8">
-								   <div class="form-group">                
-									<select class="rs-selectize-single">
-									  <option value=""selected disabled>Product Category</option>
-									  <option value="4">Thomas Edison</option>
-									  <option value="1">Nikola</option>
-									  <option value="3">Nikola Tesla</option>
-									  <option value="5">Arnold Schwarzenegger</option>
-									</select>
-								   </div><!-- /.form-group -->
-								  </div>
-								  </div>
-
-					   <div class="col-sm-12">
-						<div class="col-sm-4">
-								 
-						 Tax Name <i class="fa fa-inr" aria-hidden="true"></i>
-								 
-						</div>
-						<div class="col-sm-8">
-						 <div class="form-group">
-						  <input type="tel" class="form-control"  placeholder="Tax Name" name="orderno">
-						  <p class="help-block with-errors"></p>
-						 </div>
-						</div>
-					   </div>
-
-					   <div class="col-sm-12">
-						<div class="col-sm-4">             
-						 Tax Rate <b>%</b>             
-						</div>
-						<div class="col-sm-8">
-						 <div class="form-group has-feedback">
-								
-						  <div class="input-group">
-						   <span class="input-group-addon">%</span>
-						   <input type="text" class="form-control" placeholder="Tax Rate">
-						  </div>
-						 </div>
-						</div>
-					   </div>
-						<div class="panel-body"></div>
-					   <div class="form-group m-a-0" style="padding-left:207px;">
-						<button type="reset" class="btn btn-default btn-wide">Reset</button>
-						<button type="submit" class="btn btn-success btn-wide">Submit</button>
-					   </div>
-
-							   
-							</div>
-							<div class="modal-footer">
-							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							</div>
-						  </div>
-						  
-						</div>
-					  </div>
+ </div> <!--/ end pop up-->				
 
 	<!-- Page Plugins -->
 	<script src="js/bootstrap-switch.min.js"></script>
@@ -742,7 +669,7 @@
 
 		$(document).ready(function() {
 		  $(".add-more").click(function(){ 
-			  var htmlz = "	<div class=' row atrri_add_cont' ><div class=' ache_ekta' ></div><div class=' col-md-12' ><table class=' table table-bordered table-b-t table-b-b' ><thead></thead><tbody><tr class=' roxkas' ><td class=' col-sm-4' ><div class=' form-group' > <select class=' rs-selectize-single' > <option value=' ' selected disabled>Product Name</option> <option value=' 4' >Thomas Edison</option> <option value=' 1' >Nikola</option> <option value=' 3' >Nikola Tesla</option> <option value=' 5' >Arnold Schwarzenegger</option> </select></div><p class=' help-block with-errors' ></p></td><td class=' col-sm-1' ><div class=' form-group' ><input type=' text'  name=' attri[]'  class=' form-control'  placeholder='  Qty '  required><p class=' help-block with-errors' ></p></div></td><td class=' col-sm-1' ><div class=' form-group'  style=' font-size:15px;margin-top:10px;' ><b>00.00</b><p class=' help-block with-errors' ></p></div></td><td class=' col-sm-2' ><div class=' form-group' ><div class=' input-group' ><select class=' rs-selectize-optgroup'  multiple><option value=' ' >Choose</option><option value=' CGST' >CGST</option><option value=' SGST' >SGST</option><option value=' VAT' >VAT</option></select><span class=' input-group-btn' ><button type=' button'  class=' btn btn-success btn-wide'  data-toggle=' modal'  data-target=' #myModal2' style=' height:34px;width:50px;text-align:center;padding:2px;'  type=' button' ><i class=' fa fa-plus' ></i> New</button></span></div></div></td><td class=' col-sm-2' ><div class=' form-group'  style=' font-size:15px;margin-top:10px;' ><b style=' color:#ef5350;' >00.00</b> <p class=' help-block with-errors' ></p></div></td><td class=' col-sm-2' ><div class=' form-group'  style=' font-size:15px;margin-top:10px;' ><b style=' color:#5dc26a;' >00.00</b> <a href='#' class='remove' style='color:#ef5350;'><i class='fa fa-trash'></i></a> <p class=' help-block with-errors' ></p></div><div class=' col-sm-1'  style=' margin-top:-20px;' >&nbsp;</div></td></tr></tbody></table></div></div>";
+			  var htmlz = "<div class='row atrri_add_cont'><div class='ache_ekta'></div><div class='col-md-12'><table class='table table-bordered table-b-t table-b-b'><thead></thead><tbody><tr class='roxkas'><td class='col-sm-4'><div class='form-group'> <select class='rs-selectize-single' style='height:32px;width:310px;border:border:2px solid red;'> <option value=' 'selected disabled>Product Name</option> <option value=' 4' >Thomas Edison</option> <option value='1'>Nikola</option> <option value='3'>Nikola Tesla</option> <option value=' 5' >Arnold Schwarzenegger</option> </select></div><!-- /.form-group --><p class=' help-block with-errors' ></p></td><td class=' col-sm-1' ><div class=' form-group' ><input type=' text'name='attri[]'class=' form-control'placeholder='Qty'required><p class=' help-block with-errors' ></p></div></td><td class=' col-sm-1' ><div class='form-group'style='font-size:15px;margin-top:10px;' ><b>00.00</b><p class=' help-block with-errors' ></p></div></td><td class=' col-sm-2' ><div class='form-group'><label>CGST:-9%</label><br><label>SGST:-9%</label></div></div></td><td class=' col-sm-2' ><div class=' form-group'  style=' font-size:15px;'><b style='color:#ef5350;'>00.00</b><br><b style=' color:#ef5350;' >00.00</b><p class=' help-block with-errors' ></p></div></td><td class='col-sm-2'><div class='form-group'style=' font-size:15px;margin-top:10px;'><b style='color:#5dc26a;' >00.00</b> <a href='#' class='remove' style='color:#ef5350;padding:45px;'><i class='fa fa-trash'></i></a> <p class='help-block with-errors'></p></div><div class=' col-sm-1'style='margin-top:-20px;'>&nbsp;</div></td></tr></tbody></table></div></div>";
 			  //alert(htmlz);
 			  $(".add-more-contz").append(htmlz);
 		  });
