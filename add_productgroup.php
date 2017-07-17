@@ -71,12 +71,7 @@
 								<div class="panel-body">
 									<form >
 
-											<div class="form-group">
-												<label>Select Product Category</label>
-												<div style="padding:left;">
-												<input type="text" class="rs-selectize-tags" value="awesome,neat" placeholder="Input Tags">
-												</div>
-											</div>
+											
 									
 
 											<div class="row" style="margin-bottom:10px;">
@@ -105,7 +100,7 @@
 
 											<div class="row">
 												<div class="col-sm-3">
-													Group Name
+													Category Name
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
@@ -133,7 +128,7 @@
 										   Tax Name <i class="fa fa-inr" aria-hidden="true"></i>
 											 
 										  </div>
-										  <div class="col-sm-7">
+										  <div class="col-sm-9">
 										   <div class="form-group">
 											<input type="tel" class="form-control"  placeholder="Tax Name" name="orderno">
 											<p class="help-block with-errors"></p>
@@ -145,7 +140,7 @@
 											<div class="col-sm-3">       
 										   Tax Rate <b>%</b>             
 										  </div>
-										  <div class="col-sm-8">
+										  <div class="col-sm-9">
 										   <div class="form-group has-feedback">
 											
 											<div class="input-group">
@@ -252,7 +247,7 @@
 						</div>
 						
 						<!-- right side -->
-						<div class="col-md-5 col-sm-12">
+						<div class="col-md-5 col-sm-12" style="margin-top:40px;">
 							<div class="dropzone">
 								
 							</div>

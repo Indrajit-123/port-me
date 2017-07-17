@@ -59,22 +59,24 @@
 							
 								<div style="margin-left:800px;">
 									<button type="button" class=" fa fa-file-pdf-o btn btn-success " onclick="pdf_document();">  PDF</button>	
-									<input type="button" value="Print Div Contents" id="btnPrint" >
+									<input type="button" value="Print 1st Div" onclick="javascript:printDiv('printablediv')" />
 								</div>								
 						</div>
 					</div>
 	 
-			<form  id="form1" name="vendor_form" method="POST" enctype="multipart/form-data" id="rs-validation-login-page">
-			<div id="dvContainer">
-					<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
-						<div class="col-md-12 col-sm-12">
-							<div class="col-md-8 col-sm-8" >
-												<div class="col-sm-12">
-													<label style="font-size:30px;">
+		<div id="printablediv" style="width: 100%; height: 200px">
+			<form id="form1" runat="server">
+
+			<div class="container-fluid" style="margin-top:40px;">
+			<div class="col-md-12 col-sm-12">
+
+							<div class="col-md-4 col-sm-12" >
+										<div class="col-sm-12 col-sm-offset-0">
+													<label>
 														[Company Name]
 													</label>
 												</div>
-												<div class="col-sm-12">
+												<div class="col-sm-12 ">
 													<label style="font-size:15px;">
 														[Company address] Barrackpore
 													</label>
@@ -85,39 +87,11 @@
 													</label>
 												</div>												
 									
-							</div><!-- /.1panel -->
-
-							<div class="col-md-4 col-sm-4" style="text-align:right;" >
-												<div class="col-sm-12">
-													<label style="font-size:30px;">
-														INVOICE
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:18px;">
-														Invoice Number :
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:13px;">
-														Date : <?php echo date("d/m/y");?>
-													</label>
-												</div>
-									</form>		
-							</div><!-- /.2panel -->
-						</div>
-					</div>
-				</form>
-
-					<form name="vendor_form" method="POST" enctype="multipart/form-data" id="rs-validation-login-page">
-						<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:0px;margin-left:0px;">
-							<div class="panel panel-plain panel-rounded">
-								<div class="panel-body">
-								
-								<div class="col-md-6 col-sm-12" style="text-align:left;">
-									<form name="vendor_form" method="POST" enctype="multipart/form-data" id="rs-validation-login-page">
-												<div class="col-sm-12">
-													<label style="font-size:20px;">
+									</div><!-- /.1panel -->
+						
+							<div class="col-md-4 col-sm-12 col-sm-offset-1" >
+										<div class="col-sm-12">
+													<label >
 														[Billing Address]
 													</label>
 												</div>
@@ -146,49 +120,42 @@
 														[Phone]
 													</label>
 												</div>
-																	
-
-							</div><!-- /.3panel -->
-
-							<div class="col-md-6 col-sm-12" style="text-align:right;" >
-												<div class="col-sm-12">
-													<label style="font-size:20px;">
-														[Delivery Address]
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:15px;">
-														[Customer name]
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:15px;">
-														[company]
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:15px;">
-														[Address]
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:15px;">
-														[City Name, PIN]
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:15px;">
-														[Phone]
-													</label>
-												</div>										
-								</div><!-- /.4panel -->
-							</form>	
+										</div><!-- /.2panel -->
 							
-						<form>
+
+
+							<div class="col-md-4 col-sm-12 col-sm-offset-9" >
+								<div class="col-sm-12" >
+													<label style="font-size:30px;">
+														INVOICE
+													</label>
+												</div>
+												<div class="col-sm-12">
+													<label style="font-size:18px;">
+														Invoice Number :
+													</label>
+												</div>
+												<div class="col-sm-12">
+													<label style="font-size:13px;">
+														Date : <?php echo date("d/m/y");?>
+													</label>
+												</div>
+								</div><!--/.2panel -->
+							</div>
+					
+			
+
+						<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:0px;margin-left:0px;">
+							<div class="panel panel-plain panel-rounded">
+								<div class="panel-body">								
+								<div class="col-md-12 col-sm-12" style="text-align:left;">
+									
+							
+					
 							<div class="col-md-12">
 							<!-- Begin Panel -->
 								<div class="panel panel-plain panel-rounded">
-									<div class="panel-body" style="border-line:15px;" >
+									<div class="panel-body" style="border-line:15px; margin-top:40px;" >
 
 								
 								<!--saler details -->
@@ -219,28 +186,28 @@
 								<div class="panel-body" style="background:" >
 								   <div class="col-md-12">
 									<table class="table" border="3">
-										<thead>
-											<tr>
-												<th>Product Name</th>
-												<th>Quantity</th>
-												<th>Rate</th>
-												<th>Tax Value </th>
-												<th>Amount</th>												
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>												
-											</tr>
-										</tbody>
-									</table>
-								</div>											
-							</div>
-						</div>
+											<thead>
+												<tr>
+													<th>Product Name</th>
+													<th>Quantity</th>
+													<th>Rate</th>
+													<th>Tax Value </th>
+													<th>Amount</th>												
+												</tr>
+											</thead>
+												<tbody>
+													<tr>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>												
+													</tr>
+												</tbody>
+										</table>
+											</div>											
+										</div>
+									</div>
 
 											<div class="row col-sm-offset-10">
 												<div class="col-sm-8">
@@ -363,18 +330,28 @@
 	</script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-	<script type="text/javascript">
-        $("#btnPrint").live("click", function () {
-            var divContents = $("#dvContainer").html();
-            var printWindow = window.open('', '', 'height=400,width=800');
-            printWindow.document.write('<html><head><title>DIV Contents</title>');
-            printWindow.document.write('</head><body >');
-            printWindow.document.write(divContents);
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            printWindow.print();
-        });
+	<script language="javascript" type="text/javascript">
+        function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Get the HTML of whole page
+            var oldPage = document.body.innerHTML;
+
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML = 
+              "<html><head><title></title></head><body>" + 
+              divElements + "</body>";
+
+            //Print Page
+            window.print();
+
+            //Restore orignal HTML
+            document.body.innerHTML = oldPage;
+
+          
+        }
     </script>
+
 
 </body>
 </html>
