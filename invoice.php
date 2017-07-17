@@ -88,25 +88,24 @@
 								<table class="table table-b-t table-b-b datatable-default rs-table table-default" style="border-right:1px solid #f5f5f5;border-left:1px solid #f5f5f5;">
 									<thead>
 							            <tr>
-											<th>Bill Id</th>
-							                <th>Customer Name</th>
-							                <th>Product Name</th>
-							                <th>Quantity</th>
-							                <th>Price</th>
-							                <th>Date</th>
+											<th>Customer Name</th>
+							                <th>Invoice Number</th>
+							                <th>Invoice Date</th>
+							                <th>Seller Name</th>
+							                <th>Total</th>
 											<th>Action</th>
 							            </tr>
 							        </thead>
 							        <tbody>
 							            <tr>
 							                <td>Tiger Nixon</td>
-							                <td>System Architect</td>
-							                <td>Edinburgh</td>
-							                <td>61</td>
+							                <td>#154789</td>
 							                <td>2011/04/25</td>
+							                <td>Edinburgh</td>
 							                <td>$320,800</td>
 											<td>
-												<a href="view_invoice.php"><button type="submit" class="btn btn-success btn-wide" value="submit">View</button></a>
+												<a href="view_invoice.php?cu_id=<?php echo $fetch_customer_info['customer_id'];?>" class="btn btn-default" style="margin:3px;"> View </a>												
+												<a href="?delete_id=<?php echo $fetch_customer_info['customer_id'];?>" class="fa fa-trash" style="height:35px;margin-top:10px;padding-right:-50px; font-size:25px"></a>
 											</td>
 							            </tr>
 							            

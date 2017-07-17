@@ -93,26 +93,22 @@ $customer_info = mysqli_query ($mysqli,"select * from customers where business_i
 								<table class="table table-b-t table-b-b datatable-default rs-table table-default" style="border-right:1px solid #f5f5f5;border-left:1px solid #f5f5f5;">
 									<thead>
 							           <tr>
-							                <th style="text-align:center;">Customer Name</th>
-							                <th style="text-align:center;">Company Name</th>
-							                <th style="text-align:center;">Email</th>
-							                <th style="text-align:center;">Mobile No.</th>
-							               
-											
+							                <th style="text-align:center;">Product Name</th>
+							                <th style="text-align:center;">Product Category</th>
+							                <th style="text-align:center;">In Stock</th>
+							                <th style="text-align:center;">Sold out</th>										
+											<th style="text-align:center;">Total Purchased</th>
 											<th style="text-align:center;">Action</th>
 							            </tr>
 							        </thead>
 							        <tbody>
 							            <tr>
-										<?php
-										while ($fetch_customer_info = mysqli_fetch_array($customer_info))										
-										{
-										?>
-							                <td style="text-align:center;"><?php echo $fetch_customer_info['firstname']?></td>											
-											<td style="text-align:center;"><?php echo $fetch_customer_info['company_name']?></td>
-							                <td style="text-align:center;"><?php echo $fetch_customer_info['email']?></td>
-							                <td style="text-align:center;"><?php echo $fetch_customer_info['mobile']?></td>
-							               
+										
+							                <td>Vibe K5 Note</td>										
+											<td>Lenovo Mobiles</td>
+							                <td>50</td>
+							                <td>20</td>
+											<td>70</td>						               
 										
 											<td>
 												<a href="view_product.php?product_id=<?php echo $fetch_customer_info['product_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
@@ -122,9 +118,7 @@ $customer_info = mysqli_query ($mysqli,"select * from customers where business_i
 												<a href="" class="fa fa-trash" style="height:35px;margin:5px;"></a>
 											</td>
 							            </tr>
-							           <?php
-										}
-										?>								        
+							          							        
 							        </tbody>
 								</table>
 						</div><!-- /.panel -->

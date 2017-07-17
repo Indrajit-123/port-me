@@ -2,7 +2,7 @@
 include ("config.php");
 
 $vendor_id = $_GET['vendor_id'];
-$view_vendor_info = mysqli_query($mysqli, "select * from vendors where business_id='".$vendor_id."'");
+$view_vendor_info = mysqli_query($mysqli, "select * from vendors where vendor_id='".$vendor_id."'");
 $fetch_vendor_details = mysqli_fetch_array ($view_vendor_info);
 ?>
 
@@ -47,7 +47,7 @@ $fetch_vendor_details = mysqli_fetch_array ($view_vendor_info);
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
-										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='customer.php'"> <i class="fa fa-remove"></i> </span>
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='vendor.php'"> <i class="fa fa-remove"></i> </span>
 									</div>
 								</h3>
 								
@@ -205,7 +205,7 @@ $fetch_vendor_details = mysqli_fetch_array ($view_vendor_info);
 														
 														<div class="form-group">
 															<div class="col-sm-2">
-																Street :
+																Street:
 															</div>	
 														<label><?php echo $fetch_vendor_details['shipping_street'];?> </label>
 														</div><!-- /.form-group -->

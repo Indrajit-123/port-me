@@ -9,7 +9,7 @@ if(isset($_GET['delete_id']))
 	$delete_customer = mysqli_query($mysqli,"delete from vendors where vendor_id = '".$delete_id."'");
 	if($delete_customer)
 		{
-			echo "<script>window.location.href='customer.php'</script>";
+			echo "<script>window.location.href='vendor.php'</script>";
 		}
 }
 
@@ -74,7 +74,7 @@ if(isset($_GET['delete_id']))
 						<div class="rs-dashhead-content">
 							<div class="rs-dashhead-titles">
 								<h3 class="rs-dashhead-title m-t">
-									Sppliers/Vendors
+									Suppliers/Vendors
 									<!--<div style="float:right;">
 										<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>
 
@@ -84,7 +84,7 @@ if(isset($_GET['delete_id']))
 								
 							</div>
 							<div class="rs-dashhead-toolbar">
-								<button type="button" class="btn btn-success btn-wide rs-btn-icon block-on-mobile" onclick="window.location.href='add_customer.php'">
+								<button type="button" class="btn btn-success btn-wide rs-btn-icon block-on-mobile" onclick="window.location.href='add_vendor.php'">
 									<span class="gcon gcon-upload-to-cloud icon-btn"></span>
 									Add New
 								</button>

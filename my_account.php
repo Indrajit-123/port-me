@@ -43,6 +43,43 @@ if ($update_details)
 	{
 		echo "<script>alert('error')</script>";
 	}
+
+
+
+	if(isset($_POST['change_pass']))
+	{
+	$old_password = $_POST['old_password'];
+	$select_query = mysqli_query($mysqli,"select * from profile_page where password='".$old_password."' and id='". $user_id."'");
+	$get_row = mysqli_num_rows($select_query);
+	if($get_row > 0)
+	{
+		$new_password = $_POST['Password'];
+		$confirm_password = $_POST['confirm_password'];
+
+		if($new_password == $confirm_password)
+		{
+			$change_password = mysqli_query($mysqli,"update profile_page set password='".$confirm_password."' where id='".$user_id."'");
+			if($change_password)
+			{
+				echo "<script>alert('successfully Changed')</script>";
+			}
+			else
+			{
+				echo "<script>alert('error')</script>";
+			}
+		}
+		else
+		{
+			echo "<script>alert('confirm error')</script>";
+		}
+	}
+	else
+	{
+		echo "<script>alert('not in here')</script>";
+	}
+	}
+
+
 }
 ?>
 
@@ -110,7 +147,7 @@ if ($update_details)
 							<!-- Begin Panel -->
 							<div class="panel panel-plain panel-rounded" >
 								<div class="panel-body" style="text-align:right;">	
-								<a href =""><button name="change_pass" class="btn btn-success btn-wide">Change Password</button></a>
+								<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Change Password</button>
 								</div>
 							
 									<div class="panel-body" >
@@ -315,6 +352,68 @@ if ($update_details)
 		</article><!-- /.rs-content-wrapper -->
 		<!-- END MAIN CONTENT -->
 	<?php include("footer.php");?>
+
+	<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Change Password</h4>
+        </div>
+        <div class="modal-body">
+          
+		  <div class="panel-body">
+										<form >										
+												
+										<div class="row">
+											<div class="col-sm-4">Old Password:</div>
+												<div class="form-group">
+													<div class="col-sm-8">
+														<input type="password" class="form-control" id="rs-form-example-email" placeholder="Old Password"  required>
+															<p class="help-block with-errors"></p>
+													</div><!-- /.form-group -->
+												</div>
+										</div>
+
+										<div class="row">
+											<div class="col-sm-4">New Password:</div>
+												<div class="form-group">
+													<div class="col-sm-8">
+														<input type="password" class="form-control" id="rs-form-example-email" placeholder="New Password"  required>
+															<p class="help-block with-errors"></p>
+													</div><!-- /.form-group -->
+												</div>
+										</div>
+											
+										<div class="row">
+											<div class="col-sm-4">Confirm Password:</div>
+												<div class="form-group">
+													<div class="col-sm-8">
+														<input type="password" class="form-control" id="rs-form-example-email" placeholder="Confirm Password"  required>
+															<p class="help-block with-errors"></p>
+													</div><!-- /.form-group -->
+												</div>
+										</div>
+											
+
+								</div><!-- /.panel-body -->
+
+								<div class="form-group m-a-0" style="padding-left:20px;">
+												<button type="update" class="btn btn-success btn-wide" name="change_pass">Change Password</button>
+											</div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
 	<!-- Page Plugins -->
 	<script src="js/bootstrap-switch.min.js"></script>
 	<script src="js/bootstrap-switch-example.js"></script>

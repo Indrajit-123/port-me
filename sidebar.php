@@ -45,13 +45,13 @@ $fetch_details = mysqli_fetch_array($cu_info);
 			
 
 
-				<li class="nav-item start <?php if($page_name == 'supplier_vendor.php' ||  $page_name == 'customer.php') { ?>active open<?php } ?>">
+				<li class="nav-item start <?php if($page_name == 'vendor.php' ||  $page_name == 'customer.php') { ?>active open<?php } ?>">
 					<a href="javascript:void(0);">
 						<span class="badge badge-danger">6</span>
 						<span class="fa fa-address-book rs-icon-menu"></span>Contacts
 					</a>
 					<ul>
-						<li ><a href="supplier_vendor.php">Suppliers / Vendors</a></li>
+						<li ><a href="vendor.php">Suppliers / Vendors</a></li>
 						<li ><a href="customer.php">Customers</a></li>
 					</ul>
 				</li>

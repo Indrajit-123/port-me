@@ -34,11 +34,11 @@
 						<div class="rs-dashhead-content">
 							<div class="rs-dashhead-titles">
 								<h3 class="rs-dashhead-title m-t">
-									Generate Invoice :
+									New Sales Order :
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
-										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='invoice.php'"> <i class="fa fa-remove"></i> </span>
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='sales_order.php'"> <i class="fa fa-remove"></i> </span>
 									</div>
 								</h3>
 								
@@ -66,29 +66,29 @@
 												</div>
 												<div class="col-sm-7">
 													<div class="form-group" style="margin-bottom:-1px;">
-														<label>CUSTOMER NAME HERE</label>
+														<label>FULL NAME HERE</label>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->												
 											</div><!-- /.row -->
 
 											<div class="row">
 											<div class="col-sm-3">
-													Invoice Number :
+													Order Number :
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<label>INVOICE NUMBER HERE </label>
+														<label>ORDER NUMBER HERE </label>
 													</div><!-- /.form-group -->
 												</div>
 											</div>
 
 											<div class="row">
 											<div class="col-sm-3">
-													Invoice Date :
+													Sales Date :
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<label>INVOICE DATE HERE</label>
+														<label>SALES DATE HERE</label>
 													</div><!-- /.form-group -->
 												</div>
 										</div>
@@ -179,13 +179,13 @@
 												
 											</td>
 												<td class="col-sm-1">												
-													<div class="form-group" style="font-size:15px;margin-top:20px;">												
-																
-														<b>2</b>
+													<div class="form-group">																
+														<input type="text" name="attri[]" class="form-control" placeholder=" Qty " required>
 														<p class="help-block with-errors"></p>
 													</div>
 												</td>
-												<td>
+
+												<td class="col-sm-1">												
 													<div class="form-group" style="font-size:15px;margin-top:10px;">
 														<b>00.00</b>
 														<p class="help-block with-errors"></p>
@@ -298,7 +298,6 @@
 										<div class="panel-footer">
 											<div class="form-group m-a-0" style="padding-left:0px;">												
 												<a href="sales_order.php"><button class="btn btn-success btn-wide">BACK</button>
-												<a href="print_invoice.php"><button class="btn btn-success btn-wide">PRINT INVOICE</button>
 											</div>
 										</div><!-- /.panel-footer -->
 									</div>

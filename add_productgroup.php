@@ -127,9 +127,37 @@
 												</div>
 											</div>
 
-
 											<div class="row">
-												<div class="col-sm-3" style="margin-top:10px;">
+												<div class="col-sm-3">
+											 
+										   Tax Name <i class="fa fa-inr" aria-hidden="true"></i>
+											 
+										  </div>
+										  <div class="col-sm-7">
+										   <div class="form-group">
+											<input type="tel" class="form-control"  placeholder="Tax Name" name="orderno">
+											<p class="help-block with-errors"></p>
+										   </div>
+										  </div>
+											</div>
+
+										<div class="row">
+											<div class="col-sm-3">       
+										   Tax Rate <b>%</b>             
+										  </div>
+										  <div class="col-sm-8">
+										   <div class="form-group has-feedback">
+											
+											<div class="input-group">
+											 <span class="input-group-addon">%</span>
+											 <input type="text" class="form-control" placeholder="Tax Rate">
+											</div>
+										   </div>
+										  </div>
+											</div>
+
+										<div class="row">
+												<div class="col-sm-3">
 													<div class="form-group">
 														Multiple Items
 													</div><!-- /.form-group -->

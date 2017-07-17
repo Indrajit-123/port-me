@@ -9,7 +9,6 @@
 	<meta name="author" content="">
 	<title>Company details | Port-ME</title>
 	<?php include("metalinks.php");?>
-
 	<style>
 		.dt-buttons a{
 			border:1px solid #CCC;
@@ -60,11 +59,13 @@
 							
 								<div style="margin-left:800px;">
 									<button type="button" class=" fa fa-file-pdf-o btn btn-success " onclick="pdf_document();">  PDF</button>	
-									<button type="button" class=" fa fa-print btn btn-success " onclick="print_document();">  PRINT</button>	
+									<input type="button" value="Print Div Contents" id="btnPrint" >
 								</div>								
 						</div>
 					</div>
-				<form name="vendor_form" method="POST" enctype="multipart/form-data" id="rs-validation-login-page">
+	 
+			<form  id="form1" name="vendor_form" method="POST" enctype="multipart/form-data" id="rs-validation-login-page">
+			<div id="dvContainer">
 					<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
 						<div class="col-md-12 col-sm-12">
 							<div class="col-md-8 col-sm-8" >
@@ -109,7 +110,7 @@
 				</form>
 
 					<form name="vendor_form" method="POST" enctype="multipart/form-data" id="rs-validation-login-page">
-						<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
+						<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:0px;margin-left:0px;">
 							<div class="panel panel-plain panel-rounded">
 								<div class="panel-body">
 								
@@ -241,7 +242,7 @@
 							</div>
 						</div>
 
-											<div class="row col-sm-offset-9">
+											<div class="row col-sm-offset-10">
 												<div class="col-sm-8">
 													<label style="font-size:15px;">
 														Sub Total <i class="fa fa-inr" aria-hidden="true"></i>
@@ -314,7 +315,7 @@
 				</div>
 				</div><!-- /.rs-inner -->
 			</div><!-- /.rs-content -->
-			
+			</div>
 		</article><!-- /.rs-content-wrapper -->
 		<!-- END MAIN CONTENT -->
 
@@ -360,17 +361,20 @@
 
 		});
 	</script>
-	
-	<script>
-		function print_document() 
-		{
-		  window.print();
-		  
-		 
-		}
-	
-	</script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-	
+	<script type="text/javascript">
+        $("#btnPrint").live("click", function () {
+            var divContents = $("#dvContainer").html();
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>DIV Contents</title>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });
+    </script>
+
 </body>
 </html>

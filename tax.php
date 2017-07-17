@@ -68,23 +68,7 @@
 									<form name="vendor_form" method="POST" enctype="multipart/form-data" >
 										<div class="modal-body">
 
-										   <div class="col-sm-7">
-											<div class="col-sm-4">             
-											Product Category              
-											  </div>
-											 <div class="col-sm-8">
-											   <div class="form-group">                
-											 <select class="rs-selectize-single">
-											   <option value=""selected disabled>Product Category</option>
-											   <option value="4">Thomas Edison</option>
-											   <option value="1">Nikola</option>
-											   <option value="3">Nikola Tesla</option>
-											   <option value="5">Arnold Schwarzenegger</option>
-											 </select>
-											   </div><!-- /.form-group -->
-											  </div>
-											  </div>
-
+									
 											<div class="col-sm-7">
 										  <div class="col-sm-4">
 											 

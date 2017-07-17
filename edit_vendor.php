@@ -81,7 +81,7 @@ if(isset($_POST['update']))
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
-										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='customer.php'"> <i class="fa fa-remove"></i> </span>
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='vendor.php'"> <i class="fa fa-remove"></i> </span>
 									</div>
 								</h3>
 								
@@ -116,11 +116,11 @@ if(isset($_POST['update']))
 													<div class="form-group">
 														<select name="sal" class="rs-selectize-single" >
 															<option selected disabled value=""><?php echo $fetch_vendor_details['salutation']?></option>
-															<option value="1"<?php echo(($fetch_vendor_details['salutation']=='1')?'selected':'');?>>Mr.</option>
-															<option value="2"<?php echo(($fetch_vendor_details['salutation']=='2')?'selected':'');?>>Mrs.</option>
-															<option value="3"<?php echo(($fetch_vendor_details['salutation']=='3')?'selected':'');?>>Ms.</option>
-															<option value="4"<?php echo(($fetch_vendor_details['salutation']=='4')?'selected':'');?>>Miss.</option>
-															<option value="5"<?php echo(($fetch_vendor_details['salutation']=='5')?'selected':'');?>>Dr.</option>
+															<option value="Mr."<?php echo(($fetch_vendor_details['salutation']=='1')?'selected':'');?>>Mr.</option>
+															<option value="Mrs."<?php echo(($fetch_vendor_details['salutation']=='2')?'selected':'');?>>Mrs.</option>
+															<option value="Ms."<?php echo(($fetch_vendor_details['salutation']=='3')?'selected':'');?>>Ms.</option>
+															<option value="Miss."<?php echo(($fetch_vendor_details['salutation']=='4')?'selected':'');?>>Miss.</option>
+															<option value="Dr."<?php echo(($fetch_vendor_details['salutation']=='5')?'selected':'');?>>Dr.</option>
 														</select>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->

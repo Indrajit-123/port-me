@@ -44,7 +44,7 @@
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
-										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='product_group.php'"> <i class="fa fa-remove"></i> </span>
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='product.php'"> <i class="fa fa-remove"></i> </span>
 									</div>
 								</h3>
 								
@@ -93,6 +93,23 @@
 
 												</div><!-- /.col-sm-4 -->
 											</div><!-- /.row -->
+							
+								<div class="row" style="margin-bottom:5px;">
+									<div class="col-sm-3" style="margin-top:10px;">         
+											Product Category              
+											  </div>
+											 <div class="col-sm-8">
+											   <div class="form-group">                
+											 <select class="rs-selectize-single">
+											   <option value=""selected disabled>Product Category</option>
+											   <option value="4">Thomas Edison</option>
+											   <option value="1">Nikola</option>
+											   <option value="3">Nikola Tesla</option>
+											   <option value="5">Arnold Schwarzenegger</option>
+											 </select>
+											   </div><!-- /.form-group -->
+											  </div>
+									</div><br>
 
 											<div class="row">
 												<div class="col-sm-3">

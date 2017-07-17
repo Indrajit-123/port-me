@@ -88,13 +88,12 @@
 								<table class="table table-b-t table-b-b datatable-default rs-table table-default" style="border-right:1px solid #f5f5f5;border-left:1px solid #f5f5f5;">
 									<thead>
 							            <tr>
-							                <th>Name</th>
-							                <th>Position</th>
-							                <th>Office</th>
-							                <th>Age</th>
-							                <th>Start date</th>
-							                <th>Salary</th>
-											<th></th>
+							                <th>Customer Name</th>
+							                <th>Order Number</th>
+							                <th>Sales Date</th>
+							                <th>Seller Person</th>
+											<th>ACTION</th>
+							               
 							            </tr>
 							        </thead>
 							        <tbody>
@@ -103,12 +102,9 @@
 							                <td>System Architect</td>
 							                <td>Edinburgh</td>
 							                <td>61</td>
-							                <td>2011/04/25</td>
-							                <td>$320,800</td>
-											<td>
-												<a href="view_sales_order.php?cu_id=<?php echo $fetch_customer_info['customer_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
-												<a href="edit_sales_order.php?cu_id=<?php echo $fetch_customer_info['customer_id'];?>" class="fa fa-pencil" style="height:10px;margin:5px;"></a>
-												<a href="?delete_id=<?php echo $fetch_customer_info['customer_id'];?>" class="fa fa-trash" style="height:10px;margin:5px;"></a>
+							               	<td>
+												<a href="view_sales_order.php?cu_id=<?php echo $fetch_customer_info['customer_id'];?>" class="btn btn-default" style="margin:3px;"> View </a>												
+												<a href="?delete_id=<?php echo $fetch_customer_info['customer_id'];?>" class="fa fa-trash" style="height:35px;margin-top:10px;padding-right:-50px; font-size:25px"></a>
 											</td>
 							            </tr>
 							          
