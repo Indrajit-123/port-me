@@ -195,23 +195,17 @@
 
 																			<td class="col-sm-2">
 																				<div class="form-group">
-																					<div class="input-group">
-																						<select class="rs-selectize-optgroup" multiple>
-																							<option value="">Choose</option>
-																							<option value="CGST">CGST</option>
-																							<option value="SGST">SGST</option>
-																							<option value="VAT">VAT</option>
-																						</select>
-																							<span class="input-group-btn">
-																								<button type="button" class="btn btn-success btn-wide" data-toggle="modal" data-target="#myModal1"
-																								style="height:34px;width:50px;text-align:center;padding:2px;" type="button"><i class="fa fa-plus"></i> New</button>
-																							</span>
-																					</div><!-- /input-group -->
+																						<label>CGST:-9%  </label>
+																						<br>
+																						<label>SGST:-9%  </label>
+
+																					
 																				</div>
 																			</td>
 
 																			<td class="col-sm-2">
-																				<div class="form-group" style="font-size:15px;margin-top:10px;">
+																				<div class="form-group" style="font-size:15px;">
+																					<b style="color:#ef5350;">00.00</b><br>
 																					<b style="color:#ef5350;">00.00</b>
 																					<p class="help-block with-errors"></p>
 																				</div>

@@ -1,36 +1,27 @@
 <?php
 	include("config.php");
+	$user_id=$_SESSION['user_id'];
 	if(isset($_POST['submit'])){
-		$salutation = $_POST['salutation'];
-		$firstname = $_POST['firstname'];
-		$lastname = $_POST['lastname'];
-		$companyname = $_POST['companyname'];
+		$name = $_POST['name'];
 		$email = $_POST['email'];
-		$work_phone = $_POST['work_phone'];
-		$mobile = $_POST['mobile'];
-		$Website = $_POST['Website'];
-		$billing_address = $_POST['billing_address'];
-		$billing_city = $_POST['billing_city'];
-		$billing_state = $_POST['billing_state'];
-		$billing_zip = $_POST['billing_zip'];
-		$billing_country = $_POST['billing_country'];
-		$shipping_street = $_POST['shipping_street'];
-		$shipping_city = $_POST['shipping_city'];
-		$shipping_state = $_POST['shipping_state'];
-		$shipping_zip = $_POST['shipping_zip'];
-		$shipping_country = $_POST['shipping_country'];
-		$notes = $_POST['notes'];
+		$phone = $_POST['phone'];
+		$commision = $_POST['commision'];
+		$document = $_POST['document'];
+		$street = $_POST['street'];
+		$state = $_POST['state'];
+		$city = $_POST['city'];
+		$zip = $_POST['zip'];
 
-		$date = time();
-		$added_by = $_SESSION['user_id'];
+		$insert_staff_details = mysqli_query($mysqli, "insert staff_details values ('','".$name."','".$email."','".$phone."','".$commision."','".$document."','".$street."','".$state."','".$city."','".$zip."','".$user_id."')");
 
-		$save_vendors = mysqli_query($mysqli,"INSERT into vendors VALUES('','$salutation','$firstname','$lastname','$companyname','$email','$work_phone','$mobile','$Website','$billing_address','$billing_city','$billing_state','$billing_zip','$billing_country','$shipping_street','$shipping_city','$shipping_state','$shipping_zip','$shipping_country','$notes','$date','$added_by')");
-
-		if($save_vendors){
-			$data = "success";
-		}else{
-			$data = "error";
-		}
+	if($insert_staff_details)
+	{
+		echo "<script>alert('inserted successfully')</script>";
+	}
+	else
+	{
+		echo "<script>alert('error')</script>";
+	}
 	}
 ?>
 <!DOCTYPE html>
@@ -73,7 +64,7 @@
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
-										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='staff.php'"> <i class="fa fa-remove"></i> </span>
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='vendor.php'"> <i class="fa fa-remove"></i> </span>
 									</div>
 								</h3>
 								
@@ -123,7 +114,7 @@
 
 												<div class="col-sm-8">
 													<div class="form-group">
-														<input type="text" class="form-control" id="rs-form-example-name" placeholder="Email Address" name="name" >
+														<input type="email" class="form-control" id="rs-form-example-name" placeholder="Email Address" name="email" >
 														<p class="help-block with-errors"></p>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-8 -->
@@ -139,7 +130,7 @@
 
 												<div class="col-sm-8">
 													<div class="form-group">
-														<input type="text" class="form-control" id="rs-form-example-name" placeholder="Phone Number" name="name" >
+														<input type="integer" class="form-control" id="rs-form-example-name" placeholder="Phone Number" name="phone" >
 														<p class="help-block with-errors"></p>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-8 -->
@@ -154,7 +145,7 @@
 
 												<div class="col-sm-8">
 													<div class="form-group">
-														<input type="text" class="form-control" id="rs-form-example-name" placeholder="Commision %" name="name" >
+														<input type="integer" class="form-control" id="rs-form-example-name" placeholder="Commision %" name="commision" >
 														<p class="help-block with-errors"></p>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-8 -->
@@ -169,7 +160,7 @@
 
 												<div class="col-sm-8">
 													<div class="form-group">
-														<input type="file" class="form-control" id="rs-form-example-name" placeholder="Documents" name="name" >
+														<input type="file" class="form-control" id="rs-form-example-name" placeholder="Documents" name="document" >
 														<p class="help-block with-errors"></p>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-8 -->
@@ -196,11 +187,11 @@
 													<div class="col-md-6 col-sm-12" style="padding:5px;">
 														
 														<div class="form-group">
-															<input type="text" class="form-control billcity" id="rs-form-example-email" placeholder="Street/Village" name="billing_city">
+															<input type="text" class="form-control billcity" id="rs-form-example-email" placeholder="Street/Village" name="street">
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 														<div class="form-group">
-															<input type="text" class="form-control billcity" id="rs-form-example-email" placeholder="State" name="billing_city">
+															<input type="text" class="form-control billcity" id="rs-form-example-email" placeholder="State" name="state">
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->	
 													</div>
@@ -208,7 +199,7 @@
 													<div class="col-md-6 col-sm-12" style="margin-left:0px;padding:5px;">
 
 														<div class="form-group">
-															<input type="text" class="form-control billstate2" id="rs-form-example-tel" placeholder="City" name="shipping_state">
+															<input type="text" class="form-control billstate2" id="rs-form-example-tel" placeholder="City" name="city">
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
