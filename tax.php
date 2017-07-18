@@ -1,3 +1,25 @@
+<?php
+include ("config.php");
+
+$user_id = $_SESSION['user_id'];
+
+if(isset($_POST['submit']))
+{
+	$taxname = $_POST['tax_name'];
+	$taxvalue = $_POST['tax_value'];
+
+	$add_tax = mysqli_query($mysqli,"insert tax values('','".$taxname."','".$taxvalue."','".$user_id."')");
+	if ($add_tax)
+	{
+		$data = "success";
+	}
+	else
+	{
+		$data = "error";
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html lang=en>
 
@@ -52,10 +74,27 @@
 					<!-- End Dashhead -->
 					
 					<!-- Begin default content width -->
-					<div class="container-fluid loginwrap" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
+					<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
 						<div class="col-md-12 col-sm-12">
-							<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Registration Successfull </p>
+						<?php
+								if(isset($data) && $data == "success")
+						{
+						?>
+						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Added Successfully </p>
+						<?php
+						}else if(isset($data) && $data == "error"){
+						?>
+						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error in Insertion </p>
+						<?php
+						}
+						?>
 						</div>
+
+
+
+
+					<div class="container-fluid loginwrap" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
+						
 						<div class="col-md-6 col-sm-12" style="margin-left:30px;padding:5px;">
 						<h3 style="margin-bottom:15px;font-size:17px;padding-left:44px;">Tax Information</h3>
 						</div>
@@ -77,7 +116,7 @@
 										  </div>
 										  <div class="col-sm-8">
 										   <div class="form-group">
-											<input type="tel" class="form-control"  placeholder="Tax Name" name="orderno">
+											<input name="tax_name" type="tel" class="form-control"  placeholder="Tax Name" name="orderno">
 											<p class="help-block with-errors"></p>
 										   </div>
 										  </div>
@@ -92,7 +131,7 @@
 											
 											<div class="input-group">
 											 <span class="input-group-addon">%</span>
-											 <input type="text" class="form-control" placeholder="Tax Rate">
+											 <input name="tax_value" type="text" class="form-control" placeholder="Tax Rate">
 											</div>
 										   </div>
 										  </div>

@@ -27,7 +27,7 @@ if(isset($_POST['update']))
 	$notes			= $_POST['notes'];
 	$date			= date();
 
-	$update_vendor_details = mysqli_query($mysqli, "update vendors set salutation= '".$salutation."', firstname='".$firstname."', lastname='".$lastname."', company_name='".$company_name."', email='".$email."', work_phone='".$work_phone."', mobile='".$mobile."', website='".$website."', billing_street='".$billing_street."', billing_city='".$billing_city."', billing_state='".$billing_state."', billing_zip='".$billing_zip."', billing_country='INDIA', shipping_street='".$shipping_street."', shipping_city='".$shipping_city."', shipping_state='".$shipping_state."', shipping_zip='".$shipping_zip."', shipping_country='INDIA', date='".$date."', notes='".$notes."',business_id='".$user_id."'  where vendor_id='".$vendor_id."' ");
+	$update_vendor_details = mysqli_query($mysqli, "update vendors set salutation= '".$salutation."', firstname='".$firstname."', lastname='".$lastname."', company_name='".$company_name."', email='".$email."', work_phone='".$work_phone."', mobile='".$mobile."', website='".$website."', billing_street='".$billing_street."', billing_city='".$billing_city."', billing_state='".$billing_state."', billing_zip='".$billing_zip."',  shipping_street='".$shipping_street."', shipping_city='".$shipping_city."', shipping_state='".$shipping_state."', shipping_zip='".$shipping_zip."', date='".$date."', notes='".$notes."',business_id='".$user_id."'  where vendor_id='".$vendor_id."' ");
 	if($update_vendor_details)
 	{
 		$data = "success";
@@ -131,11 +131,11 @@ if(isset($_POST['update']))
 													<div class="form-group">
 														<select name="sal" class="rs-selectize-single" >
 															<option selected disabled value=""><?php echo $fetch_vendor_details['salutation']?></option>
-															<option value="Mr."<?php echo(($fetch_vendor_details['salutation']=='1')?'selected':'');?>>Mr.</option>
-															<option value="Mrs."<?php echo(($fetch_vendor_details['salutation']=='2')?'selected':'');?>>Mrs.</option>
-															<option value="Ms."<?php echo(($fetch_vendor_details['salutation']=='3')?'selected':'');?>>Ms.</option>
-															<option value="Miss."<?php echo(($fetch_vendor_details['salutation']=='4')?'selected':'');?>>Miss.</option>
-															<option value="Dr."<?php echo(($fetch_vendor_details['salutation']=='5')?'selected':'');?>>Dr.</option>
+															<option value="Mr."<?php echo(($fetch_vendor_details['salutation']=='Mr.')?'selected':'');?>>Mr.</option>
+															<option value="Mrs."<?php echo(($fetch_vendor_details['salutation']=='Mrs.')?'selected':'');?>>Mrs.</option>
+															<option value="Ms."<?php echo(($fetch_vendor_details['salutation']=='Ms.')?'selected':'');?>>Ms.</option>
+															<option value="Miss."<?php echo(($fetch_vendor_details['salutation']=='Miss.')?'selected':'');?>>Miss.</option>
+															<option value="Dr."<?php echo(($fetch_vendor_details['salutation']=='Dr.')?'selected':'');?>>Dr.</option>
 														</select>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->
@@ -226,9 +226,7 @@ if(isset($_POST['update']))
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
-														<div class="form-group">
-															<input type="text" class="form-control" disabled value="INDIA">			
-														</div><!-- /.form-group -->
+														
 														
 													</div>
 
@@ -255,9 +253,7 @@ if(isset($_POST['update']))
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 														
-														<div class="form-group">
-															<input type="text" class="form-control" disabled value="INDIA">			
-														</div><!-- /.form-group -->
+														
 
 													</div>
 												</div>

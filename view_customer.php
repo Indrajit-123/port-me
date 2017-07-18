@@ -191,14 +191,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 															<label><?php echo $fetch_customer_details['billing_zip'];?> </label>
 														</div><!-- /.form-group -->
 
-														<div class="form-group">
-															<div class="col-sm-2">
-																Country :
-															</div>	
-															<label>	INDIA </label>
-														</div><!-- /.form-group -->
-
-													</div>
+														</div>
 
 													<div class="col-md-6 col-sm-12" style="margin-left:0px;padding:5px;">
 														<h3 style="margin-bottom:15px;font-size:17px;">Shipping Address </h3>
@@ -231,13 +224,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 														<label><?php echo $fetch_customer_details['shipping_zip'];?> </label>
 														</div><!-- /.form-group -->
 
-														<div class="form-group">
-															<div class="col-sm-2">
-																Country :
-															</div>	
-														<label >INDIA </label>		
-														</div><!-- /.form-group -->
-
+														
 													</div>
 												</div>
 											</div><!-- /.tab-pane -->
@@ -257,7 +244,7 @@ $fetch_customer_details = mysqli_fetch_array ($view_customer_info);
 									<div class="panel-footer">
 											<div class="form-group m-a-0">
 												<button type="reset" class="btn btn-default btn-wide">Reset</button>
-												<a href = "customer.php"><button class="btn btn-success btn-wide">Back</button></a>
+												<a class="btn btn-success btn-wide" href="customer.php" style="color:white;">Back</a>
 											</div>
 										</div><!-- /.panel-footer -->
 									</form>

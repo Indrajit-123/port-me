@@ -144,10 +144,7 @@ if(isset($_GET['delete_id']))
 											<td style="text-align:center;"><?php echo $fetch_category_items['category_type']?></td>
 							                <td style="text-align:center;"><?php echo $fetch_category_items['category_name']?></td>
 							                <td style="text-align:center;"><?php echo $fetch_category_items['item_type']?></td>
-											<td style="text-align:center;">
-											<?php echo $fetch_category_items['tax_name']?>
-											<?php echo $fetch_category_items['tax_rate']?>
-											</td>
+											<td style="text-align:center;"><?php echo $fetch_category_items['tax']?></td>
 											
 							               										
 											<td style="text-align:center;">

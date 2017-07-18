@@ -15,9 +15,12 @@ if(isset($_POST['update']))
 	$options   = $_POST['optn'];
 	$add_options   = implode(",",$options);
 	$item_type	= $_POST['item_type'];
+	$tax_update   = $_POST['tax'];
+	$edit_tax  = implode(",",$tax_update);
+
 	
 
-	$update_product = mysqli_query($mysqli,"update product_category set  category_type='".$category_type."', category_name='".$category_name."', description='".$desc."', tax_name='".$tax_name."', tax_rate='".$tax_rate."', attribute_name='".$add_attribute."', attribute_options='".$add_options."', item_type='".$item_type."' where category_id='".$category_id."' ");
+	$update_product = mysqli_query($mysqli,"update product_category set  category_type='".$category_type."', category_name='".$category_name."', description='".$desc."', attribute_name='".$add_attribute."', attribute_options='".$add_options."', tax='".$edit_tax."', item_type='".$item_type."', business_id='".$user_id."' where category_id='".$category_id."' ");
 
 	if($update_product)
 	{
@@ -101,6 +104,8 @@ if(isset($_POST['update']))
 						?>
 						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Updated Successfully </p>
 						<?php
+						echo "<script>window.location.href='product_group.php'</script>";
+
 						}else if(isset($data) && $data == "error"){
 						?>
 						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error while updating </p>
@@ -162,31 +167,43 @@ if(isset($_POST['update']))
 													</div>
 												</div>
 											</div>
+									
+											<div class="row">
+										<div class="col-md-3">
+											<div class="form-group">
+												<label>Choose Tax</label>
+											</div>
+										</div>
+
+										<div class="col-md-9">
+											<div class="form-group">
+													<select name="tax[]" class="rs-selectize-optgroup" multiple>							
+
+												 <?php
+												 $tax_details = explode(",",$fetch_category['tax']);
+												 foreach($tax_details as $tax_info)
+												 {
+												?>
+												<option value=""><?php echo $tax_info;?></option>											
+												<?php
+												}
+												?>
 											
-											<div class="row">
-												<div class="col-sm-3">
-													Tax Name
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<input name="tax_name" type="text" class="form-control" id="rs-form-example-email" value="<?php echo $fetch_category['tax_name'];?>" required>
-														<p class="help-block with-errors"></p>
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-3">
-													Tax Rate
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<input name="tax_rate" type="number" class="form-control" id="rs-form-example-email" value="<?php echo $fetch_category['tax_rate'];?>" required>
-														<p class="help-block with-errors"></p>
-													</div>
-												</div>
-											</div>
-
+												<?php
+												$tax_details = mysqli_query($mysqli,"select * from tax");
+												while ($fetch_tax_details = mysqli_fetch_array($tax_details))
+												{
+												?>												
+												<option><?php echo $fetch_tax_details['tax_name'];?> <?php echo $fetch_tax_details['tax_rate'];?>%
+												</option>													
+												<?php
+												}		
+												?>
+												</select>
+											</div><!-- /.form-group -->
+										</div><!-- /.col-md-6 -->										
+									</div>
+											
 											<div class="row">
 												<div class="col-sm-3" style="margin-top:10px;">
 													<div class="form-group">

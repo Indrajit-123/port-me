@@ -191,13 +191,7 @@ $fetch_vendor_details = mysqli_fetch_array ($view_vendor_info);
 															<label><?php echo $fetch_vendor_details['billing_zip'];?> </label>
 														</div><!-- /.form-group -->
 
-														<div class="form-group">
-															<div class="col-sm-2">
-																Country :
-															</div>	
-															<label>	INDIA </label>
-														</div><!-- /.form-group -->
-
+														
 													</div>
 
 													<div class="col-md-6 col-sm-12" style="margin-left:0px;padding:5px;">
@@ -231,14 +225,7 @@ $fetch_vendor_details = mysqli_fetch_array ($view_vendor_info);
 														<label><?php echo $fetch_vendor_details['shipping_zip'];?> </label>
 														</div><!-- /.form-group -->
 
-														<div class="form-group">
-															<div class="col-sm-2">
-																Country :
-															</div>	
-														<label >INDIA </label>		
-														</div><!-- /.form-group -->
-
-													</div>
+														</div>
 												</div>
 											</div><!-- /.tab-pane -->
 

@@ -1,14 +1,12 @@
 <?php
 include ("config.php");
-$user_id = $_GET['user_id'];
+$user_id = $_SESSION['user_id'];
 
 if(isset($_POST['submit']))
 {
 	$product_type= $_POST['cs-radio'];
 	$name	   = $_POST['cat_name'];
 	$desc	   = $_POST['desc'];
-	$tax_name  = $_POST['tax_name'];
-	$tax_rate  = $_POST['tax_rate'];
 
 	$attribute = $_POST['attri'];
 	$add_attribute = implode(",",$attribute);
@@ -18,10 +16,12 @@ if(isset($_POST['submit']))
 
 	$item_type = $_POST['cs-radio1'];
 
+	$tax = $_POST['tax'];
+	$add_tax = implode(",",$tax);
 	
 	
 
-	$insert_category = mysqli_query($mysqli,"insert into product_category values ('','".$product_type."','".$name."','".$desc."','".$tax_name."','".$tax_rate."','".$add_attribute."','".$add_options."','".$item_type."','".$user_id."') ");
+	$insert_category = mysqli_query($mysqli,"insert into product_category values ('','".$product_type."','".$name."','".$desc."','".$add_attribute."','".$add_options."','".$item_type."','".$user_id."','".$add_tax."') ");
 	if($insert_category)
 	{
 		$data = "success";		
@@ -106,6 +106,8 @@ if(isset($_POST['submit']))
 						?>
 						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Added Successfully </p>
 						<?php
+							echo "<script>window.location.href='product_group.php'</script>";
+
 						}else if(isset($data) && $data == "error"){
 						?>
 						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error in Insertion </p>
@@ -151,7 +153,7 @@ if(isset($_POST['submit']))
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<input name="cat_name" type="text" class="form-control" id="rs-form-example-email" placeholder="Group/Category Name" required>
+														<input name="cat_name" type="text" class="form-control" id="rs-form-example-email" placeholder="Group/Category Name"  required>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
@@ -163,40 +165,36 @@ if(isset($_POST['submit']))
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<textarea name="desc" class="form-control" placeholder="Description" style="height:150px;" required></textarea>
+														<textarea name="desc" class="form-control" placeholder="Description" style="height:150px;"  ></textarea>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
 											</div>
 
-											<div class="row">
-												<div class="col-sm-3">
-											 
-										   Tax Name <i class="fa fa-inr" aria-hidden="true"></i>
-											 
-										  </div>
-										  <div class="col-sm-9">
-										   <div class="form-group">
-											<input type="tel" class="form-control"  placeholder="Tax Name" name="tax_name">
-											<p class="help-block with-errors"></p>
-										   </div>
-										  </div>
+									<div class="row">
+										<div class="col-md-3">
+											<div class="form-group">
+												<label>Choose Tax</label>
 											</div>
+										</div>
 
-										<div class="row">
-											<div class="col-sm-3">       
-										   Tax Rate <b>%</b>             
-										  </div>
-										  <div class="col-sm-9">
-										   <div class="form-group has-feedback">
-											
-											<div class="input-group">
-											 <span class="input-group-addon">%</span>
-											 <input name="tax_rate" type="text" class="form-control" placeholder="Tax Rate">
-											</div>
-										   </div>
-										  </div>
-											</div>
+										<div class="col-md-9">
+											<div class="form-group">
+													<select name="tax[]" class="rs-selectize-optgroup" multiple>
+												<?php
+												$tax_details = mysqli_query($mysqli,"select * from tax");
+												while ($fetch_tax_details = mysqli_fetch_array($tax_details))
+												{
+												?>												
+														<option ><?php echo $fetch_tax_details['tax_name'];?> <?php echo $fetch_tax_details['tax_rate'];?>%
+														</option>													
+														<?php
+												}		
+												?>
+												</select>
+											</div><!-- /.form-group -->
+										</div><!-- /.col-md-6 -->										
+									</div>
 
 										<div class="row">
 												<div class="col-sm-3">
@@ -227,7 +225,7 @@ if(isset($_POST['submit']))
 																<label style="font-size:13px;">
 																	Attribute
 																</label>
-																<input type="text" name="attri[]" class="form-control" placeholder="Eg: color" required>
+																<input type="text" name="attri[]" class="form-control" placeholder="Eg: color"  >
 																<p class="help-block with-errors"></p>
 															</div>
 														</div>
@@ -238,7 +236,7 @@ if(isset($_POST['submit']))
 																	<label style="font-size:13px;">
 																		Options
 																	</label>
-																	<input type="text" name="optn[]" class="form-control" placeholder="Red" required>
+																	<input type="text" name="optn[]" class="form-control" placeholder="Red"  >
 																	<p class="help-block with-errors"></p>
 																</div>
 																<div class="col-sm-2" style="margin-top:30px;">
@@ -295,7 +293,7 @@ if(isset($_POST['submit']))
 						
 						<!-- right side -->
 						<div class="col-md-5 col-sm-12">							 
-							<div class="panel panel-plain panel-rounded" style="padding-top:10px;" >
+							<div class="panel panel-plain panel-rounded" style="padding-top:60px;" >
 								<iframe width="100%" height="50%" src="https://www.youtube.com/embed/5GZ3fP71Bzg" style="padding:10px;min-height:300px;" frameborder="0" allowfullscreen></iframe>
 							</div>
 						</div>
@@ -349,7 +347,7 @@ if(isset($_POST['submit']))
 
 		$(document).ready(function() {
 		  $(".add-more").click(function(){ 
-			  var htmlz = "<div class='row atrri_add_cont'><div class='col-sm-3 ache_ekta'></div><div class='col-sm-4'><div class='form-group'><label style='font-size:13px;'>Attribute</label><input type='text' name='attri[]' class='form-control' placeholder='Eg: color' required><p class='help-block with-errors'></p></div></div><div class='col-sm-5'><div class='form-group'><div class='col-sm-10'><label style='font-size:13px;'>Options</label><input type='text' name='optn[]' class='form-control' placeholder='Red' required><p class='help-block with-errors'></p></div><div class='col-sm-2' style='margin-top:30px;'><a href='javascript:void(0);' class='remove' style='color:#ef5350;'><i class='fa fa-trash'></i></a></div></div></div></div>";
+			  var htmlz = "<div class='row atrri_add_cont'><div class='col-sm-3 ache_ekta'></div><div class='col-sm-4'><div class='form-group'><label style='font-size:13px;'>Attribute</label><input type='text' name='attri[]' class='form-control' placeholder='Eg: color'  ><p class='help-block with-errors'></p></div></div><div class='col-sm-5'><div class='form-group'><div class='col-sm-10'><label style='font-size:13px;'>Options</label><input type='text' name='optn[]' class='form-control' placeholder='Red'  ><p class='help-block with-errors'></p></div><div class='col-sm-2' style='margin-top:30px;'><a href='javascript:void(0);' class='remove' style='color:#ef5350;'><i class='fa fa-trash'></i></a></div></div></div></div>";
 			  //alert(htmlz);
 			  $(".add-more-contz").append(htmlz);
 		  });

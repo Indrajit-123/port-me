@@ -114,16 +114,23 @@ $fetch_category_details = mysqli_fetch_array($view_category_info);
 											</div>
 											
 											<div class="row">
-												<div class="col-sm-3">
-													Tax Value
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label> <?php echo $fetch_category_details['tax_name'];?> <?php echo $fetch_category_details['tax_rate'];?></label>
-														<p class="help-block with-errors"></p>
-													</div>
-												</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label>Choose Tax</label>
 											</div>
+										</div>
+
+										<div class="col-md-9">
+											<div class="form-group">
+													
+																						
+														<label ><?php echo $fetch_category_details['tax'];?>
+														</label>													
+											
+										
+											</div><!-- /.form-group -->
+										</div><!-- /.col-md-6 -->										
+									</div>
 
 											<div class="row">
 												<div class="col-sm-3">

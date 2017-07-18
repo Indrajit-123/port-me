@@ -23,7 +23,7 @@ if(isset($_POST['submit']))
 	$notes = $_POST['notes'];
 	$date = date('m/d/Y h:i:s', time());
 
-	$insert_vendor_details = mysqli_query($mysqli, "insert vendors values ('','".$salutation."','".$firstname."','".$lastname."','".$company_name."','".$email."','".$work_phone."','".$mobile."','".$website."','".$billing_street."','".$billing_city."','".$billing_state."','".$billing_zip."','INDIA','".$shipping_street."','".$shipping_city."','".$shipping_state."','".$shipping_zip."','INDIA','','".$date."','".$user_id."','".$user_id."')");
+	$insert_vendor_details = mysqli_query($mysqli, "insert vendors values ('','".$salutation."','".$firstname."','".$lastname."','".$company_name."','".$email."','".$work_phone."','".$mobile."','".$website."','".$billing_street."','".$billing_city."','".$billing_state."','".$billing_zip."','".$shipping_street."','".$shipping_city."','".$shipping_state."','".$shipping_zip."','','".$date."','".$user_id."','".$user_id."')");
 	if($insert_vendor_details)
 	{
 		$data = "success";
@@ -215,10 +215,7 @@ if(isset($_POST['submit']))
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
-														<div class="form-group">
-															<input type="text" class="form-control" disabled value="INDIA">			
-														</div><!-- /.form-group -->
-														
+																											
 													</div>
 
 													<div class="col-md-6 col-sm-12" style="margin-left:0px;padding:5px;">
@@ -244,11 +241,7 @@ if(isset($_POST['submit']))
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
-														<div class="form-group">
-															<input type="text" class="form-control" disabled value="INDIA">			
-														</div><!-- /.form-group -->
-
-														
+																											
 													</div>
 												</div>
 											</div><!-- /.tab-pane -->

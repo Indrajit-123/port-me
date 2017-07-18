@@ -1,12 +1,11 @@
 <?php
 include ("config.php");
 $user_id = $_SESSION['user_id'];
-$customer_info = mysqli_query ($mysqli,"select * from customers where business_id='".$user_id."'");
 
 if(isset($_GET['delete_id']))
 {
-	$delete_id = $_GET['delete_id'];
-	$delete_customer = mysqli_query($mysqli,"delete from customers where customer_id = '".$delete_id."'");
+	$cu_id = $_GET['delete_id'];
+	$delete_customer = mysqli_query($mysqli,"delete from customers where customer_id = '".$cu_id."'");
 	if($delete_customer)
 		{
 			$data = "success";
@@ -89,7 +88,7 @@ if(isset($_GET['delete_id']))
 							</div>
 
 
-							<div class="col-md-12 col-sm-12">
+						<div class="col-md-12 col-sm-12">
 						<?php
 								if(isset($data) && $data == "success")
 						{
@@ -137,6 +136,7 @@ if(isset($_GET['delete_id']))
 							        <tbody>
 							            <tr>
 										<?php
+										$customer_info = mysqli_query ($mysqli,"select * from customers where business_id='".$user_id."'");
 										while ($fetch_customer_info = mysqli_fetch_array($customer_info))										
 										{
 										?>
