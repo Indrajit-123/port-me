@@ -1,41 +1,38 @@
 <?php
 include ("config.php");
-$user_id = $_GET['user_id'];
+$user_id = $_SESSION['user_id'];
+$category_id = $_GET['category_id'];
 
-if(isset($_POST['submit']))
+if(isset($_POST['update']))
 {
-	$product_type= $_POST['cs-radio'];
-	$name	   = $_POST['cat_name'];
+	$category_type = $_POST['cs_radio'];
+	$category_name = $_POST['category_name'];
 	$desc	   = $_POST['desc'];
 	$tax_name  = $_POST['tax_name'];
 	$tax_rate  = $_POST['tax_rate'];
-
 	$attribute = $_POST['attri'];
 	$add_attribute = implode(",",$attribute);
-
 	$options   = $_POST['optn'];
 	$add_options   = implode(",",$options);
-
-	$item_type = $_POST['cs-radio1'];
-
-	
+	$item_type	= $_POST['item_type'];
 	
 
-	$insert_category = mysqli_query($mysqli,"insert into product_category values ('','".$product_type."','".$name."','".$desc."','".$tax_name."','".$tax_rate."','".$add_attribute."','".$add_options."','".$item_type."','".$user_id."') ");
-	if($insert_category)
+	$update_product = mysqli_query($mysqli,"update product_category set  category_type='".$category_type."', category_name='".$category_name."', description='".$desc."', tax_name='".$tax_name."', tax_rate='".$tax_rate."', attribute_name='".$add_attribute."', attribute_options='".$add_options."', item_type='".$item_type."' where category_id='".$category_id."' ");
+
+	if($update_product)
 	{
-		$data = "success";		
+		$data = "success";
 	}
 	else
 	{
 		$data = "error";
 	}
-
 }
 
+	$category_info = mysqli_query ($mysqli, "select * from product_category where category_id='".$category_id."'");
+	$fetch_category = mysqli_fetch_array($category_info );
 
 ?>
-
 
 
 <!DOCTYPE html>
@@ -47,14 +44,12 @@ if(isset($_POST['submit']))
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>Add Product group | Port-ME</title>
+	<title>Edit Product | Port-ME</title>
 	<?php include("metalinks.php");?>
 	<link rel="stylesheet" href="bootstrap.min.css">
 	<script src="http://code.jquery.com/jquery.min.js"></script>
 	<script src="bootstrap.min.js"></script>
-	<style>
-		.atrri{display:none;}
-	</style>
+	
 </head>
 
 
@@ -80,7 +75,7 @@ if(isset($_POST['submit']))
 						<div class="rs-dashhead-content">
 							<div class="rs-dashhead-titles">
 								<h3 class="rs-dashhead-title m-t">
-									New Product Group
+									Edit Product Category
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
@@ -96,33 +91,30 @@ if(isset($_POST['submit']))
 						<!-- End Breadcrumb -->
 					</div><!-- /.rs-dashhead -->
 					<!-- End Dashhead -->
-				
+
 					<!-- Begin default content width -->
-						<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
+					<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
 						<div class="col-md-12 col-sm-12">
 						<?php
 								if(isset($data) && $data == "success")
 						{
 						?>
-						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Added Successfully </p>
+						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Updated Successfully </p>
 						<?php
 						}else if(isset($data) && $data == "error"){
 						?>
-						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error in Insertion </p>
+						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error while updating </p>
 						<?php
 						}
 						?>
 						</div>
-					
-
 						
 						<div class="col-md-7 col-sm-12">
 						<!-- Begin Panel -->
 							<div class="panel panel-plain panel-rounded">
 
 								<div class="panel-body">
-									<form method="POST" enctype="multipart/form-data" name="myfosda">								
-
+									<form method="post" enctype="multipart/form-data">
 											<div class="row" style="margin-bottom:10px;">
 												<div class="col-sm-3" style="margin-top:10px;">
 													<span >
@@ -133,15 +125,17 @@ if(isset($_POST['submit']))
 												<div class="col-sm-6">
 													<div class="radio radio-custom">
 													<label class="radio-inline">
-														 <input type="radio" name="cs-radio"  id="cs-radio-04" value="Product" >Product
+														<input type="radio" name="cs_radio" id="cs-radio-04" value="Product" <?php echo(($fetch_category['category_type'] == 'Product')?'checked':'');?>>
 														<span class="checker"></span>
-													
+														Product
 													</label>
 													<label class="radio-inline">
-														 <input type="radio" name="cs-radio"  id="cs-radio-04" value="Service">Service
-														<span class="checker"></span>														
+														<input type="radio" name="cs_radio" id="cs-radio-05" value="Service" <?php echo(($fetch_category['category_type'] == 'Service')?'checked':'');?>>
+														<span class="checker"></span>
+														Service
 													</label>
 												</div>
+
 												</div><!-- /.col-sm-4 -->
 											</div><!-- /.row -->
 
@@ -151,7 +145,7 @@ if(isset($_POST['submit']))
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<input name="cat_name" type="text" class="form-control" id="rs-form-example-email" placeholder="Group/Category Name" required>
+														<input name="category_name" type="text" class="form-control" id="rs-form-example-email" value="<?php echo $fetch_category['category_name'];?>" required>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
@@ -163,7 +157,19 @@ if(isset($_POST['submit']))
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<textarea name="desc" class="form-control" placeholder="Description" style="height:150px;" required></textarea>
+														<textarea name="desc" class="form-control"  style="height:150px;" required><?php echo $fetch_category['description'];?></textarea>
+														<p class="help-block with-errors"></p>
+													</div>
+												</div>
+											</div>
+											
+											<div class="row">
+												<div class="col-sm-3">
+													Tax Name
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<input name="tax_name" type="text" class="form-control" id="rs-form-example-email" value="<?php echo $fetch_category['tax_name'];?>" required>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
@@ -171,35 +177,18 @@ if(isset($_POST['submit']))
 
 											<div class="row">
 												<div class="col-sm-3">
-											 
-										   Tax Name <i class="fa fa-inr" aria-hidden="true"></i>
-											 
-										  </div>
-										  <div class="col-sm-9">
-										   <div class="form-group">
-											<input type="tel" class="form-control"  placeholder="Tax Name" name="tax_name">
-											<p class="help-block with-errors"></p>
-										   </div>
-										  </div>
+													Tax Rate
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<input name="tax_rate" type="number" class="form-control" id="rs-form-example-email" value="<?php echo $fetch_category['tax_rate'];?>" required>
+														<p class="help-block with-errors"></p>
+													</div>
+												</div>
 											</div>
 
-										<div class="row">
-											<div class="col-sm-3">       
-										   Tax Rate <b>%</b>             
-										  </div>
-										  <div class="col-sm-9">
-										   <div class="form-group has-feedback">
-											
-											<div class="input-group">
-											 <span class="input-group-addon">%</span>
-											 <input name="tax_rate" type="text" class="form-control" placeholder="Tax Rate">
-											</div>
-										   </div>
-										  </div>
-											</div>
-
-										<div class="row">
-												<div class="col-sm-3">
+											<div class="row">
+												<div class="col-sm-3" style="margin-top:10px;">
 													<div class="form-group">
 														Multiple Items
 													</div><!-- /.form-group -->
@@ -208,8 +197,8 @@ if(isset($_POST['submit']))
 													<div class="form-group">
 														<div class="checkbox checkbox-custom checkbox-danger">
 															<label style="font-size:13px;">
-																<input type="checkbox" value="1" class="attributes_options" onchange="valueChanged()">
-																<span class="checker"></span>
+																<input type="checkbox" value="1" class="attributes_options" onchange="valueChanged()" <?php echo(($fetch_category['attribute_name'] != '' && $fetch_category['attribute_options'] != '')?'checked':'')?>	>
+																<span class="checker" ></span>
 																Create Attributes and options
 															</label>
 														</div>
@@ -227,8 +216,17 @@ if(isset($_POST['submit']))
 																<label style="font-size:13px;">
 																	Attribute
 																</label>
-																<input type="text" name="attri[]" class="form-control" placeholder="Eg: color" required>
+																 <?php
+																 $attri = explode(",",$fetch_category['attribute_name']);
+																 foreach($attri as $attri_fetch)
+																 {
+																?>
+																<input type="text" name="attri[]" class="form-control" value="<?php echo $attri_fetch;?>" placeholder="Eg: color" >
 																<p class="help-block with-errors"></p>
+																<?php
+																 }
+																?>
+																
 															</div>
 														</div>
 
@@ -238,11 +236,16 @@ if(isset($_POST['submit']))
 																	<label style="font-size:13px;">
 																		Options
 																	</label>
-																	<input type="text" name="optn[]" class="form-control" placeholder="Red" required>
-																	<p class="help-block with-errors"></p>
-																</div>
-																<div class="col-sm-2" style="margin-top:30px;">
-																	&nbsp;
+																	<?php
+																 $option = explode(",",$fetch_category['attribute_options']);
+																 foreach($option as $option_fetch)
+																 {
+																?>
+																<input type="text" name="optn[]" class="form-control" value="<?php echo $option_fetch;?>" placeholder="Eg: color" >
+																<p class="help-block with-errors"></p>
+																<?php
+																 }
+																?>
 																</div>
 															</div>
 														</div>
@@ -272,12 +275,12 @@ if(isset($_POST['submit']))
 												<div class="col-sm-6">
 													<div class="radio radio-custom">
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio1" id="cs-radio-04" value="Inventory">
+														<input type="radio" name="item_type" id="cs-radio-04" value="Inventory" <?php echo(($fetch_category['item_type'] == 'Inventory')?'checked':'');?>>
 														<span class="checker"></span>
 														Inventory
 													</label>
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio1" id="cs-radio-05" value="Non-inventory">
+														<input type="radio" name="item_type" id="cs-radio-05" value="Non-inventory" <?php echo(($fetch_category['item_type'] == 'Non-inventory')?'checked':'');?>>
 														<span class="checker"></span>
 														Non-inventory
 													</label>
@@ -285,6 +288,7 @@ if(isset($_POST['submit']))
 
 												</div><!-- /.col-sm-4 -->
 											</div><!-- /.row -->
+
 
 								</div><!-- /.panel-body -->
 
@@ -294,9 +298,9 @@ if(isset($_POST['submit']))
 						</div>
 						
 						<!-- right side -->
-						<div class="col-md-5 col-sm-12">							 
-							<div class="panel panel-plain panel-rounded" style="padding-top:10px;" >
-								<iframe width="100%" height="50%" src="https://www.youtube.com/embed/5GZ3fP71Bzg" style="padding:10px;min-height:300px;" frameborder="0" allowfullscreen></iframe>
+						<div class="col-md-5 col-sm-12">
+							<div class="dropzone">
+								
 							</div>
 						</div>
 						<!-- right side ends -->
@@ -305,7 +309,7 @@ if(isset($_POST['submit']))
 					<div class="panel-footer" style="background:#fff;">
 							<div class="form-group m-a-0">
 								<button type="reset" class="btn btn-default btn-wide">Reset</button>
-								<button name="submit" type="submit" class="btn btn-success btn-wide">Submit</button>
+								<button type="submit" class="btn btn-success btn-wide" name="update">Submit</button>
 							</div>
 						</div><!-- /.panel-footer -->
 					</form>
@@ -349,7 +353,7 @@ if(isset($_POST['submit']))
 
 		$(document).ready(function() {
 		  $(".add-more").click(function(){ 
-			  var htmlz = "<div class='row atrri_add_cont'><div class='col-sm-3 ache_ekta'></div><div class='col-sm-4'><div class='form-group'><label style='font-size:13px;'>Attribute</label><input type='text' name='attri[]' class='form-control' placeholder='Eg: color' required><p class='help-block with-errors'></p></div></div><div class='col-sm-5'><div class='form-group'><div class='col-sm-10'><label style='font-size:13px;'>Options</label><input type='text' name='optn[]' class='form-control' placeholder='Red' required><p class='help-block with-errors'></p></div><div class='col-sm-2' style='margin-top:30px;'><a href='javascript:void(0);' class='remove' style='color:#ef5350;'><i class='fa fa-trash'></i></a></div></div></div></div>";
+			  var htmlz = "<div class='row atrri_add_cont'><div class='col-sm-3 ache_ekta'></div><div class='col-sm-4'><div class='form-group'><label style='font-size:13px;'>Attribute</label><input type='text' name='attri[]' class='form-control' placeholder='Eg: color' required><p class='help-block with-errors'></p></div></div><div class='col-sm-5'><div class='form-group'><div class='col-sm-10'><label style='font-size:13px;'>Options</label><input type='text' name='optn[]' class='form-control' placeholder='Red' required><p class='help-block with-errors'></p></div><div class='col-sm-2' style='margin-top:30px;'><a href='#' class='remove' style='color:#ef5350;'><i class='fa fa-trash'></i></a></div></div></div></div>";
 			  //alert(htmlz);
 			  $(".add-more-contz").append(htmlz);
 		  });

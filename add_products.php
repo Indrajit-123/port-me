@@ -29,8 +29,6 @@ if(isset($_POST['submit']))
 	{
 		$data = "error";
 	}
-
-
 }
 
 
@@ -301,7 +299,7 @@ if(isset($_POST['submit']))
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<a href="#" class="add-more" style="font-size:13px;">
+														<a href="javascript:void(0)" class="add-more" style="font-size:13px;">
 															<i class="fa fa-plus"></i> Add More Attribute
 														</a>
 													</div><!-- /.form-group -->
@@ -316,9 +314,10 @@ if(isset($_POST['submit']))
 						</div>
 						
 						<!-- right side -->
-						<div class="col-md-5 col-sm-12" style="margin-top:50px;">
-							<div class="dropzone">
-								
+						<div class="col-md-5 col-sm-12">
+							 
+							<div class="panel panel-plain panel-rounded" style="padding-top:20px;" >
+								<iframe width="100%" height="50%" src="https://www.youtube.com/embed/5GZ3fP71Bzg" style="padding:30px;min-height:300px;" frameborder="0" allowfullscreen></iframe>
 							</div>
 						</div>
 						<!-- right side ends -->

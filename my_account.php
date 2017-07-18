@@ -6,9 +6,6 @@ $fetch_details = mysqli_fetch_array($cu_info);
 $image = $fetch_details['logo_image'];
 
 
-
-
-
 if(isset($_POST['update']))
 {
 	$username = $_POST['cu_name'];
@@ -37,11 +34,11 @@ if(isset($_POST['update']))
 $update_details = mysqli_query ($mysqli, "update users set username='".$username."', pan='".$pan."', logo_image = '".$user_pic."' ,type_business='".$type."'  , adhaar='".$adhaar."',business='".$business."',street='".$street."',city='".$city."',state='".$state."',zip='".$zip."' where user_id='".$user_id."'");
 if ($update_details)
 	{
-		echo "<script>alert('updated successfully')</script>";
+			$data = "updated";
 	}
 		else
 	{
-		echo "<script>alert('error')</script>";
+		$data = "not_updated";
 	}
 
 
@@ -61,21 +58,21 @@ if ($update_details)
 			$change_password = mysqli_query($mysqli,"update profile_page set password='".$confirm_password."' where id='".$user_id."'");
 			if($change_password)
 			{
-				echo "<script>alert('successfully Changed')</script>";
+				$data = "password_change";
 			}
 			else
 			{
-				echo "<script>alert('error')</script>";
+				$data = "pass_not_change";
 			}
 		}
 		else
-		{
-			echo "<script>alert('confirm error')</script>";
+		{ 
+			$data = "confirm_error";
 		}
 	}
 	else
 	{
-		echo "<script>alert('not in here')</script>";
+		$data = "pass_doesnt_match";
 	}
 	}
 
@@ -138,11 +135,26 @@ if ($update_details)
 					</div><!-- /.rs-dashhead -->
 					<!-- End Dashhead -->
 
+
+						<div class="col-md-12 col-sm-12">
+						<?php
+								if(isset($data) && $data == "updated")
+						{
+						?>
+						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Profile Updated Successfully </p>
+						<?php
+						}else if(isset($data) && $data == "not_updated"){
+						?>
+						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error while updating.. Please try again!! </p>
+						<?php
+						}
+						?>
+						</div>
+
+
+
 					<!-- Begin default content width -->
 					<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
-					
-					
-
 					<div class="col-md-12" style="margin-top:0px;">
 							<!-- Begin Panel -->
 							<div class="panel panel-plain panel-rounded" >

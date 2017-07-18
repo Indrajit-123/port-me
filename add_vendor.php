@@ -120,11 +120,11 @@ if(isset($_POST['submit']))
 												<div class="col-sm-4">
 													<div class="form-group">
 														<select name="sal" class="rs-selectize-single" >															
-															<option value="Mr."<?php echo(($fetch_customer_details['salutation']=='1')?'selected':'');?>>Mr.</option>
-															<option value="Mrs."<?php echo(($fetch_customer_details['salutation']=='2')?'selected':'');?>>Mrs.</option>
-															<option value="Ms."<?php echo(($fetch_customer_details['salutation']=='3')?'selected':'');?>>Ms.</option>
-															<option value="Miss."<?php echo(($fetch_customer_details['salutation']=='4')?'selected':'');?>>Miss.</option>
-															<option value="Dr."<?php echo(($fetch_customer_details['salutation']=='5')?'selected':'');?>>Dr.</option>
+															<option value="Mr."<?php echo(($fetch_customer_details['salutation']=='Mr.')?'selected':'');?>>Mr.</option>
+															<option value="Mrs."<?php echo(($fetch_customer_details['salutation']=='Mrs.')?'selected':'');?>>Mrs.</option>
+															<option value="Ms."<?php echo(($fetch_customer_details['salutation']=='Ms.')?'selected':'');?>>Ms.</option>
+															<option value="Miss."<?php echo(($fetch_customer_details['salutation']=='Miss.')?'selected':'');?>>Miss.</option>
+															<option value="Dr."<?php echo(($fetch_customer_details['salutation']=='Dr.')?'selected':'');?>>Dr.</option>
 														</select>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->

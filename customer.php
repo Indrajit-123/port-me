@@ -9,8 +9,12 @@ if(isset($_GET['delete_id']))
 	$delete_customer = mysqli_query($mysqli,"delete from customers where customer_id = '".$delete_id."'");
 	if($delete_customer)
 		{
-			echo "<script>window.location.href='customer.php'</script>";
+			$data = "success";
 		}
+		else
+	{
+			$data = "error";
+	}
 }
 
 ?>
@@ -83,6 +87,24 @@ if(isset($_GET['delete_id']))
 								</h3>
 								
 							</div>
+
+
+							<div class="col-md-12 col-sm-12">
+						<?php
+								if(isset($data) && $data == "success")
+						{
+						?>
+						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Deleted Successfully </p>
+						<?php
+						}else if(isset($data) && $data == "error"){
+						?>
+						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error while deleting </p>
+						<?php
+						}
+						?>
+						</div>
+
+
 							<div class="rs-dashhead-toolbar">
 								<button type="button" class="btn btn-success btn-wide rs-btn-icon block-on-mobile" onclick="window.location.href='add_customer.php'">
 									<span class="gcon gcon-upload-to-cloud icon-btn"></span>

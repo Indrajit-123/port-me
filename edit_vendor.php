@@ -93,7 +93,7 @@ if(isset($_POST['update']))
 						<!-- End Breadcrumb -->
 					</div><!-- /.rs-dashhead -->
 					<!-- End Dashhead -->
-					<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
+
 						<div class="col-md-12 col-sm-12">
 						<?php
 								if(isset($data) && $data == "success")
@@ -103,7 +103,7 @@ if(isset($_POST['update']))
 						<?php
 						}else if(isset($data) && $data == "error"){
 						?>
-						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error in updation </p>
+						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error while updating </p>
 						<?php
 						}
 						?>

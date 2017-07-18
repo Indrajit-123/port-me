@@ -1,9 +1,9 @@
 <?php
 include ("config.php");
 
-$product_id = $_GET['product_id'];
-$view_product_info = mysqli_query($mysqli, "select * from product where product_id='".$product_id."'");
-$fetch_product_details = mysqli_fetch_array($view_product_info);
+$category_id = $_GET['category_id'];
+$view_category_info = mysqli_query($mysqli, "select * from product_category where category_id='".$category_id."'");
+$fetch_category_details = mysqli_fetch_array($view_category_info);
 ?>
 
 
@@ -49,7 +49,7 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 						<div class="rs-dashhead-content">
 							<div class="rs-dashhead-titles">
 								<h3 class="rs-dashhead-title m-t">
-									View Product
+									View Product Category
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
@@ -74,29 +74,20 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 
 								<div class="panel-body">
 									<form >
-											<div class="row" style="margin-bottom:10px;">
-												<div class="col-sm-3" style="margin-top:10px;">
-													<span >
-														Type
-													</span>
-												</div><!-- /.col-sm-4 -->
-
-												<div class="col-sm-6">
-													<div class="radio radio-custom">
-													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-04" selected disabled >
-														<span class="checker"></span>
-														Product
-													</label>
-													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-05" selected disabled >
-														<span class="checker"></span>
-														Service
-													</label>
+											
+											
+												<div class="row">
+												<div class="col-sm-3">
+													Category Type
 												</div>
+												<div class="col-sm-9">
+													<div class="form-group">
+														<label  id="rs-form-example-email" > <?php echo $fetch_category_details['category_type'];?></label>
+														<p class="help-block with-errors"></p>
+													</div>
+												</div>
+											</div>
 
-												</div><!-- /.col-sm-4 -->
-											</div><!-- /.row -->
 
 											<div class="row">
 												<div class="col-sm-3">
@@ -104,7 +95,7 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<label  id="rs-form-example-email" > <?php echo $fetch_product_details['product_name'];?></label>
+														<label  id="rs-form-example-email" > <?php echo $fetch_category_details['category_name'];?></label>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
@@ -116,7 +107,7 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<label> <?php echo $fetch_product_details['description'];?></label>
+														<label> <?php echo $fetch_category_details['description'];?></label>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
@@ -124,17 +115,28 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 											
 											<div class="row">
 												<div class="col-sm-3">
-													Quantity
+													Tax Value
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
-														<label><?php echo $fetch_product_details['quantity'];?></label>
+														<label> <?php echo $fetch_category_details['tax_name'];?> <?php echo $fetch_category_details['tax_rate'];?></label>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
 											</div>
 
-											
+											<div class="row">
+												<div class="col-sm-3">
+													Item Type
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label> <?php echo $fetch_category_details['item_type'];?> </label>
+														<p class="help-block with-errors"></p>
+													</div>
+												</div>
+											</div>
+
 											<div class="row">
 												<div class="col-sm-3" style="margin-top:10px;">
 													<div class="form-group">
@@ -144,7 +146,7 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 		
 											</div><!-- /.row -->
 
-																						<div class="row" >
+											<div class="row" >
 													<div class="col-sm-3">
 													</div>
 													<div class="col-sm-4" style="margin-top:-35px;">
@@ -156,7 +158,7 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 															<?php
 																$data_atti = explode(",",$fetch_category_details['attribute_name']);
 																
-																foreach($data_atti As $key => $data_atti_values){
+																foreach($data_atti As $data_atti_values){
 			
 																	echo $data_atti_values;
 																?>
@@ -188,13 +190,11 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 															?>
 														</div>
 													</div>
-											</div>									
-
-								
-
+											</div>			
+								</div><!-- /.panel-body -->
 							</div><!-- /.panel -->
 						</div>
-						</div>
+						
 						<!-- right side -->
 						<div class="col-md-5 col-sm-12">
 							<div class="dropzone">
@@ -207,7 +207,7 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 					<div class="panel-footer" style="background:#fff;">
 							<div class="form-group m-a-0">
 								<button type="reset" class="btn btn-default btn-wide">Reset</button>
-								<a href="product.php"><button class="btn btn-success btn-wide">Back</button></a>
+								<a class="btn btn-success btn-wide" href="product_group.php" style="color:white;">Back</a>
 							</div>
 						</div><!-- /.panel-footer -->
 					</form>

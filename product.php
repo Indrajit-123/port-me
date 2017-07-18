@@ -2,7 +2,21 @@
 include ("config.php");
 $user_id = $_SESSION['user_id'];
 
-$customer_info = mysqli_query ($mysqli,"select * from customers where business_id='".$user_id."'");
+
+if(isset($_GET['delete_id']))
+{
+	$delete_id = $_GET['delete_id'];
+	$delete_product = mysqli_query($mysqli,"delete from product where product_id = '".$delete_id."'");
+	if($delete_product)
+		{
+			$data = "success";
+		}
+		else
+	{
+			$data = "error";
+	}
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -81,9 +95,26 @@ $customer_info = mysqli_query ($mysqli,"select * from customers where business_i
 							</div><!-- /.rs-dashhead-toolbar -->
 							
 						</div><!-- /.rs-dashhead-content -->
+						<div class="col-md-12 col-sm-12">
+						<?php
+								if(isset($data) && $data == "success")
+						{
+						?>
+						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Deleted Successfully </p>
+						<?php
+						}else if(isset($data) && $data == "error"){
+						?>
+						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error while deleting </p>
+						<?php
+						}
+						?>
+						</div>
 						
+
 					</div><!-- /.rs-dashhead -->
 					<!-- End Dashhead -->
+						
+
 
 					<!-- Begin default content width -->
 					<div class="container-fluid">
@@ -95,29 +126,46 @@ $customer_info = mysqli_query ($mysqli,"select * from customers where business_i
 							           <tr>
 							                <th style="text-align:center;">Product Name</th>
 							                <th style="text-align:center;">Product Category</th>
-							                <th style="text-align:center;">In Stock</th>
+							                <th style="text-align:center;">Price</th>
 							                <th style="text-align:center;">Sold out</th>										
-											<th style="text-align:center;">Total Purchased</th>
+											<th style="text-align:center;">In Stock</th>
 											<th style="text-align:center;">Action</th>
 							            </tr>
 							        </thead>
 							        <tbody>
 							            <tr>
-										
-							                <td>Vibe K5 Note</td>										
-											<td>Lenovo Mobiles</td>
-							                <td>50</td>
-							                <td>20</td>
-											<td>70</td>						               
+											<?php
+											$product_info = mysqli_query ($mysqli,"select * from product ");
+											while ($fetch_product_info = mysqli_fetch_array($product_info))
+											{
+											?>
+							                <td><?php echo $fetch_product_info['product_name'];?></td>
+											<td>
+											<?php
+											$category_id = $fetch_product_info['category_id'];
+											$category_name = mysqli_query ($mysqli, "select * from product_category where category_id = '".$category_id."'");
+											$fetch_category_info = mysqli_fetch_array($category_name);
+											echo $fetch_category_info['category_name'];
+											?>
+											</td>
+											<td><?php echo $fetch_product_info['price'];?></td>
+							                <td><?php echo $fetch_product_info['product_id'];?></td>
+											<td><?php echo $fetch_product_info['product_id'];?></td>						               
 										
 											<td>
-												<a href="view_product.php?product_id=<?php echo $fetch_customer_info['product_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
+												<a href="view_product.php?product_id=<?php echo $fetch_product_info['product_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
 
-												<a href="edit_product.php?product_id=<?php echo $fetch_customer_info['product_id'];?>" class="fa fa-pencil" style="height:35px;margin:5px;"></a>
+												<a href="edit_product.php?product_id=<?php echo $fetch_product_info['product_id'];?>" class="fa fa-pencil" style="height:35px;margin:5px;"></a>
 
-												<a href="" class="fa fa-trash" style="height:35px;margin:5px;"></a>
+												<a href="?delete_id=<?php echo $fetch_product_info['product_id'];?>" class="fa fa-trash" style="height:10px;margin:5px;"></a>
 											</td>
-							            </tr>
+											</tr>
+											
+											
+											<?php
+												}
+											?>
+							            
 							          							        
 							        </tbody>
 								</table>

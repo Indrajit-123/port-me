@@ -210,11 +210,7 @@ if(isset($_POST['submit']))
 														<div class="form-group">
 															<input name="bzip" type="integer" class="form-control bilzip" id="rs-form-example-tel" placeholder="Zip" required>
 															<p class="help-block with-errors"></p>
-														</div><!-- /.form-group -->
-
-														<div class="form-group">
-															<input type="text" class="form-control" disabled value="INDIA">			
-														</div><!-- /.form-group -->
+														</div><!-- /.form-group -->														
 														
 													</div>
 

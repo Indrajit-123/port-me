@@ -2,7 +2,20 @@
 include ("config.php");
 $user_id = $_SESSION['user_id'];
 
-$fetch_category = mysqli_query($mysqli, "select * from product_category ");
+
+if(isset($_GET['delete_id']))
+{
+	$delete_id = $_GET['delete_id'];
+	$delete_category = mysqli_query($mysqli,"delete from product_category where category_id = '".$delete_id."'");
+	if($delete_category)
+		{
+			$data = "success";
+		}
+		else
+	{
+			$data = "error";
+	}
+}
 
 ?>
 <!DOCTYPE html>
@@ -82,9 +95,26 @@ $fetch_category = mysqli_query($mysqli, "select * from product_category ");
 							</div><!-- /.rs-dashhead-toolbar -->
 							
 						</div><!-- /.rs-dashhead-content -->
-						
+						<div class="col-md-12 col-sm-12">
+						<?php
+								if(isset($data) && $data == "success")
+						{
+						?>
+						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Deleted Successfully </p>
+						<?php
+						}else if(isset($data) && $data == "error"){
+						?>
+						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error while deleting </p>
+						<?php
+						}
+						?>
+						</div>
+
 					</div><!-- /.rs-dashhead -->
 					<!-- End Dashhead -->
+					
+						
+
 
 					<!-- Begin default content width -->
 					<div class="container-fluid">
@@ -104,12 +134,14 @@ $fetch_category = mysqli_query($mysqli, "select * from product_category ");
 							        <tbody>
 							             <tr>
 										<?php
+										$fetch_category = mysqli_query($mysqli, "select * from product_category ");
+
 										while ($fetch_category_items = mysqli_fetch_array($fetch_category))	
 										
 										{
 										?>
 							               
-											<td style="text-align:center;"><?php echo $fetch_category_items['product_type']?></td>
+											<td style="text-align:center;"><?php echo $fetch_category_items['category_type']?></td>
 							                <td style="text-align:center;"><?php echo $fetch_category_items['category_name']?></td>
 							                <td style="text-align:center;"><?php echo $fetch_category_items['item_type']?></td>
 											<td style="text-align:center;">
@@ -119,11 +151,11 @@ $fetch_category = mysqli_query($mysqli, "select * from product_category ");
 											
 							               										
 											<td style="text-align:center;">
-												<a href="view_product.php?cu_id=<?php echo $fetch_category_items['customer_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
+												<a href="view_product_group.php?category_id=<?php echo $fetch_category_items['category_id'];?>" class="btn btn-default" style="height:35px;margin:5px;"> View </a><br>
 
-												<a href="edit_product.php?cu_id=<?php echo $fetch_category_items['customer_id'];?>" class="fa fa-pencil" style="height:35px;margin:5px;"></a>
+												<a href="edit_product_group.php?category_id=<?php echo $fetch_category_items['category_id'];?>" class="fa fa-pencil" style="height:35px;margin:5px;"></a>
 
-												<a href="" class="fa fa-trash" style="height:35px;margin:5px;"></a>
+												<a href="?delete_id=<?php echo $fetch_category_items['category_id'];?>" class="fa fa-trash" style="height:10px;margin:5px;"></a>
 											</td>
 							            </tr>
 							           <?php
