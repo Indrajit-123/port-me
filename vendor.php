@@ -9,8 +9,12 @@ if(isset($_GET['delete_id']))
 	$delete_customer = mysqli_query($mysqli,"delete from vendors where vendor_id = '".$delete_id."'");
 	if($delete_customer)
 		{
+			$data = "success";
 			echo "<script>window.location.href='vendor.php'</script>";
 		}
+	else {
+			$data = "error";
+	}
 }
 
 ?>

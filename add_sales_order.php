@@ -1,15 +1,40 @@
 <?php
 include ("config.php");
-$user_id=$_SESSION['user_id'];
+$user_id = $_SESSION['user_id'];
 
-$customer_info = mysqli_query($mysqli, "select * from customers ");
-$fetch_cu_details = mysqli_fetch_array($customer_info);
+if(isset($_POST['add_customer']))
+{
+	$salutation = $_POST['sal'];
+	$firstname = $_POST['fname'];
+	$lastname = $_POST['lname'];
+	$company_name = $_POST['cname'];
+	$email = $_POST['email'];
+	$work_phone = $_POST['wphone'];
+	$mobile = $_POST['mobile'];
+	$website = $_POST['website'];
+	$billing_street = $_POST['bstreet'];
+	$billing_city = $_POST['bcity'];
+	$billing_state = $_POST['bstate'];
+	$billing_zip = $_POST['bzip'];
+	$shipping_street = $_POST['sstreet'];
+	$shipping_city = $_POST['scity'];
+	$shipping_state = $_POST['sstate'];
+	$shipping_zip = $_POST['szip'];
+	$notes = $_POST['notes'];
+	$date = date('m/d/Y h:i:s', time());
 
-$cu_info = $_REQUEST['cu_id'];
-$customer_details = mysqli_query ($mysqli, "select * from customers where customer_id='".$cu_info."'");
-$fetch_cu_info = mysqli_fetch_array($customer_details);
+	$insert_customer_details = mysqli_query($mysqli, "insert customers values ('','".$salutation."','".$firstname."','".$lastname."','".$company_name."','".$email."','".$work_phone."','".$mobile."','".$website."','".$billing_street."','".$billing_city."','".$billing_state."','".$billing_zip."','INDIA','".$shipping_street."','".$shipping_city."','".$shipping_state."','".$shipping_zip."','INDIA','','".$date."','','".$user_id."')");
+	if($insert_customer_details)
+	{
+		$data = "success";
+		
+	}
+	else
+	{
+		$error = "error";
+	}
+}
 ?>
-
 
 
 
@@ -499,7 +524,7 @@ $fetch_cu_info = mysqli_fetch_array($customer_details);
 <!-- start pop up-->
 	<div class="modal fade" id="myModal" role="dialog" >
     <div class="modal-dialog">
-    
+    <form method="post" enctype="multipart/form-data">
       <!-- Modal content-->
       <div class="modal-content" style="width:130%">
         <div class="modal-header">
@@ -509,72 +534,81 @@ $fetch_cu_info = mysqli_fetch_array($customer_details);
         <div class="modal-body">
          <!-- Begin default content width -->
 					<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
-						<div class="col-sm-12">
+						<div class="col-md-12 col-sm-12">
+						<?php
+								if(isset($data) && $data == "success")
+						{
+						?>
+						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Added Successfully </p>
+						<?php
+						}else if(isset($data) && $data == "error"){
+						?>
+						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error in Insertion </p>
+						<?php
+						}
+						?>
+						</div>
+					
+
+						<div class="col-md-12">
 						<!-- Begin Panel -->
 							<div class="panel panel-plain panel-rounded">
+
 								<div class="panel-body" style="margin-top:10px;">
-									<form >
+									<form method="POST">
 											<div class="row">
 												<div class="col-sm-4">
 													<div class="form-group">
-														<select class="rs-selectize-single" required>
-															<option value="">Salutation</option>
-															<option value="4">Mr.</option>
-															<option value="1">Mrs.</option>
-															<option value="3">Ms.</option>
-															<option value="5">Miss.</option>
-															<option value="6">Dr.</option>
+														<select name="sal" class="rs-selectize-single" >															
+															<option value="Mr."<?php echo(($fetch_customer_details['salutation']=='1')?'selected':'');?>>Mr.</option>
+															<option value="Mrs."<?php echo(($fetch_customer_details['salutation']=='2')?'selected':'');?>>Mrs.</option>
+															<option value="Ms."<?php echo(($fetch_customer_details['salutation']=='3')?'selected':'');?>>Ms.</option>
+															<option value="Miss."<?php echo(($fetch_customer_details['salutation']=='4')?'selected':'');?>>Miss.</option>
+															<option value="Dr."<?php echo(($fetch_customer_details['salutation']=='5')?'selected':'');?>>Dr.</option>
 														</select>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->
 												<div class="col-sm-4">
 													<div class="form-group">
-														<input type="text" class="form-control" id="rs-form-example-fname" placeholder="First Name" required>
+														<input name= "fname" type="text" class="form-control" id="rs-form-example-fname" placeholder="First Name" required>
 														<p class="help-block with-errors"></p>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->
 												<div class="col-sm-4">
 													<div class="form-group">
-														<input type="text" class="form-control" id="rs-form-example-lname" placeholder="Last Name" required>
+														<input name="lname" type="text" class="form-control" id="rs-form-example-lname" placeholder="Last Name" required>
 														<p class="help-block with-errors"></p>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->
 											</div><!-- /.row -->
 
 											<div class="form-group">
-												<input type="email" class="form-control" id="rs-form-example-email" placeholder="Company Name" required>
+												<input name="cname" type="text" class="form-control" id="rs-form-example-email" placeholder="Company Name" required>
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input type="email" class="form-control" id="rs-form-example-email" placeholder="Email" required>
+												<input name="email" type="email" class="form-control" id="rs-form-example-email" placeholder="Email" required>
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input type="tel" class="form-control" id="rs-form-example-tel" placeholder="Work Phone" required>
+												<input name="wphone" type="number" class="form-control" id="rs-form-example-tel" placeholder="Work Phone" required>
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input type="tel" class="form-control" id="rs-form-example-tel" placeholder="Mobile" required>
+												<input name="mobile" type="number" class="form-control" id="rs-form-example-tel" placeholder="Mobile" required>
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input type="tel" class="form-control" id="rs-form-example-tel" placeholder="Website" required>
+												<input name="website" type="text" class="form-control" id="rs-form-example-tel" placeholder="Website" required>
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
 								</div><!-- /.panel-body -->
 							</div><!-- /.panel -->
-						</div>
-
-						<div class="col-md-5 col-sm-12">
-							<!-- Begin Panel 
-							<div class="panel panel-plain panel-rounded" >
-								<iframe width="100%" height="100%" src="https://www.youtube.com/embed/5GZ3fP71Bzg" style="padding:10px;min-height:300px;" frameborder="0" allowfullscreen></iframe>
-							</div> panel -->
 						</div>
 						
 						<div class="col-md-12" style="margin-top:-50px;">
@@ -595,50 +629,59 @@ $fetch_cu_info = mysqli_fetch_array($customer_details);
 														<h3 style="margin-bottom:15px;font-size:17px;">Billing Address</h3>
 														
 														<div class="form-group">
-															<textarea class="form-control billstreet" placeholder="Street" required></textarea>
+															<textarea name="bstreet" class="form-control billstreet" placeholder="Street" required></textarea>
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="text" class="form-control billcity" id="rs-form-example-email" placeholder="City" required>
+															<input name="bcity" type="text" class="form-control billcity" id="rs-form-example-email" placeholder="City" required>
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="text" class="form-control billstate" id="rs-form-example-tel" placeholder="State" required>
+															<input name="bstate" type="text" class="form-control billstate" id="rs-form-example-tel" placeholder="State" required>
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="tel" class="form-control bilzip" id="rs-form-example-tel" placeholder="Zip" required>
+															<input name="bzip" type="integer" class="form-control bilzip" id="rs-form-example-tel" placeholder="Zip" required>
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
+														<div class="form-group">
+															<input type="text" class="form-control" disabled value="INDIA">			
+														</div><!-- /.form-group -->
+														
 													</div>
 
 													<div class="col-md-6 col-sm-12" style="margin-left:0px;padding:5px;">
 														<h3 style="margin-bottom:15px;font-size:17px;">Shipping Address <span style="font-size:15px;float:right;color:#4a89dc;font-weight:normal;cursor:pointer;padding:5px;" onclick="copybillingaddr();"><i class="fa fa-hand-o-down"></i> Copy billing address</span></h3>
 														
 														<div class="form-group">
-															<textarea class="form-control billstreet2" placeholder="Street" required></textarea>
+															<textarea name="sstreet" class="form-control billstreet2" placeholder="Street" required></textarea>
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="text" class="form-control billcity2" id="rs-form-example-email" placeholder="City" required>
+															<input name="scity" type="text" class="form-control billcity2" id="rs-form-example-email" placeholder="City" required>
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="text" class="form-control billstate2" id="rs-form-example-tel" placeholder="State" required>
+															<input name="sstate" type="text" class="form-control billstate2" id="rs-form-example-tel" placeholder="State" required>
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<input type="tel" class="form-control bilzip2" id="rs-form-example-tel" placeholder="Zip" required>
+															<input name="szip" type="number" class="form-control bilzip2" id="rs-form-example-tel" placeholder="Zip" required>
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->
 
+														<div class="form-group">
+															<input type="text" class="form-control" disabled value="INDIA">			
+														</div><!-- /.form-group -->
+
+														
 													</div>
 												</div>
 											</div><!-- /.tab-pane -->
@@ -646,18 +689,19 @@ $fetch_cu_info = mysqli_fetch_array($customer_details);
 											<div role="tabpanel" class="tab-pane fade" id="rs-tab-02">
 												<h3 style="margin-bottom:15px;font-size:17px;">Notes</h3>	
 												<div class="form-group">
-													<textarea class="form-control" placeholder="Notes" style="min-height:250px;" required></textarea>
+													<textarea name="notes" class="form-control" placeholder="Notes" style="min-height:250px;" ></textarea>
 													<p class="help-block with-errors"></p>
 												</div><!-- /.form-group -->
 											</div><!-- /.tab-pane -->
 
 										</div><!-- /.tab-content -->
 									</div><!-- .panel-body -->
+									
 
 									<div class="panel-footer">
 											<div class="form-group m-a-0">
-												<button type="reset" class="btn btn-default btn-wide">Reset</button>
-												<button type="submit" class="btn btn-success btn-wide">Submit</button>
+												<button name="reset" type="reset" class="btn btn-default btn-wide">Reset</button>
+												<button name="add_customer" type="submit" class="btn btn-success btn-wide">Add Customer</button>
 											</div>
 										</div><!-- /.panel-footer -->
 									</form>
@@ -675,7 +719,8 @@ $fetch_cu_info = mysqli_fetch_array($customer_details);
 			<div class="modal-footer">
 			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
-		 </div>						  
+		 </div>		
+		 </form>
 	</div>
  </div> <!--/ end pop up-->				
 
@@ -716,6 +761,22 @@ $fetch_cu_info = mysqli_fetch_array($customer_details);
 		  });
 
 		});
+	</script>
+	<script>
+		function copybillingaddr(){
+			var billstreet = $(".billstreet").val();
+			var billcity = $(".billcity").val();
+			var billstate = $(".billstate").val();
+			var bilzip = $(".bilzip").val();
+			var billcountry = $(".billcountry option:selected").val();
+			
+			$(".billstreet2").val(billstreet);
+			$(".billcity2").val(billcity);
+			$(".billstate2").val(billstate);
+			$(".bilzip2").val(bilzip);
+			//$(".billcountry2 select").val(billcountry)
+			$('.billcountry2 option[value='+billcountry+']').prop('selected',true);
+		}
 	</script>
 	
 </body>
