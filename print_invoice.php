@@ -1,13 +1,21 @@
-<!DOCTYPE html>
-<html lang=en>
+<?php
+include ("config.php");
 
+$sales_order_id = $_GET['sales_order_id'];
+$sale_order_info = mysqli_query($mysqli, "select * from sales_order where sales_order_id='".$sales_order_id."'");
+$fetch_sale_order_details = mysqli_fetch_array ($sale_order_info);
+?>
+
+
+<!doctype html>
+<html>
 <head>
-	<meta charset="utf-8">
+<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>Company details | Port-ME</title>
+	<title>Port-ME | Invoice | Print</title>
 	<?php include("metalinks.php");?>
 	<style>
 		.dt-buttons a{
@@ -32,17 +40,90 @@
 			width:300px !important;
 		}
 	</style>
-
+    
+    
+    <style>
+    .invoice-box{
+        max-width:800px;
+        margin:auto;
+        padding:30px;
+        border:1px solid #eee;
+        box-shadow:0 0 10px rgba(0, 0, 0, .15);
+        font-size:16px;
+        line-height:24px;
+        font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color:#555;
+    }
+    
+    .invoice-box table{
+        width:100%;
+        line-height:inherit;
+        text-align:left;
+    }
+    
+    .invoice-box table td{
+        padding:5px;
+        vertical-align:top;
+    }
+    
+    .invoice-box table tr td:nth-child(2){
+        text-align:left;
+    }
+    
+    .invoice-box table tr.top table td{
+        padding-bottom:0px;
+    }
+    
+    .invoice-box table tr.top table td.title{
+        font-size:45px;
+        line-height:25px;
+        color:#333;
+    }
+    
+    .invoice-box table tr.information table td{
+        padding-bottom:40px;
+    }
+    
+    .invoice-box table tr.heading td{
+        background:#eee;
+        border-bottom:1px solid #ddd;
+        font-weight:bold;
+    }
+    
+    .invoice-box table tr.details td{
+        padding-bottom:20px;
+    }
+    
+    .invoice-box table tr.item td{
+        border-bottom:1px solid #eee;
+    }
+    
+    .invoice-box table tr.item.last td{
+        border-bottom:none;
+    }
+    
+    .invoice-box table tr.total td:nth-child(2){
+        border-top:2px solid #eee;
+        font-weight:bold;
+    }
+    
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td{
+            width:100%;
+            display:block;
+            text-align:center;
+        }
+        
+        .invoice-box table tr.information table td{
+            width:100%;
+            display:block;
+            text-align:center;
+        }
+    }
+    </style>
 </head>
-
-
 <body>
-
-	<!--[if lt IE 8]>
-	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-	<![endif]-->
-
-	<div id="rs-wrapper">
+<div id="rs-wrapper">
 		<?php 
 			include("header.php");
 			include("sidebar.php");
@@ -59,107 +140,78 @@
 							
 								<div style="margin-left:800px;">
 									<button type="button" class=" fa fa-file-pdf-o btn btn-success " onclick="pdf_document();">  PDF</button>	
-									 <input type="button" value="Print Div Contents" id="btnPrint" />
+									<button type="button" class=" fa fa-print btn btn-success " onclick="javascript:printDiv('printablediv')"> PRINT </button>
 								</div>								
 						</div>
 					</div>
-	 
-	<form id="form1">
-    <div id="dvContainer">
-
-			<div class="container-fluid" style="margin-top:40px;">
-			<div class="col-md-12 col-sm-12">
-
-							<div class="col-md-4 col-sm-12" >
-										<div class="col-sm-12 col-sm-offset-0">
-													<label>
-														[Company Name]
-													</label>
-												</div>
-												<div class="col-sm-12 ">
-													<label style="font-size:15px;">
-														[Company address] Barrackpore
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:15px;">
-													 PIN- 700120
-													</label>
-												</div>												
-									
-									</div><!-- /.1panel -->
-						
-							<div class="col-md-4 col-sm-12 col-sm-offset-1" >
-										<div class="col-sm-12">
-													<label >
-														[Billing Address]
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:15px;">
-														[Customer name]
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:15px;">
-														[company]
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:15px;">
-														[Address]
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:15px;">
-														[City Name, PIN]
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:15px;">
-														[Phone]
-													</label>
-												</div>
-										</div><!-- /.2panel -->
-							
 
 
-							<div class="col-md-4 col-sm-12 col-sm-offset-9" >
-								<div class="col-sm-12" >
-													<label style="font-size:30px;">
-														INVOICE
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:18px;">
-														Invoice Number :
-													</label>
-												</div>
-												<div class="col-sm-12">
-													<label style="font-size:13px;">
-														Date : <?php echo date("d/m/y");?>
-													</label>
-												</div>
-								</div><!--/.2panel -->
-							</div>
-					
-			
-
-						<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:0px;margin-left:0px;">
-							<div class="panel panel-plain panel-rounded">
-								<div class="panel-body">								
-								<div class="col-md-12 col-sm-12" style="text-align:left;">
-									
-							
-					
-							<div class="col-md-12">
-							<!-- Begin Panel -->
-								<div class="panel panel-plain panel-rounded">
-									<div class="panel-body" style="border-line:15px; margin-top:40px;" >
+<div id="printablediv" >
+			<form id="" runat="server">
+    <div class="invoice-box">
+	
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="12">
+                    <table >
+                        <tr>
+                            <td class="title" style="text-align:left;width:33%;">
+							 <h2 style="font-size:20px;">Port-me</h2>
+							<h5>Barrackpore
+							Kolkata
+							700120</h5>
+							</td>
+							<td class="title" style="text-align:center;width:33%;">
+                               <h2 style="font-size:20px;">
+							   <?php
+									$customer_id = $fetch_sale_order_details['customer_id'];
+									$get_sales_order_query = mysqli_query($mysqli,"select * from customers where customer_id='".$customer_id."'");
+									$get_fetch_sales_order_name = mysqli_fetch_array($get_sales_order_query);
+									echo $get_fetch_sales_order_name['salutation'];
+									echo "&nbsp;&nbsp;";
+									echo $get_fetch_sales_order_name['firstname'];
+									echo "&nbsp;&nbsp;";
+									echo $get_fetch_sales_order_name['lastname'];
+									?></h2>
+                                <h5>
+								<?php
+									$customer_id = $fetch_sale_order_details['customer_id'];
+									$get_sales_order_query = mysqli_query($mysqli,"select * from customers where customer_id='".$customer_id."'");
+									$get_fetch_sales_order_name = mysqli_fetch_array($get_sales_order_query);
+									echo $get_fetch_sales_order_name['billing_street'];
+									echo "&nbsp;&nbsp;";
+									echo $get_fetch_sales_order_name['billing_city'];
+									echo "&nbsp;&nbsp;";
+									echo $get_fetch_sales_order_name['billing_state'];
+									echo "&nbsp;&nbsp;";
+									echo $get_fetch_sales_order_name['billing_zip'];
+								?>
+								</h5>
+                            </td>
+							 <td class="title" style="text-align:right;width:33%;">
+							 <h2 style="font-size:25px;">Invoice</h2>
+							<h5>Invoice No.: 0000000123</h5>
+							<h5>date :<?php echo date("d/m/y");?> </h5>
+							</td>  
+                            
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="information">
+                <td colspan="12">
+                    <table>
+                        <tr>						
+                            <td	>
+                            </td>                           
+                           
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
 								
-								<!--saler details -->
-								<div class="col-md-12">
 									<table class="table" border="3">
 										<thead>
 											<tr>
@@ -177,14 +229,10 @@
 												<td>item</td>
 											</tr>
 										</tbody>
-									</table>
-						</div>
-					</div>
-					</div>
-						<!-- saler end -->
-							<div class="panel panel-plain panel-rounded">
-								<div class="panel-body" style="background:" >
-								   <div class="col-md-12">
+									</table><br>
+								
+            
+								
 									<table class="table" border="3">
 											<thead>
 												<tr>
@@ -204,90 +252,38 @@
 														<td></td>												
 													</tr>
 												</tbody>
+										</table><br>
+
+										<table class="table" style="width:300px;margin-left:450px;">
+											<thead>
+												<tr>
+													<th>Sub Total</th>
+													<th>00.00</th>
+												</tr>
+											</thead>
+												<tbody>
+													<tr style="font-size:15px;">
+														<td>Discount</td>
+														<td>00.00</td>
+													</tr>
+													<tr class="title" style="font-size:25px;">
+														<td>Total</td>
+														<td>00.00</td>
+													</tr>
+												</tbody>
 										</table>
-											</div>											
-										</div>
-									</div>
+          
+            
+        </table>
+    </div>
+	</form>
+	</div>
+	
 
-											<div class="row col-sm-offset-10">
-												<div class="col-sm-8">
-													<label style="font-size:15px;">
-														Sub Total <i class="fa fa-inr" aria-hidden="true"></i>
-													</label>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label style="font-size:17px;">
-															<b>00.00</b>
-														</label>	
-														<p class="help-block with-errors"></p>
-													</div>
-												</div>
-											</div>
-
-											<div class="row col-sm-offset-9">
-												<div class="col-sm-4">
-													<label style="font-size:15px;margin-top:5px;">
-														Discount
-													</label>
-												</div>												 
-											<div class="col-sm-3">
-													<div class="form-group">
-														<div class="input-group">
-
-													<div class="input-group-btn">
-														<label style="height:34px;font-size:17px;">														
-															<b>% or Rs</b>																						
-														</label>
-													</div><!-- /btn-group -->
-
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label style="font-size:17px; ">
-															<b>00.00</b>
-														</label>	
-														<p class="help-block with-errors"></p>
-													</div>
-												</div>
-
-												</div><!-- /input-group -->
-													</div>
-												</div>
-											</div>
-
-											<div class="row col-sm-offset-9">
-												<div class="col-sm-8">
-													<label style="font-size:20px;">
-														TOTAL <i class="fa fa-inr" aria-hidden="true"></i>
-													</label>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label style="font-size:20px;">
-															<b style="color:#5dc26a;">00.00</b>
-														</label>															
-														<p class="help-block with-errors"></p>
-													</div>
-												</div>
-											</div>
-
-										
-											
-
-												
-							
-						</div><!-- /.panel -->
-						</form>
+		</div>
 					</div>
-				</div><!-- /.container-fluid -->
-				</div>
-				</div><!-- /.rs-inner -->
-			</div><!-- /.rs-content -->
-			</div>
-		</article><!-- /.rs-content-wrapper -->
-		<!-- END MAIN CONTENT -->
-
-	<?php include("footer.php");?><!-- start pop up-->
+		</article>
+<?php include("footer.php");?><!-- start pop up-->
   <!--/ end pop up-->
 
 
@@ -313,35 +309,28 @@
 
 	<!-- Page Plugins -->
 	<script src="js/validator.min.js"></script>
-		<script>
 
-		$(document).ready(function() {
-		  $(".add-more").click(function(){ 
-			  var htmlz = "<div class='row atrri_add_cont'><div class='col-sm-3'><div class='form-group'><label style='font-size:13px;'>Product Name</label><input type='text' name='attri[]' class='form-control' placeholder=' Product ' required><p class='help-block with-errors'></p></div></div><div class='col-sm-2'><div class='form-group'><label style='font-size:13px;'>Quantity</label><input type='text' name='attri[]' class='form-control' placeholder=' Qty ' required><p class='help-block with-errors'></p></div></div><div class='col-sm-2'><div class='form-group'><label style='font-size:13px;'>Rate</label><input type='text' name='attri[]' class='form-control' placeholder=' Rs.' required><p class='help-block with-errors'></p></div></div><div class='col-sm-2'><div class='form-group'><label style='font-size:13px;'>TAX</label><input type='text' name='attri[]' class='form-control' placeholder='TAX %' required><p class='help-block with-errors'></p></div></div><div class='col-sm-2'><div class='form-group'><label style='font-size:13px;'>Amount</label><input type='text' name='optn[]' class='form-control' placeholder='Rs.' required><p class='help-block with-errors'></p></div></div><div class='col-sm-1' style='margin-top:30px;'><a href='#' class='remove' style='color:#ef5350;'><i class='fa fa-trash'></i></a></div></div></div></div></div>";
-			  //alert(htmlz);
-			  $(".add-more-contz").append(htmlz);
-		  });
+<script language="javascript" type="text/javascript">
+        function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Get the HTML of whole page
+            var oldPage = document.body.innerHTML;
 
-		  $("body").on("click",".remove",function(){ 
-			  
-			  $(this).parents(".atrri_add_cont").remove();
-		  });
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML = 
+              "<html><head><title></title></head><body>" + 
+              divElements + "</body>";
 
-		});
-	</script>
-	 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript">
-        $("#btnPrint").live("click", function () {
-            var divContents = $("#dvContainer").html();
-            var printWindow = window.open('', '', 'height=400,width=800');
-            printWindow.document.write('<html><head><title>DIV Contents</title>');
-            printWindow.document.write('</head><body >');
-            printWindow.document.write(divContents);
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            printWindow.print();
-        });
+            //Print Page
+            window.print();
+
+            //Restore orignal HTML
+            document.body.innerHTML = oldPage;
+
+          
+        }
     </script>
 
-</body>
+	</body>
 </html>

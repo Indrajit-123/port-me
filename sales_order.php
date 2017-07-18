@@ -1,3 +1,19 @@
+<?php
+include ("config.php");
+$user_id = $_SESSION['user_id'];
+$sale_order_info = mysqli_query ($mysqli,"select * from sales_order where business_id='".$user_id."'");
+
+if(isset($_GET['delete_id']))
+{
+	$delete_id = $_GET['delete_id'];
+	$delete_customer = mysqli_query($mysqli,"delete from sales_order where sales_orders_id = '".$delete_id."'");
+	if($delete_customer)
+		{
+			echo "<script>window.location.href='sales_order.php'</script>";
+		}
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang=en>
@@ -98,15 +114,33 @@
 							        </thead>
 							        <tbody>
 							            <tr>
-							                <td>Tiger Nixon</td>
-							                <td>System Architect</td>
-							                <td>Edinburgh</td>
-							                <td>61</td>
+										<?php
+										while ($fetch_sales_order_info = mysqli_fetch_array($sale_order_info))										
+										{
+										?>
+							                <td>
+												<?php
+													$customer_id = $fetch_sales_order_info['customer_id'];
+													$get_sales_order_query = mysqli_query($mysqli,"select * from customers where customer_id='".$customer_id."'");
+													$get_fetch_sales_order_name = mysqli_fetch_array($get_sales_order_query);
+													echo $get_fetch_sales_order_name['salutation'];
+													echo "&nbsp;&nbsp;";
+													echo $get_fetch_sales_order_name['firstname'];
+													echo "&nbsp;&nbsp;";
+													echo $get_fetch_sales_order_name['lastname'];
+												?>
+											</td>											
+											<td><?php echo $fetch_sales_order_info['order_number']?></td>
+							                <td><?php echo $fetch_sales_order_info['date']?></td>
+							                <td><?php echo $fetch_sales_order_info['sold_by']?></td>
 							               	<td>
-												<a href="view_sales_order.php?cu_id=<?php echo $fetch_customer_info['customer_id'];?>" class="btn btn-default" style="margin:3px;"> View </a>												
-												<a href="?delete_id=<?php echo $fetch_customer_info['customer_id'];?>" class="fa fa-trash" style="height:35px;margin-top:10px;padding-right:-50px; font-size:25px"></a>
+												<a href="print_invoice.php?sales_order_id=<?php echo $fetch_sales_order_info['sales_order_id'];?>" class="btn btn-default" style="margin:3px;"> View </a>												
+												<a href="?delete_id=<?php echo $fetch_sales_order_info['sales_order_id'];?>" class="fa fa-trash" style="height:35px;margin-top:10px;padding-right:-50px; font-size:25px"></a>
 											</td>
 							            </tr>
+										 <?php
+										}
+										?>	
 							          
 							        </tbody>
 								</table>

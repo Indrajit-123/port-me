@@ -37,6 +37,35 @@ if(isset($_POST['add_customer']))
 ?>
 
 
+<?php
+	include("config.php");
+	$user_id=$_SESSION['user_id'];
+	if(isset($_POST['submit'])){
+		$name = $_POST['name'];
+		$email = $_POST['email'];
+		$phone = $_POST['phone'];
+		$commision = $_POST['commision'];
+		$document = $_POST['document'];
+		$street = $_POST['street'];
+		$state = $_POST['state'];
+		$city = $_POST['city'];
+		$zip = $_POST['zip'];
+
+		$insert_staff_details = mysqli_query($mysqli, "insert staff_details values ('','".$name."','".$email."','".$phone."','".$commision."','".$document."','".$street."','".$state."','".$city."','".$zip."','".$user_id."')");
+
+	if($insert_staff_details)
+	{
+
+		$data = "success";
+	}
+	else
+	{
+		$data = "error";
+	}
+	}
+?>
+
+
 
 
 <!DOCTYPE html>
@@ -119,14 +148,11 @@ if(isset($_POST['add_customer']))
 											<div class="col-sm-9">
 											<div class="form-group">
 												<select class="rs-selectize-single">
-												<?php
-												while ($fetch_cu_name = mysqli_fetch_array($customer_info))
-												{
-												?>
-													<option id="?cu_id=<?php echo $fetch_cu_name['customer_id'];?>" value="<?php echo $fetch_cu_name['firstname'];?><?php echo $fetch_cu_name['lastname'];?>"><?php echo $fetch_cu_name['firstname'];?> <?php echo $fetch_cu_name['lastname'];?></option>
-												<?php												
-												}
-												?>
+													<option value=""selected disabled>Customer Name</option>
+													<option value="4">Thomas Edison</option>
+													<option value="1">Nikola</option>
+													<option value="3">Nikola Tesla</option>
+													<option value="5">Arnold Schwarzenegger</option>
 												</select>
 											</div><!-- /.form-group -->
 											</div>

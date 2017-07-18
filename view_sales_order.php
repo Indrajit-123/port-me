@@ -1,3 +1,11 @@
+<?php
+include ("config.php");
+
+$sales_order_id = $_GET['sales_order_id'];
+$sale_order_info = mysqli_query($mysqli, "select * from sales_order where sales_order_id='".$sales_order_id."'");
+$fetch_sale_order_details = mysqli_fetch_array ($sale_order_info);
+?>
+
 <!DOCTYPE html>
 <html lang=en>
 
@@ -66,7 +74,18 @@
 												</div>
 												<div class="col-sm-7">
 													<div class="form-group" style="margin-bottom:-1px;">
-														<label>FULL NAME HERE</label>
+														<label>
+												<?php
+													$customer_id = $fetch_sale_order_details['customer_id'];
+													$get_sales_order_query = mysqli_query($mysqli,"select * from customers where customer_id='".$customer_id."'");
+													$get_fetch_sales_order_name = mysqli_fetch_array($get_sales_order_query);
+													echo $get_fetch_sales_order_name['salutation'];
+													echo "&nbsp;&nbsp;";
+													echo $get_fetch_sales_order_name['firstname'];
+													echo "&nbsp;&nbsp;";
+													echo $get_fetch_sales_order_name['lastname'];
+												?>
+											</label>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->												
 											</div><!-- /.row -->
@@ -77,7 +96,7 @@
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<label>ORDER NUMBER HERE </label>
+														<label><?php echo $fetch_sale_order_details['order_number']?> </label>
 													</div><!-- /.form-group -->
 												</div>
 											</div>
@@ -88,7 +107,7 @@
 											</div>
 												<div class="form-group">
 													<div class="col-sm-8">
-														<label>SALES DATE HERE</label>
+														<label><?php echo $fetch_sale_order_details['date']?></label>
 													</div><!-- /.form-group -->
 												</div>
 										</div>
@@ -99,7 +118,7 @@
 												</div>
 												<div class="col-sm-7">
 													<div class="form-group" style="margin-bottom:10px;">
-														<label> SALES PERSON FULL NAME HERE</label>
+														<label><?php echo $fetch_sale_order_details['sold_by']?></label>
 													</div><!-- /.form-group -->
 												</div><!-- /.col-sm-4 -->												
 											</div><!-- /.row -->
@@ -111,22 +130,56 @@
 									<form name="vendor_form" method="POST" enctype="multipart/form-data" id="rs-validation-login-page">
 												<div class="col-sm-12">
 													<label style="font-size:20px;">
-														Indrajit Ghosh
+														<?php
+															$customer_id = $fetch_sale_order_details['customer_id'];
+															$get_sales_order_query = mysqli_query($mysqli,"select * from customers where customer_id='".$customer_id."'");
+															$get_fetch_sales_order_name = mysqli_fetch_array($get_sales_order_query);
+															echo $get_fetch_sales_order_name['salutation'];
+															echo "&nbsp;&nbsp;";
+															echo $get_fetch_sales_order_name['firstname'];
+															echo "&nbsp;&nbsp;";
+															echo $get_fetch_sales_order_name['lastname'];
+														?>
 													</label>
 												</div>
 												<div class="col-sm-12">
 													<label style="font-size:15px;">
-														Dukbanglow
+														<?php
+															$customer_id = $fetch_sale_order_details['customer_id'];
+															$get_sales_order_query = mysqli_query($mysqli,"select * from customers where customer_id='".$customer_id."'");
+															$get_fetch_sales_order_name = mysqli_fetch_array($get_sales_order_query);
+															echo $get_fetch_sales_order_name['billing_street']
+														?>
 													</label>
 												</div>
 												<div class="col-sm-12">
 													<label style="font-size:15px;">
-														Murshidabad
+														<?php
+															$customer_id = $fetch_sale_order_details['customer_id'];
+															$get_sales_order_query = mysqli_query($mysqli,"select * from customers where customer_id='".$customer_id."'");
+															$get_fetch_sales_order_name = mysqli_fetch_array($get_sales_order_query);
+															echo $get_fetch_sales_order_name['billing_city']
+														?>
 													</label>
 												</div>
 												<div class="col-sm-12">
 													<label style="font-size:15px;">
-														742132
+														<?php
+															$customer_id = $fetch_sale_order_details['customer_id'];
+															$get_sales_order_query = mysqli_query($mysqli,"select * from customers where customer_id='".$customer_id."'");
+															$get_fetch_sales_order_name = mysqli_fetch_array($get_sales_order_query);
+															echo $get_fetch_sales_order_name['billing_state']
+														?>
+													</label>
+												</div>
+												<div class="col-sm-12">
+													<label style="font-size:15px;">
+														<?php
+															$customer_id = $fetch_sale_order_details['customer_id'];
+															$get_sales_order_query = mysqli_query($mysqli,"select * from customers where customer_id='".$customer_id."'");
+															$get_fetch_sales_order_name = mysqli_fetch_array($get_sales_order_query);
+															echo $get_fetch_sales_order_name['billing_zip']
+														?>
 													</label>
 												</div>
 												</form>
