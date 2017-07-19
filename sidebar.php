@@ -93,11 +93,11 @@ $fetch_details = mysqli_fetch_array($cu_info);
 					</a>
 				</li>
 				
-				<li class="nav-item start <?php if($page_name == 'tax.php') { ?>active open<?php } ?>">
+				<!--<li class="nav-item start <?php if($page_name == 'tax.php') { ?>active open<?php } ?>">
 					<a href="tax.php">
 						<span class="fa fa-balance-scale rs-icon-menu"></span>Tax
 					</a>
-				</li>
+				</li>-->
 								
 				<li class="menu-block-divider"></li>
 			</ul>

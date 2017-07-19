@@ -72,7 +72,7 @@ $fetch_details = mysqli_fetch_array($cu_info);
 					</a>
 					<ul>
 						<li><a href="add_sales_order.php">Create Sales</a></li>
-						<li><a href="sales_order.php">View Bills</a></li>
+						<li><a href="sales_order.php">View Sales</a></li>
 					</ul>
 				</li>
 
