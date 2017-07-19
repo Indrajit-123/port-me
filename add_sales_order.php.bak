@@ -148,7 +148,7 @@ $business_id = $get_business_id['company_id'];
 												</div>
 
 												<div class="form-group" style="">
-													<button style="height:34px;width:155px;text-align:center;padding:2px;" class="btn btn-success btn-wide" data-toggle="modal" data-target="#myModal" type="button"><i class="fa fa-plus"></i> Add New</button>
+													<button style="height:34px;width:155px;text-align:center;padding:2px;" class="btn btn-success btn-wide" data-toggle="modal" data-target="#myModal" type="button"><i class="fa fa-plus"></i> Add Customer</button>
 													
 												</div>
 											</div>
