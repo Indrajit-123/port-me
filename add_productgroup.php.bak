@@ -5,34 +5,37 @@ $user_id = $_SESSION['user_id'];
 if(isset($_POST['submit']))
 {
 	$product_type= $_POST['cs-radio'];
-	$category_id   = $_POST['product_category_id'];
-	$product_name=$_POST['product_name'];
+	$name	   = $_POST['cat_name'];
 	$desc	   = $_POST['desc'];
-	$tax_name  = $_POST['tax_name'];
-	$tax_rate  = $_POST['tax_rate'];
-	$quantity  = $_POST['quantity'];
-	$price	   = $_POST['price'];
+
 	$attribute = $_POST['attri'];
 	$add_attribute = implode(",",$attribute);
+
 	$options   = $_POST['optn'];
 	$add_options   = implode(",",$options);
 
+	$item_type = $_POST['cs-radio1'];
+
+	$tax = $_POST['tax'];
+	$add_tax = implode(",",$tax);
 	
 	
 
-	$insert_product = mysqli_query($mysqli,"insert into product values ('','".$product_type."','".$category_id."','".$product_name."','".$desc."','".$quantity."','".$tax_name."','".$tax_rate."','".$price."','".$add_attribute."','".$add_options."','".$user_id."') ");
-	if($insert_product)
+	$insert_category = mysqli_query($mysqli,"insert into product_category values ('','".$product_type."','".$name."','".$desc."','".$add_attribute."','".$add_options."','".$item_type."','".$user_id."','".$add_tax."') ");
+	if($insert_category)
 	{
-		$data = "success";
+		$data = "success";		
 	}
 	else
 	{
 		$data = "error";
 	}
+
 }
 
 
 ?>
+
 
 
 <!DOCTYPE html>
@@ -44,7 +47,7 @@ if(isset($_POST['submit']))
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>Add Product | Port-ME</title>
+	<title>Add Product group | Port-ME</title>
 	<?php include("metalinks.php");?>
 	<link rel="stylesheet" href="bootstrap.min.css">
 	<script src="http://code.jquery.com/jquery.min.js"></script>
@@ -77,11 +80,11 @@ if(isset($_POST['submit']))
 						<div class="rs-dashhead-content">
 							<div class="rs-dashhead-titles">
 								<h3 class="rs-dashhead-title m-t">
-									New Product
+									New Product Group
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
-										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='product.php'"> <i class="fa fa-remove"></i> </span>
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='product_group.php'"> <i class="fa fa-remove"></i> </span>
 									</div>
 								</h3>
 								
@@ -93,7 +96,7 @@ if(isset($_POST['submit']))
 						<!-- End Breadcrumb -->
 					</div><!-- /.rs-dashhead -->
 					<!-- End Dashhead -->
-
+				
 					<!-- Begin default content width -->
 						<div class="container-fluid" style="padding:0px;margin-top:-20px;margin-right:5px;margin-left:-5px;">
 						<div class="col-md-12 col-sm-12">
@@ -103,6 +106,8 @@ if(isset($_POST['submit']))
 						?>
 						<p style="text-align:center;background:#5cb85c;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Added Successfully </p>
 						<?php
+							echo "<script>window.location.href='product_group.php'</script>";
+
 						}else if(isset($data) && $data == "error"){
 						?>
 						<p style="text-align:center;background:#e54e53;border:1px solid #CCC;border-radius:5px;padding:5px;color:#fff;font-weight:bold;margin-left:15px;"> Error in Insertion </p>
@@ -118,7 +123,8 @@ if(isset($_POST['submit']))
 							<div class="panel panel-plain panel-rounded">
 
 								<div class="panel-body">
-									<form method="POST" enctype="multipart/form-data">
+									<form method="POST" enctype="multipart/form-data" name="myfosda">								
+
 											<div class="row" style="margin-bottom:10px;">
 												<div class="col-sm-3" style="margin-top:10px;">
 													<span >
@@ -129,49 +135,25 @@ if(isset($_POST['submit']))
 												<div class="col-sm-6">
 													<div class="radio radio-custom">
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-04" value="Product">
+														 <input type="radio" name="cs-radio"  id="cs-radio-04" value="Product" >Product
 														<span class="checker"></span>
-														Product
+													
 													</label>
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-05" value="Service">
-														<span class="checker"></span>
-														Service
+														 <input type="radio" name="cs-radio"  id="cs-radio-04" value="Service">Service
+														<span class="checker"></span>														
 													</label>
 												</div>
-
 												</div><!-- /.col-sm-4 -->
 											</div><!-- /.row -->
-							
-								<div class="row" style="margin-bottom:5px;">
-									<div class="col-sm-3" style="margin-top:10px;">         
-											Choose Category              
-											  </div>
-											 <div class="col-sm-9">
-											   <div class="form-group">                
-											 <select name="product_category_id" class="rs-selectize-single">
-												
-											 <?php
-											 $category_name = mysqli_query($mysqli, "select * from product_category");
-											 while ($fetch_category = mysqli_fetch_array($category_name))
-											 {
-											 ?>											   
-											   <option value="<?php echo $fetch_category['category_id']?>"><?php echo $fetch_category['category_name']?></option>
-											  <?php
-											 }  
-											 ?>
-											  
-											 </select>
-											   </div><!-- /.form-group -->
-											  </div>
-										</div>
+
 											<div class="row">
 												<div class="col-sm-3">
-													Product Name
+													Category Name
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<input name="product_name" type="text" class="form-control" id="rs-form-example-email" placeholder="Product Name" required>
+														<input name="cat_name" type="text" class="form-control" id="rs-form-example-email" placeholder="Group/Category Name"  required>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
@@ -183,90 +165,15 @@ if(isset($_POST['submit']))
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
-														<textarea  name="desc" class="form-control" placeholder="Description" style="height:150px;" ></textarea>
+														<textarea name="desc" class="form-control" placeholder="Description" style="height:150px;"  ></textarea>
 														<p class="help-block with-errors"></p>
 													</div>
 												</div>
 											</div>
 
-											<div class="row">
-												<div class="col-sm-3">Tax</div>
 
-														<div class="col-sm-4">
-															<div class="form-group">
-																<input type="text" name="attri[]" class="form-control" placeholder="Eg: CGST" required>
-																<p class="help-block with-errors"></p>
-															</div>
-														</div>
-
-														<div class="col-sm-5">
-															<div class="form-group">
-																<input type="text" name="optn[]" class="form-control" placeholder="9%" required>
-																<p class="help-block with-errors"></p>
-															</div>
-														</div>
-
-														<!-- 2nd line -->
-														<div class="col-sm-3">&nbsp;</div>
-														<div class="col-sm-4">
-															<div class="form-group">
-																<input type="text" name="attri[]" class="form-control" placeholder="Eg: SGST" required>
-																<p class="help-block with-errors"></p>
-															</div>
-														</div>
-
-														<div class="col-sm-5">
-															<div class="form-group">
-																<input type="text" name="optn[]" class="form-control" placeholder="9%" required>
-																<p class="help-block with-errors"></p>
-															</div>
-														</div>
-
-													<!-- 3rd line -->
-														<div class="col-sm-3">&nbsp;</div>
-														<div class="col-sm-4">
-															<div class="form-group">
-																<input type="text" name="attri[]" class="form-control" placeholder="Eg: IGST" required>
-																<p class="help-block with-errors"></p>
-															</div>
-														</div>
-
-														<div class="col-sm-5">
-															<div class="form-group">
-																<input type="text" name="optn[]" class="form-control" placeholder="10%" required>
-																<p class="help-block with-errors"></p>
-															</div>
-														</div>
-											</div>
-
-			
-											
-											<div class="row">
+										<div class="row">
 												<div class="col-sm-3">
-													Quantity
-												</div>
-												<div class="col-sm-9">
-													<div class="form-group">
-														<input name="quantity" type="number" class="form-control" id="rs-form-example-email" placeholder="Select Quantity" required>
-														<p class="help-block with-errors"></p>
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-3">
-													Price <i class="fa fa-inr"></i>
-												</div>
-												<div class="col-sm-9">
-													<div class="form-group">
-														<input name="price" type="number" class="form-control" id="rs-form-example-email" placeholder="Enter Price" required>
-														<p class="help-block with-errors"></p>
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-3" style="margin-top:10px;">
 													<div class="form-group">
 														Multiple Items
 													</div><!-- /.form-group -->
@@ -294,7 +201,7 @@ if(isset($_POST['submit']))
 																<label style="font-size:13px;">
 																	Attribute
 																</label>
-																<input type="text" name="attri[]" class="form-control" placeholder="Eg: color" required>
+																<input type="text" name="attri[]" class="form-control" placeholder="Eg: color"  >
 																<p class="help-block with-errors"></p>
 															</div>
 														</div>
@@ -305,7 +212,7 @@ if(isset($_POST['submit']))
 																	<label style="font-size:13px;">
 																		Options
 																	</label>
-																	<input type="text" name="optn[]" class="form-control" placeholder="Red" required>
+																	<input type="text" name="optn[]" class="form-control" placeholder="Red"  >
 																	<p class="help-block with-errors"></p>
 																</div>
 																<div class="col-sm-2" style="margin-top:30px;">
@@ -329,6 +236,30 @@ if(isset($_POST['submit']))
 												</div><!-- /.col-sm-4 -->
 											</div><!-- /.row -->
 
+											<div class="row">
+												<div class="col-sm-3" style="margin-top:10px;">
+													<span >
+														Item Type :
+													</span>
+												</div><!-- /.col-sm-4 -->
+
+												<div class="col-sm-6">
+													<div class="radio radio-custom">
+													<label class="radio-inline">
+														<input type="radio" name="cs-radio1" id="cs-radio-04" value="Inventory">
+														<span class="checker"></span>
+														Inventory
+													</label>
+													<label class="radio-inline">
+														<input type="radio" name="cs-radio1" id="cs-radio-05" value="Non-inventory">
+														<span class="checker"></span>
+														Non-inventory
+													</label>
+												</div>
+
+												</div><!-- /.col-sm-4 -->
+											</div><!-- /.row -->
+
 								</div><!-- /.panel-body -->
 
 								
@@ -337,10 +268,9 @@ if(isset($_POST['submit']))
 						</div>
 						
 						<!-- right side -->
-						<div class="col-md-5 col-sm-12">
-							 
-							<div class="panel panel-plain panel-rounded" style="padding-top:20px;" >
-								<iframe width="100%" height="50%" src="https://www.youtube.com/embed/5GZ3fP71Bzg" style="padding:30px;min-height:300px;" frameborder="0" allowfullscreen></iframe>
+						<div class="col-md-5 col-sm-12">							 
+							<div class="panel panel-plain panel-rounded" style="padding-top:60px;" >
+								<iframe width="100%" height="50%" src="https://www.youtube.com/embed/5GZ3fP71Bzg" style="padding:10px;min-height:300px;" frameborder="0" allowfullscreen></iframe>
 							</div>
 						</div>
 						<!-- right side ends -->
@@ -393,7 +323,7 @@ if(isset($_POST['submit']))
 
 		$(document).ready(function() {
 		  $(".add-more").click(function(){ 
-			  var htmlz = "<div class='row atrri_add_cont'><div class='col-sm-3 ache_ekta'></div><div class='col-sm-4'><div class='form-group'><label style='font-size:13px;'>Attribute</label><input type='text' name='attri[]' class='form-control' placeholder='Eg: color' required><p class='help-block with-errors'></p></div></div><div class='col-sm-5'><div class='form-group'><div class='col-sm-10'><label style='font-size:13px;'>Options</label><input type='text' name='optn[]' class='form-control' placeholder='Red' required><p class='help-block with-errors'></p></div><div class='col-sm-2' style='margin-top:30px;'><a href='#' class='remove' style='color:#ef5350;'><i class='fa fa-trash'></i></a></div></div></div></div>";
+			  var htmlz = "<div class='row atrri_add_cont'><div class='col-sm-3 ache_ekta'></div><div class='col-sm-4'><div class='form-group'><label style='font-size:13px;'>Attribute</label><input type='text' name='attri[]' class='form-control' placeholder='Eg: color'  ><p class='help-block with-errors'></p></div></div><div class='col-sm-5'><div class='form-group'><div class='col-sm-10'><label style='font-size:13px;'>Options</label><input type='text' name='optn[]' class='form-control' placeholder='Red'  ><p class='help-block with-errors'></p></div><div class='col-sm-2' style='margin-top:30px;'><a href='javascript:void(0);' class='remove' style='color:#ef5350;'><i class='fa fa-trash'></i></a></div></div></div></div>";
 			  //alert(htmlz);
 			  $(".add-more-contz").append(htmlz);
 		  });

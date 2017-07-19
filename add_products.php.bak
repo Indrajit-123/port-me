@@ -201,7 +201,7 @@ if(isset($_POST['submit']))
 
 														<div class="col-sm-5">
 															<div class="form-group">
-																<input type="text" name="optn[]" class="form-control" placeholder="9%" required>
+																<input type="text" name="optn[]" class="form-control" placeholder="10%" required>
 																<p class="help-block with-errors"></p>
 															</div>
 														</div>

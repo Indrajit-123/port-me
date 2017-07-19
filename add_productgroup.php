@@ -16,8 +16,7 @@ if(isset($_POST['submit']))
 
 	$item_type = $_POST['cs-radio1'];
 
-	$tax = $_POST['tax'];
-	$add_tax = implode(",",$tax);
+	$tax = "";
 	
 	
 
@@ -171,30 +170,6 @@ if(isset($_POST['submit']))
 												</div>
 											</div>
 
-									<div class="row">
-										<div class="col-md-3">
-											<div class="form-group">
-												<label>Choose Tax</label>
-											</div>
-										</div>
-
-										<div class="col-md-9">
-											<div class="form-group">
-													<select name="tax[]" class="rs-selectize-optgroup" multiple>
-												<?php
-												$tax_details = mysqli_query($mysqli,"select * from tax");
-												while ($fetch_tax_details = mysqli_fetch_array($tax_details))
-												{
-												?>												
-														<option ><?php echo $fetch_tax_details['tax_name'];?> <?php echo $fetch_tax_details['tax_rate'];?>%
-														</option>													
-														<?php
-												}		
-												?>
-												</select>
-											</div><!-- /.form-group -->
-										</div><!-- /.col-md-6 -->										
-									</div>
 
 										<div class="row">
 												<div class="col-sm-3">
