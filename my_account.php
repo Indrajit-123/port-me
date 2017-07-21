@@ -1,6 +1,12 @@
 <?php
 include ("config.php");
 $user_id =$_SESSION['user_id'];
+$get_business_id = mysqli_query($mysqli,"SELECT * FROM users JOIN (user_access_levels,company_details) WHERE users.user_id=user_access_levels.user_id AND    user_access_levels.business_id=company_details.company_id AND users.user_id='$user_id'");
+
+$get_business_id = mysqli_fetch_array($get_business_id);
+$business_id = $get_business_id['company_id'];
+
+
 $cu_info = mysqli_query($mysqli, "select * from users where user_id = '".$user_id."'");
 $fetch_details = mysqli_fetch_array($cu_info);
 $image = $fetch_details['logo_image'];
@@ -12,7 +18,7 @@ if(isset($_POST['update']))
 	$type	  = $_POST['type_business'];
 	$pan	  = $_POST['pan'];
 	$adhaar	  = $_POST['adhaar'];
-	$business = $_POST['businessname'];
+	$gstin = $_POST['gstin'];
 	$street	  = $_POST['street'];
 	$city	  = $_POST['city'];
 	$state	  = $_POST['state'];
@@ -31,7 +37,7 @@ if(isset($_POST['update']))
 	move_uploaded_file($tmp_image,"uploads/".$user_pic);
 	}
 
-$update_details = mysqli_query ($mysqli, "update users set username='".$username."', pan='".$pan."', logo_image = '".$user_pic."' ,type_business='".$type."'  , adhaar='".$adhaar."',business='".$business."',street='".$street."',city='".$city."',state='".$state."',zip='".$zip."' where user_id='".$user_id."'");
+$update_details = mysqli_query ($mysqli, "update users set username='".$username."', pan='".$pan."', logo_image = '".$user_pic."' ,type_business='".$type."'  , adhaar='".$adhaar."',business='".$gstin."',street='".$street."',city='".$city."',state='".$state."',zip='".$zip."', business_id = '".$business_id."' where user_id='".$user_id."'");
 if ($update_details)
 	{
 			$data = "updated";
@@ -215,9 +221,9 @@ if ($update_details)
 
 														<div class="form-group">
 														<div class="col-sm-4">
-																Business ID :
+																GSTIN Number :
 															</div>
-															<input name="businessname" type="text" class="form-control " id="rs-form-example-tel" placeholder="Business ID" required value=<?php echo $fetch_details['business']; ?>>
+															<input name="gstin" type="text" class="form-control " id="rs-form-example-tel" placeholder="Business ID" required value=<?php echo $fetch_details['business']; ?>>
 															<p class="help-block with-errors"></p>
 														</div><!-- /.form-group -->										
 
@@ -326,7 +332,7 @@ if ($update_details)
 														</div><!-- /.form-group -->
 
 														<div class="form-group">
-															<div class="col-sm-2">
+															<div class="col-sm-3">
 																ZIP code :
 															</div>
 															<input name="zip" type="integer" class="form-control " id="rs-form-example-tel" placeholder="Zip" required value=<?php echo $fetch_details['zip']; ?>>

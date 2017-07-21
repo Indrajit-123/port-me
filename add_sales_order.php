@@ -153,7 +153,7 @@ $business_id = $get_business_id['company_id'];
 												</div>
 
 												<div class="form-group" style="">
-													<button style="height:34px;width:155px;text-align:center;padding:2px;" class="btn btn-success btn-wide" data-toggle="modal" data-target="#myModal" type="button"><i class="fa fa-plus"></i> Add New</button>
+													<button style="height:34px;width:133px;text-align:center;padding:2px;" class="btn btn-success btn-wide" data-toggle="modal" data-target="#myModal" type="button"><i class="fa fa-plus"></i> Add New</button>
 													
 												</div>
 											</div>
@@ -264,7 +264,7 @@ $business_id = $get_business_id['company_id'];
 											<div class="row atrri" style="margin-top:0px;">
 												<div class="col-sm-12">
 													<div class="form-group">
-														<a href="#" class="add-more" style="font-size:15px;">
+														<a href="javascript:void(0)" class="add-more" style="font-size:15px;">
 															<i class="fa fa-plus"></i> Add More Product
 														</a>
 													</div><!-- /.form-group -->

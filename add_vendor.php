@@ -1,6 +1,11 @@
 <?php
 include ("config.php");
 $user_id = $_SESSION['user_id'];
+$get_business_id = mysqli_query($mysqli,"SELECT * FROM users JOIN (user_access_levels,company_details) WHERE users.user_id=user_access_levels.user_id AND user_access_levels.business_id=company_details.company_id AND users.user_id='$user_id'");
+
+$get_business_id = mysqli_fetch_array($get_business_id);
+$business_id = $get_business_id['company_id'];
+
 
 if(isset($_POST['submit']))
 {
@@ -23,11 +28,11 @@ if(isset($_POST['submit']))
 	$notes = $_POST['notes'];
 	$date = date('m/d/Y h:i:s', time());
 
-	$insert_vendor_details = mysqli_query($mysqli, "insert vendors values ('','".$salutation."','".$firstname."','".$lastname."','".$company_name."','".$email."','".$work_phone."','".$mobile."','".$website."','".$billing_street."','".$billing_city."','".$billing_state."','".$billing_zip."','".$shipping_street."','".$shipping_city."','".$shipping_state."','".$shipping_zip."','','".$date."','".$user_id."','".$user_id."')");
+	$insert_vendor_details = mysqli_query($mysqli, "insert vendors values ('','".$salutation."','".$firstname."','".$lastname."','".$company_name."','".$email."','".$work_phone."','".$mobile."','".$website."','".$billing_street."','".$billing_city."','".$billing_state."','".$billing_zip."','".$shipping_street."','".$shipping_city."','".$shipping_state."','".$shipping_zip."','','".$date."','".$user_id."','".$business_id."')");
 	if($insert_vendor_details)
 	{
 		$data = "success";
-		echo "<script>alert('inserted successfully')</script>";
+	
 	}
 	else
 	{
@@ -77,7 +82,7 @@ if(isset($_POST['submit']))
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
-										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='supplier_vendor.php'"> <i class="fa fa-remove"></i> </span>
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='vendor.php'"> <i class="fa fa-remove"></i> </span>
 									</div>
 								</h3>
 								

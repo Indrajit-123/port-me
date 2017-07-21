@@ -2,14 +2,23 @@
 include ("config.php");
 $user_id = $_SESSION['user_id'];
 
+$get_business_id = mysqli_query($mysqli,"SELECT * FROM users JOIN (user_access_levels,company_details) WHERE users.user_id=user_access_levels.user_id AND user_access_levels.business_id=company_details.company_id AND users.user_id='$user_id'");
+
+$get_business_id = mysqli_fetch_array($get_business_id);
+$business_id = $get_business_id['company_id'];
+
+
+
 if(isset($_POST['submit']))
 {
 	$product_type= $_POST['cs-radio'];
 	$category_id   = $_POST['product_category_id'];
 	$product_name=$_POST['product_name'];
 	$desc	   = $_POST['desc'];
-	$tax_name  = $_POST['tax_name'];
-	$tax_rate  = $_POST['tax_rate'];
+	$tax_name = $_POST ['tax_name'];
+	$add_tax_name = implode (",",$tax_name);
+	$tax_rate = $_POST['tax_rate'];
+	$add_tax_rate = implode (",",$tax_rate);
 	$quantity  = $_POST['quantity'];
 	$price	   = $_POST['price'];
 	$attribute = $_POST['attri'];
@@ -20,7 +29,7 @@ if(isset($_POST['submit']))
 	
 	
 
-	$insert_product = mysqli_query($mysqli,"insert into product values ('','".$product_type."','".$category_id."','".$product_name."','".$desc."','".$quantity."','".$tax_name."','".$tax_rate."','".$price."','".$add_attribute."','".$add_options."','".$user_id."') ");
+	$insert_product = mysqli_query($mysqli,"insert into product values ('','".$product_type."','".$category_id."','".$product_name."','".$desc."','".$quantity."','".$add_tax_name."','".$add_tax_rate."','".$price."','".$add_attribute."','".$add_options."','".$business_id."') ");
 	if($insert_product)
 	{
 		$data = "success";
@@ -194,14 +203,14 @@ if(isset($_POST['submit']))
 
 														<div class="col-sm-4">
 															<div class="form-group">
-																<input type="text" name="attri[]" class="form-control" placeholder="Eg: CGST" required>
+																<input type="text" name="tax_name[]" class="form-control" placeholder="Eg: CGST" required>
 																<p class="help-block with-errors"></p>
 															</div>
 														</div>
 
 														<div class="col-sm-5">
 															<div class="form-group">
-																<input type="text" name="optn[]" class="form-control" placeholder="9%" required>
+																<input type="text" name="tax_rate[]" class="form-control" placeholder="9%" required>
 																<p class="help-block with-errors"></p>
 															</div>
 														</div>
@@ -210,14 +219,14 @@ if(isset($_POST['submit']))
 														<div class="col-sm-3">&nbsp;</div>
 														<div class="col-sm-4">
 															<div class="form-group">
-																<input type="text" name="attri[]" class="form-control" placeholder="Eg: SGST" required>
+																<input type="text" name="tax_name[]" class="form-control" placeholder="Eg: SGST" required>
 																<p class="help-block with-errors"></p>
 															</div>
 														</div>
 
 														<div class="col-sm-5">
 															<div class="form-group">
-																<input type="text" name="optn[]" class="form-control" placeholder="9%" required>
+																<input type="text" name="tax_rate[]" class="form-control" placeholder="9%" required>
 																<p class="help-block with-errors"></p>
 															</div>
 														</div>
@@ -226,14 +235,14 @@ if(isset($_POST['submit']))
 														<div class="col-sm-3">&nbsp;</div>
 														<div class="col-sm-4">
 															<div class="form-group">
-																<input type="text" name="attri[]" class="form-control" placeholder="Eg: IGST" required>
+																<input type="text" name="tax_name[]" class="form-control" placeholder="Eg: IGST" required>
 																<p class="help-block with-errors"></p>
 															</div>
 														</div>
 
 														<div class="col-sm-5">
 															<div class="form-group">
-																<input type="text" name="optn[]" class="form-control" placeholder="10%" required>
+																<input type="text" name="tax_rate[]" class="form-control" placeholder="10%" required>
 																<p class="help-block with-errors"></p>
 															</div>
 														</div>

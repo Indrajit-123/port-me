@@ -53,7 +53,7 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 									<div style="float:right;">
 										<!--<span style="padding:10px 10px;font-size:15px;font-weight:normal;color:#4a89dc;cursor:pointer;border-right:1px solid #CCC;"> <i class="fa fa-lightbulb-o"></i> &nbsp;&nbsp;Page Tutorial</span>-->
 
-										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='product_group.php'"> <i class="fa fa-remove"></i> </span>
+										<span style="padding:10px 5px;font-size:25px;font-weight:normal;color:#000;cursor:pointer;" style="float:-right;" onclick="window.location.href='product.php'"> <i class="fa fa-remove"></i> </span>
 									</div>
 								</h3>
 								
@@ -73,34 +73,40 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 							<div class="panel panel-plain panel-rounded">
 
 								<div class="panel-body">
-									<form >
+									<form  method = "POST">
+
 											<div class="row" style="margin-bottom:10px;">
 												<div class="col-sm-3" style="margin-top:10px;">
 													<span >
-														Type
+														Type :
 													</span>
 												</div><!-- /.col-sm-4 -->
+
+												<?php
+													$product_info = mysqli_query ($mysqli, "select * from product where product_id = '".$product_id."'");
+													$fetch_product = mysqli_fetch_array($product_info );
+
+												?>
 
 												<div class="col-sm-6">
 													<div class="radio radio-custom">
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-04" selected disabled >
+														<input type="radio" name="cs-radio" id="cs-radio-04" value="Product" <?php echo(($fetch_product['product_type'] == 'Product')?'checked':'');?> disabled>
 														<span class="checker"></span>
 														Product
 													</label>
 													<label class="radio-inline">
-														<input type="radio" name="cs-radio" id="cs-radio-05" selected disabled >
+														<input type="radio" name="cs-radio" id="cs-radio-05" value="Service" <?php echo(($fetch_product['product_type'] == 'Service')?'checked':'');?> disabled>
 														<span class="checker"></span>
 														Service
 													</label>
 												</div>
-
-												</div><!-- /.col-sm-4 -->
-											</div><!-- /.row -->
+											</div><!-- /.col-sm-4 -->
+										</div><!-- /.row -->
 
 											<div class="row">
 												<div class="col-sm-3">
-													Product Name
+													Product Name :
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
@@ -112,7 +118,7 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 											
 											<div class="row">
 												<div class="col-sm-3">
-													Description
+													Description :
 												</div>
 												<div class="col-sm-9">
 													<div class="form-group">
@@ -124,7 +130,7 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 											
 											<div class="row">
 												<div class="col-sm-3">
-													Quantity
+													Quantity :
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
@@ -134,17 +140,84 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 												</div>
 											</div>
 
+											<div class="row">
+												<div class="col-sm-3">
+													Price :
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label><?php echo $fetch_product_details['price'];?></label>
+														<p class="help-block with-errors"></p>
+													</div>
+												</div>
+											</div>
+											
+				
+											<div class="row">
+												<div class="col-sm-3">
+													<div class="form-group">
+														TAX :
+													</div><!-- /.form-group -->
+												</div><!-- /.col-sm-4 -->		
+											</div><!-- /.row -->
+
+											<div class="row" >
+													<div class="col-sm-3">
+													</div>
+													<div class="col-sm-4" style="margin-top:-35px;">
+														<div class="form-group">
+															<label style="font-size:13px;">
+																<b>&nbsp;</b>
+															</label>
+															<br />
+															<?php
+																$tax_name = explode(",",$fetch_product_details['tax_name']);
+																
+																foreach($tax_name As $fetch_tax_name){
+			
+																	
+																?>
+																<label><?php echo $fetch_tax_name;?>:-</label>
+																<p class="help-block with-errors"></p>
+															<?php
+																}
+															?>
+															
+														</div>
+													</div>
+
+													<div class="col-sm-5" style="margin-top:-35px;">
+														<div class="form-group">															
+																<label style="font-size:13px;">
+																	<b>&nbsp;</b>
+																</label>
+																<br />
+															<?php
+																$tax_rate = explode(",",$fetch_product_details['tax_rate']);
+																
+																foreach($tax_rate As $key => $fetch_tax_rate){
+			
+																	
+																?>
+																<label><?php echo $fetch_tax_rate;?>%</label>
+																<p class="help-block with-errors"></p>
+															<?php
+																}
+															?>
+														</div>
+													</div>
+											</div>	
+
 											
 											<div class="row">
 												<div class="col-sm-3" style="margin-top:10px;">
 													<div class="form-group">
-														Multiple Items
+														Multiple Items :
 													</div><!-- /.form-group -->
-												</div><!-- /.col-sm-4 -->
-		
+												</div><!-- /.col-sm-4 -->		
 											</div><!-- /.row -->
 
-																						<div class="row" >
+												<div class="row" >
 													<div class="col-sm-3">
 													</div>
 													<div class="col-sm-4" style="margin-top:-35px;">
@@ -154,7 +227,7 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 															</label>
 															<br />
 															<?php
-																$data_atti = explode(",",$fetch_category_details['attribute_name']);
+																$data_atti = explode(",",$fetch_product_details['attribute_value']);
 																
 																foreach($data_atti As $key => $data_atti_values){
 			
@@ -176,7 +249,7 @@ $fetch_product_details = mysqli_fetch_array($view_product_info);
 																</label>
 																<br />
 															<?php
-																$data_option = explode(",",$fetch_category_details['attribute_options']);
+																$data_option = explode(",",$fetch_product_details['attribute_option']);
 																
 																foreach($data_option As $key => $data_option_values){
 			

@@ -75,18 +75,29 @@ $fetch_category_details = mysqli_fetch_array($view_category_info);
 								<div class="panel-body">
 									<form >
 											
-											
-												<div class="row">
-												<div class="col-sm-3">
-													Category Type
+											<div class="row" style="margin-bottom:10px;">
+												<div class="col-sm-3" style="margin-top:10px;">
+													<span >
+														Type
+													</span>
+												</div><!-- /.col-sm-4 -->
+
+												<div class="col-sm-6">
+													<div class="radio radio-custom">
+													<label class="radio-inline">
+														<input type="radio" name="cs_radio" id="cs-radio-04" value="Product" <?php echo(($fetch_category_details['category_type'] == 'Product')?'checked':'');?> disabled>
+														<span class="checker"></span>
+														Product
+													</label>
+													<label class="radio-inline">
+														<input type="radio" name="cs_radio" id="cs-radio-05" value="Service" <?php echo(($fetch_category_details['category_type'] == 'Service')?'checked':'');?> disabled>
+														<span class="checker"></span>
+														Service
+													</label>
 												</div>
-												<div class="col-sm-9">
-													<div class="form-group">
-														<label  id="rs-form-example-email" > <?php echo $fetch_category_details['category_type'];?></label>
-														<p class="help-block with-errors"></p>
-													</div>
-												</div>
-											</div>
+
+												</div><!-- /.col-sm-4 -->
+											</div><!-- /.row -->
 
 
 											<div class="row">
@@ -113,24 +124,7 @@ $fetch_category_details = mysqli_fetch_array($view_category_info);
 												</div>
 											</div>
 											
-											<div class="row">
-										<div class="col-md-3">
-											<div class="form-group">
-												<label>Choose Tax</label>
-											</div>
-										</div>
-
-										<div class="col-md-9">
-											<div class="form-group">
-													
-																						
-														<label ><?php echo $fetch_category_details['tax'];?>
-														</label>													
 											
-										
-											</div><!-- /.form-group -->
-										</div><!-- /.col-md-6 -->										
-									</div>
 
 											<div class="row">
 												<div class="col-sm-3">

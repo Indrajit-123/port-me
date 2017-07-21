@@ -1,6 +1,8 @@
 <?php
 	include("config.php");
 	include("user_related/functions.php");
+		
+
 	if(isset($_POST['submit'])){
 		$email = $_POST['email'];
 		$password = $_POST['password'];
@@ -17,7 +19,7 @@
 		$check_email = check_duplicate_email($email);
 		echo $check_email;
 		if($check_email < 1){
-			$save_reg = mysqli_query($mysqli,"INSERT into users VALUES ('','','','".$email."', '".$business."','".$type."', '".$password."', '".$phone."', '','','','','','','','','','','','','')");
+			$save_reg = mysqli_query($mysqli,"INSERT into users VALUES ('','','','".$email."', '".$business."','".$type."', '".$password."', '".$phone."', '','','','','','','','','','','','','','')");
 			if($save_reg)
 			{	
 				echo "<script>window.location.href='index.php'</script>";
@@ -28,7 +30,7 @@
 			}
 
 			$user_id = mysqli_insert_id($mysqli);
-			$save_biz_data = mysqli_query($mysqli,"INSERT into business_details VALUES('','$business','$type','$date')");
+			$save_biz_data = mysqli_query($mysqli,"INSERT into company_details VALUES('','$business','$email','','$phone','')");
 			$business_id = mysqli_insert_id($mysqli);
 			$access_type = "admin";
 			$access_menu = "all";
@@ -38,6 +40,7 @@
 			}else{
 				$data = "error";
 			}
+			
 		}else{
 			$data = "email";
 		}

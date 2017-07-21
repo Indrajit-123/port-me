@@ -8,8 +8,6 @@ if(isset($_POST['update']))
 	$category_type = $_POST['cs_radio'];
 	$category_name = $_POST['category_name'];
 	$desc	   = $_POST['desc'];
-	$tax_name  = $_POST['tax_name'];
-	$tax_rate  = $_POST['tax_rate'];
 	$attribute = $_POST['attri'];
 	$add_attribute = implode(",",$attribute);
 	$options   = $_POST['optn'];
@@ -20,7 +18,7 @@ if(isset($_POST['update']))
 
 	
 
-	$update_product = mysqli_query($mysqli,"update product_category set  category_type='".$category_type."', category_name='".$category_name."', description='".$desc."', attribute_name='".$add_attribute."', attribute_options='".$add_options."', tax='".$edit_tax."', item_type='".$item_type."', business_id='".$user_id."' where category_id='".$category_id."' ");
+	$update_product = mysqli_query($mysqli,"update product_category set category_type='".$category_type."', category_name='".$category_name."', description='".$desc."', attribute_name='".$add_attribute."', attribute_options='".$add_options."', item_type='".$item_type."' where category_id='".$category_id."' ");
 
 	if($update_product)
 	{
@@ -168,41 +166,7 @@ if(isset($_POST['update']))
 												</div>
 											</div>
 									
-											<div class="row">
-										<div class="col-md-3">
-											<div class="form-group">
-												<label>Choose Tax</label>
-											</div>
-										</div>
-
-										<div class="col-md-9">
-											<div class="form-group">
-													<select name="tax[]" class="rs-selectize-optgroup" multiple>							
-
-												 <?php
-												 $tax_details = explode(",",$fetch_category['tax']);
-												 foreach($tax_details as $tax_info)
-												 {
-												?>
-												<option value=""><?php echo $tax_info;?></option>											
-												<?php
-												}
-												?>
 											
-												<?php
-												$tax_details = mysqli_query($mysqli,"select * from tax");
-												while ($fetch_tax_details = mysqli_fetch_array($tax_details))
-												{
-												?>												
-												<option><?php echo $fetch_tax_details['tax_name'];?> <?php echo $fetch_tax_details['tax_rate'];?>%
-												</option>													
-												<?php
-												}		
-												?>
-												</select>
-											</div><!-- /.form-group -->
-										</div><!-- /.col-md-6 -->										
-									</div>
 											
 											<div class="row">
 												<div class="col-sm-3" style="margin-top:10px;">

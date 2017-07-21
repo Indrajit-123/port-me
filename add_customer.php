@@ -1,6 +1,12 @@
 <?php
 include ("config.php");
 $user_id = $_SESSION['user_id'];
+$get_business_id = mysqli_query($mysqli,"SELECT * FROM users JOIN (user_access_levels,company_details) WHERE users.user_id=user_access_levels.user_id AND    user_access_levels.business_id=company_details.company_id AND users.user_id='$user_id'");
+
+$get_business_id = mysqli_fetch_array($get_business_id);
+$business_id = $get_business_id['company_id'];
+
+
 
 if(isset($_POST['submit']))
 {
@@ -23,7 +29,7 @@ if(isset($_POST['submit']))
 	$notes = $_POST['notes'];
 	$date = date('m/d/Y h:i:s', time());
 
-	$insert_customer_details = mysqli_query($mysqli, "insert customers values ('','".$salutation."','".$firstname."','".$lastname."','".$company_name."','".$email."','".$work_phone."','".$mobile."','".$website."','".$billing_street."','".$billing_city."','".$billing_state."','".$billing_zip."','".$shipping_street."','".$shipping_city."','".$shipping_state."','".$shipping_zip."','','".$date."','','".$user_id."')");
+	$insert_customer_details = mysqli_query($mysqli, "insert customers values ('','".$salutation."','".$firstname."','".$lastname."','".$company_name."','".$email."','".$work_phone."','".$mobile."','".$website."','".$billing_street."','".$billing_city."','".$billing_state."','".$billing_zip."','".$shipping_street."','".$shipping_city."','".$shipping_state."','".$shipping_zip."','','".$date."','".$user_id."','".$business_id."')");
 	if($insert_customer_details)
 	{
 		$data = "success";
@@ -150,12 +156,12 @@ if(isset($_POST['submit']))
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input name="wphone" type="number" class="form-control" id="rs-form-example-tel" placeholder="Work Phone" required>
+												<input name="wphone" type="integer" class="form-control" id="rs-form-example-tel" placeholder="Work Phone" required>
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 
 											<div class="form-group">
-												<input name="mobile" type="number" class="form-control" id="rs-form-example-tel" placeholder="Mobile" required>
+												<input name="mobile" type="integer" class="form-control" id="rs-form-example-tel" placeholder="Mobile" required>
 												<p class="help-block with-errors"></p>
 											</div><!-- /.form-group -->
 

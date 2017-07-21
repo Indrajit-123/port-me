@@ -2,6 +2,12 @@
 include ("config.php");
 $user_id = $_SESSION['user_id'];
 
+$get_business_id = mysqli_query($mysqli,"SELECT * FROM users JOIN (user_access_levels,company_details) WHERE users.user_id=user_access_levels.user_id AND user_access_levels.business_id=company_details.company_id AND users.user_id='$user_id'");
+
+$get_business_id = mysqli_fetch_array($get_business_id);
+$business_id = $get_business_id['company_id'];
+
+
 if(isset($_POST['submit']))
 {
 	$product_type= $_POST['cs-radio'];
@@ -20,7 +26,7 @@ if(isset($_POST['submit']))
 	
 	
 
-	$insert_category = mysqli_query($mysqli,"insert into product_category values ('','".$product_type."','".$name."','".$desc."','".$add_attribute."','".$add_options."','".$item_type."','".$user_id."','".$add_tax."') ");
+	$insert_category = mysqli_query($mysqli,"insert into product_category values ('','".$product_type."','".$name."','".$desc."','".$add_attribute."','".$add_options."','".$item_type."','".$business_id."','".$add_tax."') ");
 	if($insert_category)
 	{
 		$data = "success";		

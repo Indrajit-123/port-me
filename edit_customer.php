@@ -25,7 +25,7 @@ if(isset($_POST['update']))
 	$notes			= $_POST['notes'];
 	$date			= date();
 
-	$update_customer_details = mysqli_query($mysqli, "update customers set salutation= '".$salutation."', firstname='".$firstname."', lastname='".$lastname."', company_name='".$company_name."', email='".$email."', work_phone='".$work_phone."', mobile='".$mobile."', website='".$website."', billing_street='".$billing_street."', billing_city='".$billing_city."', billing_state='".$billing_state."', billing_zip='".$billing_zip."', shipping_street='".$shipping_street."', shipping_city='".$shipping_city."', shipping_state='".$shipping_state."', shipping_zip='".$shipping_zip."',  date='".$date."', notes='".$notes."',business_id='".$user_id."'  where customer_id='".$customer_id."' ");
+	$update_customer_details = mysqli_query($mysqli, "update customers set salutation= '".$salutation."', firstname='".$firstname."', lastname='".$lastname."', company_name='".$company_name."', email='".$email."', work_phone='".$work_phone."', mobile='".$mobile."', website='".$website."', billing_street='".$billing_street."', billing_city='".$billing_city."', billing_state='".$billing_state."', billing_zip='".$billing_zip."', shipping_street='".$shipping_street."', shipping_city='".$shipping_city."', shipping_state='".$shipping_state."', shipping_zip='".$shipping_zip."',  date='".$date."', notes='".$notes."',added_by='".$user_id."'  where customer_id='".$customer_id."' ");
 	if($update_customer_details)
 	{
 		$data = "success";
