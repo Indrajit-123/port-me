@@ -45,6 +45,8 @@ $get_business_id = mysqli_query($mysqli,"SELECT * FROM users JOIN (user_access_l
 $get_business_id = mysqli_fetch_array($get_business_id);
 $business_id = $get_business_id['company_id'];
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -197,38 +199,38 @@ $business_id = $get_business_id['company_id'];
 																	</thead>
 																	<tbody>
 																		<tr class="roxkas">
-																			<td class="col-sm-4">												
-																				<div class="form-group">
-																					 <select class="rs-selectize-single">
-																						  <option value=""selected disabled>Product Name</option>
-																						  <option value="4">Thomas Edison</option>
-																						  <option value="1">Nikola</option>
-																						  <option value="3">Nikola Tesla</option>
-																						  <option value="5">Arnold Schwarzenegger</option>
+																		<td class="col-sm-4">												
+																		<div class="form-group">
+																		 <select class="rs-selectize-single" name="product_name" onchange="get_product_values(this.value);">	
+																		 <option value=""selected disabled>Product Name</option>
+																		<?php
+																		$get_product_details = mysqli_query($mysqli, "select * from product ");
+																		while ($fetch_product_details = mysqli_fetch_array($get_product_details))
+																		{
+																		?>																			 
+																			<option value="<?php echo $fetch_product_details['product_id'];?>" <?php echo((isset($_GET['pro_id']) && $fetch_product_details['product_id']==$_GET['pro_id'])?'selected':'');?>><?php echo ucfirst($fetch_product_details['product_name']);?></option>
+																		<?php
+																		}				 
+																		?>
 																					 </select>
 																				</div><!-- /.form-group -->
 																				<p class="help-block with-errors"></p>
 																			</td>
 
-																			<td class="col-sm-1">												
-																				<div class="form-group">																
+																			<td class="col-sm-1 ">												
+																				<div class="form-group">														
 																					<input type="text" name="attri[]" class="form-control" placeholder=" Qty " required>
-																					<p class="help-block with-errors"></p>
+																				<p class="help-block with-errors"></p>		
 																				</div>
 																			</td>
 
-																			<td class="col-sm-1">												
-																				<div class="form-group" style="font-size:15px;margin-top:10px;">
-																					<b>00.00</b>
-																					<p class="help-block with-errors"></p>
-																				</div>
+																			<td class="col-sm-1">
+																			<div id="userTable" style="text-align:center;">
+																			</div>
 																			</td>
 
 																			<td class="col-sm-2">
-																				<div class="form-group">
-																					<label>CGST:-9%  </label>
-																					  <br>
-																					  <label>SGST:-9%  </label>
+																				<div id ="details">
 																				</div>
 																			</td>
 
@@ -536,7 +538,37 @@ $business_id = $get_business_id['company_id'];
 		 </div>		
 		 </form>
 	</div>
- </div> <!--/ end pop up-->				
+ </div> <!--/ end pop up-->		
+ 
+	<script>
+		$(document).ready(function(){
+    $.ajax({
+        url: 'sales_order_ajax.php',
+        type: 'get',
+        dataType: 'JSON',
+        success: function(response){
+            var len = response.length;
+            for(var i=0; i<len; i++){
+                var tax_name = response[i].id;
+                var price = response[i].username;
+               
+
+                var tr_str = "<tr>" +
+                    "<td align='center'>" + (i+1) + "</td>" +
+                    "<td align='center'>" + username + "</td>" +
+                    "<td align='center'>" + name + "</td>" +
+                    "<td align='center'>" + email + "</td>" +
+                    "</tr>";
+
+                $("#userTable").append(tr_str);
+            }
+
+        }
+    });
+});
+</script>
+
+	
 
 	<!-- Page Plugins -->
 	<script src="js/bootstrap-switch.min.js"></script>
@@ -563,7 +595,7 @@ $business_id = $get_business_id['company_id'];
 		<script>
 		$(document).ready(function() {
 		  $(".add-more").click(function(){ 
-			  var htmlz = "<div class='row atrri_add_cont'><div class='ache_ekta'></div><div class='col-md-12'><table class='table table-bordered table-b-t table-b-b'><thead></thead><tbody><tr class='roxkas'><td class='col-sm-4'><div class='form-group'> <select class='rs-selectize-single' style='height:32px;width:310px;border:border:2px solid red;'> <option value=' 'selected disabled>Product Name</option> <option value=' 4' >Thomas Edison</option> <option value='1'>Nikola</option> <option value='3'>Nikola Tesla</option> <option value=' 5' >Arnold Schwarzenegger</option> </select></div><!-- /.form-group --><p class=' help-block with-errors' ></p></td><td class=' col-sm-1' ><div class=' form-group' ><input type=' text'name='attri[]'class=' form-control'placeholder='Qty'required><p class=' help-block with-errors' ></p></div></td><td class=' col-sm-1' ><div class='form-group'style='font-size:15px;margin-top:10px;' ><b>00.00</b><p class=' help-block with-errors' ></p></div></td><td class=' col-sm-2' ><div class='form-group'><label>CGST:-9%</label><br><label>SGST:-9%</label></div></div></td><td class=' col-sm-2' ><div class=' form-group'  style=' font-size:15px;'><b style='color:#ef5350;'>00.00</b><br><b style=' color:#ef5350;' >00.00</b><p class=' help-block with-errors' ></p></div></td><td class='col-sm-2'><div class='form-group'style=' font-size:15px;margin-top:10px;'><b style='color:#5dc26a;' >00.00</b> <a href='#' class='remove' style='color:#ef5350;padding:45px;'><i class='fa fa-trash'></i></a> <p class='help-block with-errors'></p></div><div class=' col-sm-1'style='margin-top:-20px;'>&nbsp;</div></td></tr></tbody></table></div></div>";
+			  var htmlz = "<div class='row atrri_add_cont'><div class='ache_ekta'></div><div class='col-md-12'><table class='table table-bordered table-b-t table-b-b'><thead></thead><tbody><tr class='roxkas'><td class='col-sm-4'><div class='form-group'> <select> <option value=' 'selected disabled>Product Name</option> <option value=' 4' >Thomas Edison</option> <option value='1'>Nikola</option> <option value='3'>Nikola Tesla</option> <option value=' 5' >Arnold Schwarzenegger</option> </select></div><!-- /.form-group --><p class=' help-block with-errors' ></p></td><td class=' col-sm-1' ><div class=' form-group' ><input type=' text'name='attri[]'class=' form-control'placeholder='Qty'required><p class=' help-block with-errors' ></p></div></td><td class=' col-sm-1' ><div class='form-group'style='font-size:15px;margin-top:10px;' ><b>00.00</b><p class=' help-block with-errors' ></p></div></td><td class=' col-sm-2' ><div class='form-group'><label>CGST:-9%</label><br><label>SGST:-9%</label></div></div></td><td class=' col-sm-2' ><div class=' form-group'  style=' font-size:15px;'><b style='color:#ef5350;'>00.00</b><br><b style=' color:#ef5350;' >00.00</b><p class=' help-block with-errors' ></p></div></td><td class='col-sm-2'><div class='form-group'style=' font-size:15px;margin-top:10px;'><b style='color:#5dc26a;' >00.00</b> <a href='#' class='remove' style='color:#ef5350;padding:45px;'><i class='fa fa-trash'></i></a> <p class='help-block with-errors'></p></div><div class=' col-sm-1'style='margin-top:-20px;'>&nbsp;</div></td></tr></tbody></table></div></div>";
 			  //alert(htmlz);
 			  $(".add-more-contz").append(htmlz);
 		  });
@@ -583,6 +615,8 @@ $business_id = $get_business_id['company_id'];
 			});
 		}
 	</script>
+
+	
 
 	<script>
 		function copybillingaddr(){
