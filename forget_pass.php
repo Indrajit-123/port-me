@@ -1,22 +1,13 @@
 <?php
-include ("config.php");
-
+	include("config.php");
 	if(isset($_POST['submit']))
-	{	
-		$email_id = $_POST ['username'];
-		$email_details = mysqli_query($mysqli, "select * from users where email = '".$email_id."'");
-		if($email_details)
-		{
-			echo "<script>window.location.href='change_pass_loginpage.php'</script>";
-		}
-		else 
-		{
-			$data = "error";
-		}
-		
+	{
+		echo $email = $_POST['username'];
+		$query_check_em = mysqli_query($mysqli,"SELECT * FROM users WHERE email='$email'");
+		echo $get_rows_em = mysqli_num_rows($query_check_em);
 	}
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang=en>
