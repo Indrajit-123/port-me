@@ -22,7 +22,8 @@
 			$save_reg = mysqli_query($mysqli,"INSERT into users VALUES ('','','','".$email."', '".$business."','".$type."', '".$password."', '".$phone."', '','','','','','','','','','','','','','')");
 			if($save_reg)
 			{	
-				echo "<script>window.location.href='index.php'</script>";
+				$_SESSION['user_id'] = mysqli_insert_id($mysqli);				
+				echo "<script>window.location.href='my_account.php'</script>";
 			}
 			else
 			{
